@@ -1,0 +1,71 @@
+#bg-motion {
+    background-color: rgb(7, 7, 7);
+    font-family: Androgyne;
+    background-image: url('../../../assets/images/auth-images/corndog-tile-1.png'), url('../../../assets/images/auth-images/corndog-tile.png'), url('../../../assets/images/auth-images/corndog-tile-2.png');
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+    -webkit-animation: bg-motion 1000s linear infinite;
+    -moz-animation: bg-motion 1000s linear infinite;
+    -ms-animation: bg-motion 1000s linear infinite;
+    animation: bg-motion 1000s linear infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    -webkit-box-shadow: inset 50px 50px 50px -18px #000000, inset -50px -50px 50px -18px #000000, inset -50px 50px 50px -18px #000000, inset 50px -50px 50px -18px #000000, inset 50px -50px 50px -18px #000000;
+    box-shadow: inset 50px 50px 50px -18px #000000, inset -50px -50px 50px -18px #000000, inset -50px 50px 50px -18px #000000, inset 50px -50px 50px -18px
+}
+
+@keyframes bg-motion {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
+}
+
+@-moz-keyframes bg-motion {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
+}
+
+@-webkit-keyframes bg-motion {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
+}
+
+@-ms-keyframes bg-motion {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
+}
+
+.timiTitle {
+    /* animation css */
+    position: relative;
+    width: 50vh;
+    align-self: center;
+    transition: 0.2s;
+    max-width: 20em;
+}
