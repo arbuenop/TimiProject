@@ -5,6 +5,8 @@
     justify-content: center;
     transition: 0.5s;
     color: white;
+    width: 95vw;
+    max-width: 20rem;
 }
 
 .forgotPasswd {
@@ -89,4 +91,23 @@ button {
 button:hover {
     background-color: rgb(206, 209, 178);
     transform: scale(1.03);
+}
+
+@media only screen and (hover: none) and (pointer: coarse) and (orientation:landscape) {
+    .main-reg-log {
+        display: block;
+        width: 100%;
+        max-width: none;
+    }
+    .input-login {
+        width: 48%;
+        margin: 1%;
+    }
+    .btn {
+        width: 47vw;
+    }
+    .or {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
 }
