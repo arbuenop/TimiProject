@@ -4,13 +4,13 @@
 
     <input type="password" class="formControl" placeholder="Password" #userPassword required> -->
 
-    <mat-form-field appearance="outline" class="'employee-search-field">
+    <mat-form-field appearance="outline" class="input-login">
         <mat-label>{{ emailLabel }}</mat-label>
         <input matInput placeholder="Ex. TimiEmail@domain.com" [formControl]="email" style="color: white;" #userName required>
         <mat-error *ngIf="email.invalid">{{getErrorMessage(0)}}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" color="secondary">
+    <mat-form-field appearance="outline" color="secondary" class="input-login">
         <mat-label>{{ passwdLabel }}</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" style="color: white;" [formControl]="passwd" #userPassword>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
@@ -22,11 +22,11 @@
     <span routerLink="/auth/forgot-password" class="forgotPasswd">{{ forgotPasswdLabel }}</span>
 
     <br>
-    <button mat-stroked-button (click)="authService.SignIn(userName.value, userPassword.value)"> {{ loginBtnLabel }}</button>
+    <button mat-stroked-button (click)="authService.SignIn(userName.value, userPassword.value)" class="btn"> {{ loginBtnLabel }}</button>
 
-    <span style="align-self: center;">{{orLabel}}</span>
+    <span style="align-self: center;" class="or">{{orLabel}}</span>
 
-    <button mat-stroked-button (click)="authService.GoogleAuth()">
+    <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn">
       <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;position:absolute;left:0;" alt="Google login icon">
       {{GLoginBtnLabel}}
     </button>
