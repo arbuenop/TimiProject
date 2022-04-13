@@ -1,0 +1,107 @@
+.main-reg-log {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+@keyframes parp {
+    10% {
+        transform: rotate(-30deg);
+        width: 33vh;
+    }
+    25% {
+        transform: rotate(360deg);
+        width: 0vh;
+    }
+    50% {
+        transform: rotate(720deg);
+        width: 33vh;
+    }
+    75% {
+        transform: rotate(720deg);
+    }
+    100% {
+        width: 30vh;
+        transform: rotate(720deg);
+    }
+}
+
+.button {
+    z-index: 1;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid white;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.button:after {
+    z-index: 1;
+    position: absolute;
+    transition: 0.3s;
+    content: "";
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background: #f7f7f7;
+    height: 120%;
+    left: -10%;
+    transform: skewX(15deg);
+    z-index: -1;
+}
+
+.button:hover:after {
+    width: 100%;
+    left: 0;
+    left: -10%;
+    width: 120%;
+}
+
+.button:hover:nth-of-type(5) {
+    z-index: 1;
+    color: #5bcaff;
+}
+
+.button:hover:nth-of-type(5):after {
+    z-index: 1;
+    left: -10%;
+    width: 120%;
+}
+
+p {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    flex-direction: column;
+    align-self: center;
+    font-size: 1.5em;
+}
+
+button:hover {
+    transform: scale(1.1);
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 2em;
+    margin: 1em;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1em;
+    transition: 0.1s;
+    min-height: 50px;
+}
