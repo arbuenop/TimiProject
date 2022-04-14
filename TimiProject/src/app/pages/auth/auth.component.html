@@ -1,5 +1,13 @@
 <div id="bg-motion">
+    <button mat-button routerLink='..' routerLinkActive="router-link-active" *ngIf="!hasRoute('init')" class="back-btn">
+    <mat-icon>arrow_back_ios</mat-icon>
+      {{backBtnLabel}}
+    </button>
 
-    <img src="../../../assets/images/auth-images/TimiTitle.svg" class="timiTitle" id="timiTitle" alt="">
-    <router-outlet></router-outlet>
+    <img src="../../../assets/images/auth-images/TimiTitle.svg" class="timiTitle " id="timiTitle" alt="">
+
+    <main [@authAnimations]="getRouteAnimationData()">
+
+        <router-outlet></router-outlet>
+    </main>
 </div>

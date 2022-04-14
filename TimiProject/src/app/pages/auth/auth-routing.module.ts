@@ -11,11 +11,11 @@ import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
   { path: '', component: AuthComponent, children:[
-    { path: 'init', component: InitAuthComponent},
-    { path: 'sign-in', component: SignInComponent},
-    { path: 'register-user', component: SignUpComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent },
-    { path: 'verify-email-address', component: VerifyEmailComponent },
+    { path: 'init', component: InitAuthComponent, data: { animation: 'init' }},
+    { path: 'sign-in', component: SignInComponent, data: { animation: 'login' }},
+    { path: 'register-user', component: SignUpComponent, data: { animation: 'register' }},
+    { path: 'forgot-password', component: ForgotPasswordComponent , data: { animation: 'forgotPasswd' }},
+    { path: 'verify-email-address', component: VerifyEmailComponent, data: { animation: 'verifyEmail' }},
   ]}
 ];
 

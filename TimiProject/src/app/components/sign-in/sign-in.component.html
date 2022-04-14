@@ -1,8 +1,6 @@
 <section class="main-reg-log">
-    <h2><strong>{{ signInTitle }}</strong></h2>
-    <!-- <input type="text" class="formControl" placeholder="Username" #userName required>
 
-    <input type="password" class="formControl" placeholder="Password" #userPassword required> -->
+    <h2><strong>{{ signInTitle }}</strong></h2>
 
     <mat-form-field appearance="outline" class="input-login">
         <mat-label>{{ emailLabel }}</mat-label>
@@ -22,13 +20,13 @@
     <span routerLink="/auth/forgot-password" class="forgotPasswd">{{ forgotPasswdLabel }}</span>
 
     <br>
-    <button mat-stroked-button (click)="authService.SignIn(userName.value, userPassword.value)" class="btn"> {{ loginBtnLabel }}</button>
+    <button mat-stroked-button (click)="authService.SignIn(userName.value, userPassword.value)" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
 
     <span style="align-self: center;" class="or">{{orLabel}}</span>
 
     <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn">
-      <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;position:absolute;left:0;" alt="Google login icon">
-      {{GLoginBtnLabel}}
+      <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;position:absolute;left:0;" alt="Google login icon"><strong>
+      {{GLoginBtnLabel}}</strong>
     </button>
 
 </section>

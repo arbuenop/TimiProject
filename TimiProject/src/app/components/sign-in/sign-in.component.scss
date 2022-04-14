@@ -14,6 +14,11 @@
     font-style: italic;
     align-self: center;
     cursor: pointer;
+    transition: ease all .2s;
+}
+
+.forgotPasswd:hover {
+    color: rgb(183, 176, 0);
 }
 
 p,
@@ -94,6 +99,25 @@ button:hover {
 }
 
 @media only screen and (hover: none) and (pointer: coarse) and (orientation:landscape) {
+    .main-reg-log {
+        display: block;
+        width: 100%;
+        max-width: none;
+    }
+    .input-login {
+        width: 48%;
+        margin: 1%;
+    }
+    .btn {
+        width: 47vw;
+    }
+    .or {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+}
+
+@media screen and ( max-height: 32rem) {
     .main-reg-log {
         display: block;
         width: 100%;
