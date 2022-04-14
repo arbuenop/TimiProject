@@ -24,6 +24,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { InitAuthComponent } from './components/init-auth/init-auth.component';
 import { MaterialModule } from './imports/material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { LoadingSpinnerComponent } from './components/ui/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     AuthComponent,
-    InitAuthComponent
+    InitAuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
