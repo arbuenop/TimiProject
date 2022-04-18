@@ -7,16 +7,24 @@ import { SignInComponent } from 'src/app/components/sign-in/sign-in.component';
 import { SignUpComponent } from 'src/app/components/sign-up/sign-up.component';
 import { VerifyEmailComponent } from 'src/app/components/verify-email/verify-email.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
+import { NotFoundComponent } from '../not-found/not-found.component';
 import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
-  { path: '', component: AuthComponent, children:[
-    { path: 'init', component: InitAuthComponent, data: { animation: 'init' }},
-    { path: 'sign-in', component: SignInComponent, data: { animation: 'login' }},
-    { path: 'register-user', component: SignUpComponent, data: { animation: 'register' }},
-    { path: 'forgot-password', component: ForgotPasswordComponent , data: { animation: 'forgotPasswd' }},
-    { path: 'verify-email-address', component: VerifyEmailComponent, data: { animation: 'verifyEmail' }},
-  ]}
+  { path: '', component: AuthComponent, redirectTo:'init' },
+  {
+    path: '', component: AuthComponent, children: [
+      { path: 'init', component: InitAuthComponent, data: { animation: 'init' } },
+      { path: 'sign-in', component: SignInComponent, data: { animation: 'login' } },
+      { path: 'register-user', component: SignUpComponent, data: { animation: 'register' } },
+      { path: 'forgot-password', component: ForgotPasswordComponent, data: { animation: 'forgotPasswd' } },
+      { path: 'verify-email-address', component: VerifyEmailComponent, data: { animation: 'verifyEmail' } },
+    ],
+  },
+    { path: '404-not-found', component: NotFoundComponent },
+    { path: '/**', component: NotFoundComponent, pathMatch: 'full', redirectTo:'init'},
+    { path: '**', component: NotFoundComponent, pathMatch: 'full', redirectTo:'init' },
+
 ];
 
 @NgModule({

@@ -38,10 +38,10 @@ export class AuthService {
     this.loading = new BehaviorSubject<boolean>(false);
   }
   // Sign in with email/password
-  SignIn(email: string, password: string) {
+  async SignIn(email: string, password: string) {
 
     this.setStateLoading(true)
-    return this.afAuth
+    return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
@@ -69,13 +69,12 @@ export class AuthService {
       })
       .finally(() => {
         this.SendVerificationMail();
-        this.setStateLoading(false)
       });
   }
   // Send email verfificaiton when new user sign up
-  SendVerificationMail() {
+  async SendVerificationMail() {
     this.setStateLoading(true);
-    return this.afAuth.currentUser
+    return await this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
         this.router.navigate(['/auth/verify-email-address']);
@@ -85,9 +84,9 @@ export class AuthService {
       });
   }
   // Reset Forggot password
-  ForgotPassword(passwordResetEmail: string) {
+  async ForgotPassword(passwordResetEmail: string) {
     this.setStateLoading(true)
-    return this.afAuth
+    return await this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
@@ -111,29 +110,29 @@ export class AuthService {
       // if (res) {
       //   this.goDashboard()
       // }
+        this.goDashboard()
     })
     .catch((error) => {
       window.alert(error);
     })
     .finally(() => {
       this.setStateLoading(false);
-      this.goDashboard()
     });
   }
   // Auth logic to run auth providers
-  AuthLogin(provider: any) {
+  async AuthLogin(provider: any) {
     this.setStateLoading(true)
-    return this.afAuth
+    return await this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
         this.SetUserData(result.user);
+        this.goDashboard()
       })
       .catch((error) => {
         window.alert(error);
       })
       .finally(() => {
         this.setStateLoading(false);
-        this.goDashboard()
       })
       ;
   }
@@ -156,8 +155,8 @@ export class AuthService {
     });
   }
   // Sign out
-  SignOut() {
-    return this.afAuth.signOut().then(() => {
+  async SignOut() {
+    return await this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['/auth/init']);
     });
@@ -175,8 +174,6 @@ export class AuthService {
     this.ngZone.run(() => {
       this.router.navigate(['/dashboard']);
     });
-
-    this.router.navigate(['/dashboard']);
   }
 
 }

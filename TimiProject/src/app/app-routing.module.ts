@@ -11,12 +11,15 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { AuthComponent } from './pages/auth/auth.component';
 import { loadavg } from 'os';
 import { AuthRoutingModule } from './pages/auth/auth-routing.module';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth/init', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', redirectTo:'dashboard'},
+  { path: 'not-found', component: NotFoundComponent },
   { path: 'auth', loadChildren: () => import('./pages/auth/auth-routing.module').then(m=>m.AuthRoutingModule)},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '404'},
+  { path: '404-not-found', component: NotFoundComponent },
+  { path: '**', redirectTo:'404-not-found', pathMatch: 'full' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

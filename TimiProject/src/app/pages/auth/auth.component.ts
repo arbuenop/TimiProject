@@ -28,7 +28,7 @@ export class AuthComponent implements OnInit {
    hasRoute(route: string) {
     return this.router.url.includes(route);
   }
-
+  prueba = 'hola';
   back(): void {
     this.location.back()
   }
