@@ -8,6 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,9 @@ export class AuthService {
   userData: any; // Save logged in user data
 
   private loading: BehaviorSubject<boolean>;
+
+  //SweetAlerts
+  titleAlert = '';
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -48,6 +52,9 @@ export class AuthService {
       })
       .catch((error) => {
         window.alert(error.message);
+        console.log(error.message)
+        this.titleAlert = 'Password is required';
+        Swal.fire('Error', this.titleAlert , 'error');
       })
       .finally(() => {
         this.setStateLoading(false)
