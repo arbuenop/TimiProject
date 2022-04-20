@@ -1,19 +1,24 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, OnInit } from '@angular/core';
 import { User } from '../services/user';
 import * as auth from 'firebase/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireAuth, } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { WindowServiceService } from './window-service.service';
+import { runInThisContext } from 'vm';
+import { RecaptchaVerifier } from 'firebase/auth';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnInit{
   userData: any; // Save logged in user data
+  windowRef: any;
 
   private loading: BehaviorSubject<boolean>;
 
@@ -21,7 +26,8 @@ export class AuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private win: WindowServiceService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -36,7 +42,14 @@ export class AuthService {
       }
     });
     this.loading = new BehaviorSubject<boolean>(false);
+
+
   }
+
+
+  ngOnInit() {
+  }
+
   // Sign in with email/password
   async SignIn(email: string, password: string) {
 
@@ -45,16 +58,17 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
+        this.goDashboard()
       })
       .catch((error) => {
         window.alert(error.message);
       })
       .finally(() => {
         this.setStateLoading(false)
-        this.goDashboard()
       });
   }
-  // Sign up with email/password
+
+  // Sign up with email / password
   async SignUp(email: string, password: string) {
     this.setStateLoading(true)
     return await this.afAuth
@@ -71,6 +85,7 @@ export class AuthService {
         this.SendVerificationMail();
       });
   }
+
   // Send email verfificaiton when new user sign up
   async SendVerificationMail() {
     this.setStateLoading(true);
@@ -83,6 +98,7 @@ export class AuthService {
         this.setStateLoading(false);
       });
   }
+
   // Reset Forggot password
   async ForgotPassword(passwordResetEmail: string) {
     this.setStateLoading(true)
@@ -107,16 +123,13 @@ export class AuthService {
   async GoogleAuth() {
     this.setStateLoading(true);
     return await this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      // if (res) {
-      //   this.goDashboard()
-      // }
-        this.goDashboard()
+
     })
     .catch((error) => {
       window.alert(error);
     })
     .finally(() => {
-      this.setStateLoading(false);
+      this.goDashboard();
     });
   }
   // Auth logic to run auth providers
@@ -126,13 +139,12 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.SetUserData(result.user);
-        this.goDashboard()
       })
       .catch((error) => {
         window.alert(error);
       })
       .finally(() => {
-        this.setStateLoading(false);
+        this.goDashboard()
       })
       ;
   }
@@ -171,9 +183,45 @@ export class AuthService {
   }
 
   goDashboard() {
-    this.ngZone.run(() => {
-      this.router.navigate(['/dashboard']);
-    });
+
+    setTimeout(()=>{
+      if (this.isLoggedIn) {
+        this.ngZone.run(() => {
+          this.router.navigate(['/dashboard']);
+        });
+      } else {
+        alert('Something went wrong. Please try again')
+      }
+      this.setStateLoading(false);
+    }, 0);
   }
+
+  async signInWithPhone(phoneNumber: string,) {
+
+
+
+
+
+    const appVerifier = this.windowRef.recaptchaVerifier;
+      this.afAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(result => {
+          this.windowRef.confirmationResult = result;
+        })
+        .catch( error => console.log(error) );
+    }
+
+    verifyLoginCode(verificationCode:string) {
+      return this.windowRef.confirmationResult
+          .confirm(verificationCode)
+          .then( (res:any) => {
+            this.userData = res.user;
+      })
+        .catch( (err:any) => {
+          console.log(err, "Incorrect code entered?")
+        });
+    }
+
+
+
 
 }

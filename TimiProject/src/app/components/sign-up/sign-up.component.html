@@ -4,18 +4,21 @@
         <h2><strong>{{ signUpTitle }}</strong></h2>
 
         <mat-button-toggle-group [(ngModel)]="method" aria-label="Method" class="method-chooser">
-            <mat-button-toggle class="toogle" value="phone">{{methodPhoneLabel}}</mat-button-toggle>
-            <mat-button-toggle class="toogle" value="email">{{methodEmailLabel}}</mat-button-toggle>
+            <mat-button-toggle class="toogle" (click)="toggle()" value="phone">{{methodPhoneLabel}}</mat-button-toggle>
+            <mat-button-toggle class="toogle" (click)="toggle()" value="email">{{methodEmailLabel}}</mat-button-toggle>
         </mat-button-toggle-group>
     </section>
 
     <div *ngIf="method=='phone'; then phoneForm else emailForm"></div>
 
     <ng-template #phoneForm>
-        <div class="form-template">
+        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'">
 
             <!-- POR DESARROLLAR -->
             <h2> registro por teléfono (dev)</h2>
+            <div id="recaptcha-container"></div>
+            <button mat-stroked-button (click)="authService.signInWithPhone('649060331')" class="btn"><strong> Enviar SMS</strong></button>
+
             <!-- POR DESARROLLAR -->
         </div>
     </ng-template>
@@ -23,27 +26,14 @@
     <ng-template #emailForm class="form-template">
 
 
-        <div class="form-template">
-            <div *ngIf="nextStepCompleted; then secondStep else firstStep"></div>
+        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'">
 
-            <ng-template #firstStep>
-                <mat-form-field appearance="outline" class="register-login">
-                    <mat-label>{{ emailLabel }}</mat-label>
-                    <input matInput placeholder="Ex. TimiEmail@domain.com" [formControl]="email" style="color: white;" #userName required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage(0)}}</mat-error>
-                </mat-form-field>
-            </ng-template>
+            <mat-form-field appearance="outline" class="register-login">
+                <mat-label>{{ emailLabel }}</mat-label>
+                <input matInput placeholder="Ex. TimiEmail@domain.com" [formControl]="email" style="color: white;" #userName required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-            <ng-template #secondStep>
-                <mat-form-field appearance="outline" color="secondary" class="register-login">
-                    <mat-label>{{ passwdLabel }}</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" style="color: white;" [formControl]="passwd" #userPassword>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
-                  <mat-icon style="color:rgb(129, 129, 129)">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-                    <mat-error *ngIf="passwd.invalid">{{getErrorMessage(1)}}</mat-error>
-                </mat-form-field>
-            </ng-template>
         </div>
 
     </ng-template>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateUserComponent } from 'src/app/components/create-user/create-user.component';
 import { DashboardComponent } from 'src/app/components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from 'src/app/components/forgot-password/forgot-password.component';
 import { InitAuthComponent } from 'src/app/components/init-auth/init-auth.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'register-user', component: SignUpComponent, data: { animation: 'register' } },
       { path: 'forgot-password', component: ForgotPasswordComponent, data: { animation: 'forgotPasswd' } },
       { path: 'verify-email-address', component: VerifyEmailComponent, data: { animation: 'verifyEmail' } },
+      { path: 'create-user/:email', component: CreateUserComponent, data: { animation: 'createUser' } },
     ],
   },
     { path: '404-not-found', component: NotFoundComponent },

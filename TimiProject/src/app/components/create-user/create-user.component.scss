@@ -124,43 +124,6 @@ button:hover {
     }
 }
 
-.form-template {
-    min-height: 7em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1em;
-}
-
-.register-login {
-    width: 100%;
-}
-
-.method-chooser {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    border-radius: 7px;
-    font-weight: bold;
-    border-color: grey;
-    height: 2.5em;
-    align-items: center;
-    backdrop-filter: blur(10px);
-}
-
-.mat-button-toggle {
-    color: white;
-    background-color: rgba(0, 0, 0, 0);
-    width: 50%;
-    border-radius: 5px;
-}
-
-.mat-button-toggle-checked {
-    color: black;
-    background-color: white;
-    -webkit-box-shadow: inset 0px 15px 33px -13px #000000;
-    box-shadow: inset 0px 15px 33px -13px #000000;
-}
-
 .privacy {
     color: yellow;
     font-style: italic;

@@ -1,11 +1,12 @@
 import { trigger, transition, style, query, animateChild, group, animate, state } from '@angular/animations';
 
 export const authAnimations =
+
   trigger('authAnimations', [
 
     transition('* <=> *', [
       style({
-        position:'absolute',
+        // position:'absolute',
         opacity: 0,
         transform: 'translateY(10px)'
       }),
@@ -14,3 +15,5 @@ export const authAnimations =
 
 
 ]);
+
+
