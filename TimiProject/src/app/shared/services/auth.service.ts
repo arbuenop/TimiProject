@@ -9,9 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WindowServiceService } from './window-service.service';
-import { runInThisContext } from 'vm';
-import { RecaptchaVerifier } from 'firebase/auth';
-
+import {  RecaptchaVerifier } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root',
@@ -196,16 +194,27 @@ export class AuthService implements OnInit{
     }, 0);
   }
 
-  async signInWithPhone(phoneNumber: string,) {
+  reCaptcha() {
+
+    var rec = new RecaptchaVerifier('sign-up-button', {
+      'size': 'invisible',
+    }, auth.getAuth());
+    console.log(rec)
+    rec.verify()
+    rec.render()
+    // this.windowRef.recaptchaVerifier = rec;
+    return rec;
+  }
+
+  async signInWithPhone(phoneNumber: string, appVerifier:any) {
 
 
 
 
-
-    const appVerifier = this.windowRef.recaptchaVerifier;
+    // const appVerifier = this.windowRef.recaptchaVerifier;
       this.afAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
         .then(result => {
-          this.windowRef.confirmationResult = result;
+          console.log(result)
         })
         .catch( error => console.log(error) );
     }

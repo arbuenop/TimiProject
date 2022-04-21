@@ -2,9 +2,11 @@ import { animate, animateChild, group, query, state, style, transition, trigger 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RecaptchaVerifier } from 'firebase/auth';
 import { bufferToggle } from 'rxjs';
 import { authAnimations } from 'src/app/animations/auth-animations';
 import { AuthService } from "../../shared/services/auth.service";
+import * as auth from 'firebase/auth';
 
 @Component({
   selector: 'app-sign-up',
@@ -89,5 +91,16 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
     public authService: AuthService,
     public router: Router
   ) { }
-  ngOnInit() { }
+  ngOnInit() {
+
+
+
+    // var rec = new RecaptchaVerifier('sign-up-button', {
+    //   'size': 'invisible',
+    // }, auth.getAuth());
+    // console.log(rec)
+    // rec.verify()
+    // rec.render()
+    // this.authService.windowRef.recaptchaVerifier = rec;
+  }
 }

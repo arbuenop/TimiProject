@@ -17,7 +17,9 @@
             <!-- POR DESARROLLAR -->
             <h2> registro por teléfono (dev)</h2>
             <div id="recaptcha-container"></div>
-            <button mat-stroked-button (click)="authService.signInWithPhone('649060331')" class="btn"><strong> Enviar SMS</strong></button>
+            <button mat-stroked-button id="sign-up-button" (click)="authService.reCaptcha()" class="btn"><strong> ReCaptcha! </strong></button>
+
+            <button mat-stroked-button (click)="authService.signInWithPhone('+34649060331',authService.reCaptcha())" class="btn" #signUpButton><strong> Enviar SMS</strong></button>
 
             <!-- POR DESARROLLAR -->
         </div>
@@ -25,6 +27,7 @@
 
     <ng-template #emailForm class="form-template">
 
+        <div></div>
 
         <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'">
 
