@@ -1,12 +1,11 @@
-import { animate, animateChild, group, query, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component,  OnInit,   } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RecaptchaVerifier } from 'firebase/auth';
-import { bufferToggle } from 'rxjs';
-import { authAnimations } from 'src/app/animations/auth-animations';
+import { ApplicationVerifier } from 'firebase/auth';
 import { AuthService } from "../../shared/services/auth.service";
-import * as auth from 'firebase/auth';
+
+
 
 @Component({
   selector: 'app-sign-up',
@@ -35,13 +34,14 @@ import * as auth from 'firebase/auth';
       ]),
   ])],
 })
-
 export class SignUpComponent implements OnInit {
   isOpen = true;
-
   toggle() {
     this.isOpen = !this.isOpen;
   }
+
+  reCaptcha: any;
+
 
 signUpTitle = 'Introduce tu telefono o correo electrónico'
 
@@ -63,6 +63,9 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
   emailErrorLabelReq = 'El correo electrónico és obligatório!';
   emailErrorLabelFormat = 'Formato de correo electrónico inválido';
 
+
+  phoneform = new FormControl('', [Validators.required]);
+
   getErrorMessage() {
       if (this.email.hasError('required')) {
         return this.emailErrorLabelReq;
@@ -70,13 +73,12 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
 
         return this.email.hasError('email') ? this.emailErrorLabelFormat : '';
       }
-}
+  }
+
+
   registerAction() {
     if (this.method == 'phone') {
-
-      // Action if register goes by phone (develop)
-      alert('you clicked register by phone')
-
+      this.authService.signInWithPhone(this.phoneform.value, this.rec);
     } else {
       if (this.email.valid) {
         this.router.navigate(['auth/create-user/'+this.email.value])
@@ -91,16 +93,11 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
     public authService: AuthService,
     public router: Router
   ) { }
+   rec: any;
   ngOnInit() {
 
-
-
-    // var rec = new RecaptchaVerifier('sign-up-button', {
-    //   'size': 'invisible',
-    // }, auth.getAuth());
-    // console.log(rec)
-    // rec.verify()
-    // rec.render()
-    // this.authService.windowRef.recaptchaVerifier = rec;
+    this.rec = this.authService.reCaptcha().then((x) => {
+       this.rec=x
+     })
   }
 }

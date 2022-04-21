@@ -12,16 +12,13 @@
     <div *ngIf="method=='phone'; then phoneForm else emailForm"></div>
 
     <ng-template #phoneForm>
-        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'">
+        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'" style="flex-direction:column">
 
-            <!-- POR DESARROLLAR -->
-            <h2> registro por teléfono (dev)</h2>
-            <div id="recaptcha-container"></div>
-            <button mat-stroked-button id="sign-up-button" (click)="authService.reCaptcha()" class="btn"><strong> ReCaptcha! </strong></button>
-
-            <button mat-stroked-button (click)="authService.signInWithPhone('+34649060331',authService.reCaptcha())" class="btn" #signUpButton><strong> Enviar SMS</strong></button>
-
-            <!-- POR DESARROLLAR -->
+            <mat-form-field appearance="outline" class="register-login" id="test">
+                <ngx-mat-intl-tel-input matInput [formControl]="phoneform" [preferredCountries]="['es', 'gb']" [enablePlaceholder]="true" [enableSearch]="true" #phone>
+                </ngx-mat-intl-tel-input>
+            </mat-form-field>
+            <div></div>
         </div>
     </ng-template>
 
@@ -43,7 +40,7 @@
 
     <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
 
-    <button mat-stroked-button (click)="registerAction()" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
+    <button mat-stroked-button (click)="registerAction()" id="recaptcha-container" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
 
     <span style="align-self: center;" class="or">{{orLabel}}</span>
 

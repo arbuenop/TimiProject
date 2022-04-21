@@ -194,43 +194,60 @@ export class AuthService implements OnInit{
     }, 0);
   }
 
-  reCaptcha() {
 
-    var rec = new RecaptchaVerifier('sign-up-button', {
-      'size': 'invisible',
-    }, auth.getAuth());
-    console.log(rec)
-    rec.verify()
-    rec.render()
-    // this.windowRef.recaptchaVerifier = rec;
-    return rec;
+
+  async reCaptcha() {
+    let error = false;
+    return await new Promise((resolve, reject) => {
+        if (error) {
+          reject('error'); // pass values
+        } else {
+          var rec = new RecaptchaVerifier('recaptcha-container', {
+            'size': 'invisible',
+          }, auth.getAuth());
+          console.log(rec)
+          rec.verify()
+          rec.render()
+          resolve(rec); // pass values
+        }
+    });
+
   }
 
-  async signInWithPhone(phoneNumber: string, appVerifier:any) {
+   confirmationRes:any;
 
 
+  async signInWithPhone(phoneNumber: string, appVerifier: any) {
 
-
-    // const appVerifier = this.windowRef.recaptchaVerifier;
+    this.setStateLoading(true);
       this.afAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
         .then(result => {
           console.log(result)
+          this.confirmationRes = result;
         })
-        .catch( error => console.log(error) );
-    }
-
-    verifyLoginCode(verificationCode:string) {
-      return this.windowRef.confirmationResult
-          .confirm(verificationCode)
-          .then( (res:any) => {
-            this.userData = res.user;
-      })
-        .catch( (err:any) => {
-          console.log(err, "Incorrect code entered?")
+        .catch(error => console.log(error))
+        .finally(() => {
+          this.router.navigate(['auth/verify-phone-number']);
+          this.setStateLoading(false);
         });
     }
 
+  verifyLoginCode(verificationCode: string) {
 
-
+    this.setStateLoading(true);
+      return this.confirmationRes
+          .confirm(verificationCode)
+          .then( (res:any) => {
+            this.userData = res.user;
+            this.SetUserData(res.user);
+      })
+        .catch( (err:any) => {
+          console.log(err, "Incorrect code entered?")
+        })
+        .finally(() => {
+          this.goDashboard();
+          this.setStateLoading(false);
+        });;
+  }
 
 }
