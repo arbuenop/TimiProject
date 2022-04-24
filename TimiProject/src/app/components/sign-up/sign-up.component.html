@@ -1,0 +1,95 @@
+<section class="main-reg-log">
+    <section>
+
+        <h2><strong>{{ signUpTitle }}</strong></h2>
+
+        <mat-button-toggle-group [(ngModel)]="method" aria-label="Method" class="method-chooser">
+            <mat-button-toggle class="toogle" (click)="toggle()" value="phone">{{methodPhoneLabel}}</mat-button-toggle>
+            <mat-button-toggle class="toogle" (click)="toggle()" value="email">{{methodEmailLabel}}</mat-button-toggle>
+        </mat-button-toggle-group>
+    </section>
+
+    <div *ngIf="method=='phone'; then phoneForm else emailForm"></div>
+
+    <ng-template #phoneForm>
+        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'" style="flex-direction:column">
+
+            <mat-form-field appearance="outline" class="register-login" id="test">
+                <ngx-mat-intl-tel-input matInput [formControl]="phoneform" [preferredCountries]="['es', 'gb']" [enablePlaceholder]="true" [enableSearch]="true" #phone>
+                </ngx-mat-intl-tel-input>
+            </mat-form-field>
+            <div></div>
+        </div>
+    </ng-template>
+
+    <ng-template #emailForm class="form-template">
+
+        <div></div>
+
+        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'">
+
+            <mat-form-field appearance="outline" class="register-login">
+                <mat-label>{{ emailLabel }}</mat-label>
+                <input matInput placeholder="Ex. TimiEmail@domain.com" [formControl]="email" style="color: white;" #userName required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+        </div>
+
+    </ng-template>
+
+    <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
+
+    <button mat-stroked-button (click)="registerAction()" id="recaptcha-container" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
+
+    <span style="align-self: center;" class="or">{{orLabel}}</span>
+
+    <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn">
+      <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;position:absolute;left:0;" alt="Google login icon"><strong>
+      {{GLoginBtnLabel}}</strong>
+    </button>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<div class="displayTable">
+    <div class="displayTableCell">
+        <div class="authBlock">
+            <h3>Sign Up</h3>
+            <div class="formGroup">
+                <input type="email" class="formControl" placeholder="Email Address" #userEmail required />
+            </div>
+            <div class="formGroup">
+                <input type="password" class="formControl" placeholder="Password" #userPwd required />
+            </div>
+            <div class="formGroup">
+                <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)" />
+            </div>
+            <div class="formGroup">
+                <span class="or"><span class="orInner">Or</span></span>
+            </div>
+<div class="formGroup">
+    <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+          <i class="fab fa-google-plus-g"></i>
+          Continue with Google
+        </button>
+</div>
+</div>
+<div class="redirectToLogin">
+    <span>Already have an account?
+        <span class="redirect" routerLink="/auth/sign-in">Log In</span></span>
+</div>
+</div>
+</div> -->
