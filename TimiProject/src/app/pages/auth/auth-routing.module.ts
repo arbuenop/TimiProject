@@ -7,6 +7,7 @@ import { InitAuthComponent } from 'src/app/components/init-auth/init-auth.compon
 import { SignInComponent } from 'src/app/components/sign-in/sign-in.component';
 import { SignUpComponent } from 'src/app/components/sign-up/sign-up.component';
 import { VerifyEmailComponent } from 'src/app/components/verify-email/verify-email.component';
+import { VerifyNumberComponent } from 'src/app/components/verify-number/verify-number.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { AuthComponent } from './auth.component';
@@ -21,6 +22,9 @@ const routes: Routes = [
       { path: 'forgot-password', component: ForgotPasswordComponent, data: { animation: 'forgotPasswd' } },
       { path: 'verify-email-address', component: VerifyEmailComponent, data: { animation: 'verifyEmail' } },
       { path: 'create-user/:email', component: CreateUserComponent, data: { animation: 'createUser' } },
+      { path: 'verify-phone-number', component: VerifyNumberComponent, data: { animation: 'verifyNumber' } },
+      { path: 'create-user', component: CreateUserComponent, data: { animation: 'createUser' }, redirectTo: 'register-user'},
+      { path: 'create-user/**', component: CreateUserComponent, data: { animation: 'createUser' }, redirectTo: 'register-user'},
     ],
   },
     { path: '404-not-found', component: NotFoundComponent },

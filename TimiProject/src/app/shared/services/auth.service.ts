@@ -8,13 +8,8 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-
 import { WindowServiceService } from './window-service.service';
-import { runInThisContext } from 'vm';
-import { RecaptchaVerifier } from 'firebase/auth';
-import { SwalService } from './swal.service';
-
-
+import {  RecaptchaVerifier } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root',
@@ -30,8 +25,7 @@ export class AuthService implements OnInit{
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
-    private win: WindowServiceService,
-    private swal: SwalService
+    private win: WindowServiceService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -65,7 +59,7 @@ export class AuthService implements OnInit{
         this.goDashboard()
       })
       .catch((error) => {
-        this.swal.messageErr(this.swal.getErrorMsg(error.code))
+        window.alert(error.message);
       })
       .finally(() => {
         this.setStateLoading(false)
@@ -83,7 +77,7 @@ export class AuthService implements OnInit{
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        this.swal.messageErr(this.swal.getErrorMsg(error.code))
+        window.alert(error.message);
       })
       .finally(() => {
         this.SendVerificationMail();
@@ -200,24 +194,60 @@ export class AuthService implements OnInit{
     }, 0);
   }
 
-  async signInWithPhone(phoneNumber: string,) {
 
-    const appVerifier = this.windowRef.recaptchaVerifier;
+
+  async reCaptcha() {
+    let error = false;
+    return await new Promise((resolve, reject) => {
+        if (error) {
+          reject('error'); // pass values
+        } else {
+          var rec = new RecaptchaVerifier('recaptcha-container', {
+            'size': 'invisible',
+          }, auth.getAuth());
+          console.log(rec)
+          rec.verify()
+          rec.render()
+          resolve(rec); // pass values
+        }
+    });
+
+  }
+
+   confirmationRes:any;
+
+
+  async signInWithPhone(phoneNumber: string, appVerifier: any) {
+
+    this.setStateLoading(true);
       this.afAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
         .then(result => {
-          this.windowRef.confirmationResult = result;
+          console.log(result)
+          this.confirmationRes = result;
         })
-        .catch( error => console.log(error) );
+        .catch(error => console.log(error))
+        .finally(() => {
+          this.router.navigate(['auth/verify-phone-number']);
+          this.setStateLoading(false);
+        });
     }
 
-    verifyLoginCode(verificationCode:string) {
-      return this.windowRef.confirmationResult
+  verifyLoginCode(verificationCode: string) {
+
+    this.setStateLoading(true);
+      return this.confirmationRes
           .confirm(verificationCode)
           .then( (res:any) => {
             this.userData = res.user;
+            this.SetUserData(res.user);
       })
         .catch( (err:any) => {
           console.log(err, "Incorrect code entered?")
-        });
-    }
+        })
+        .finally(() => {
+          this.goDashboard();
+          this.setStateLoading(false);
+        });;
+  }
+
 }

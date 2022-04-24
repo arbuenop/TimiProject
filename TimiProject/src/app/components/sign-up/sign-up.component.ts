@@ -1,11 +1,11 @@
-import { animate, animateChild, group, query, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component,  OnInit,   } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { bufferToggle } from 'rxjs';
-import { authAnimations } from 'src/app/animations/auth-animations';
-import { CompUsersService } from 'src/app/shared/services/comp-users.service';
+import { ApplicationVerifier } from 'firebase/auth';
 import { AuthService } from "../../shared/services/auth.service";
+
+
 
 @Component({
   selector: 'app-sign-up',
@@ -34,13 +34,14 @@ import { AuthService } from "../../shared/services/auth.service";
       ]),
   ])],
 })
-
 export class SignUpComponent implements OnInit {
   isOpen = true;
-
   toggle() {
     this.isOpen = !this.isOpen;
   }
+
+  reCaptcha: any;
+
 
 signUpTitle = 'Introduce tu telefono o correo electrónico'
 
@@ -62,6 +63,9 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
   emailErrorLabelReq = 'El correo electrónico és obligatório!';
   emailErrorLabelFormat = 'Formato de correo electrónico inválido';
 
+
+  phoneform = new FormControl('', [Validators.required]);
+
   getErrorMessage() {
       if (this.email.hasError('required')) {
         return this.emailErrorLabelReq;
@@ -69,14 +73,12 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
 
         return this.email.hasError('email') ? this.emailErrorLabelFormat : '';
       }
-}
-  registerAction(email:string) {
-    this.compUsersService.emailComp(email);
+  }
+
+
+  registerAction() {
     if (this.method == 'phone') {
-
-      // Action if register goes by phone (develop)
-      alert('you clicked register by phone')
-
+      this.authService.signInWithPhone(this.phoneform.value, this.rec);
     } else {
       if (this.email.valid) {
         this.router.navigate(['auth/create-user/'+this.email.value])
@@ -89,8 +91,13 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
 
   constructor(
     public authService: AuthService,
-    public router: Router,
-    public compUsersService: CompUsersService
+    public router: Router
   ) { }
-  ngOnInit() { }
+   rec: any;
+  ngOnInit() {
+
+    this.rec = this.authService.reCaptcha().then((x) => {
+       this.rec=x
+     })
+  }
 }

@@ -27,6 +27,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoadingSpinnerComponent } from './components/ui/loading-spinner/loading-spinner.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { VerifyNumberComponent } from './components/verify-number/verify-number.component';
+import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+import { CodeInputComponent } from './components/code-input/code-input.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     InitAuthComponent,
     LoadingSpinnerComponent,
     NotFoundComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    VerifyNumberComponent,
+    CodeInputComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     // End Firebase Imports
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMatIntlTelInputModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

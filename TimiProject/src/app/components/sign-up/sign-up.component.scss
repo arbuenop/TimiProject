@@ -81,6 +81,12 @@ button {
     transition: ease all .2s;
 }
 
+::ng-deep .country-selector {
+    opacity: 1 !important;
+    bottom: 8px !important;
+    color: white !important;
+}
+
 button:hover {
     background-color: rgb(206, 209, 178);
     transform: scale(1.03);
