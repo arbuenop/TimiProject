@@ -23,7 +23,7 @@ const routes: Routes = [
       { path: 'verify-email-address', component: VerifyEmailComponent, data: { animation: 'verifyEmail' } },
       { path: 'create-user/:email', component: CreateUserComponent, data: { animation: 'createUser' } },
       { path: 'verify-phone-number', component: VerifyNumberComponent, data: { animation: 'verifyNumber' } },
-      { path: 'create-user', component: CreateUserComponent, data: { animation: 'createUser' }, redirectTo: 'register-user'},
+      { path: 'create-user', component: CreateUserComponent, data: { animation: 'createUser' }},
       { path: 'create-user/**', component: CreateUserComponent, data: { animation: 'createUser' }, redirectTo: 'register-user'},
     ],
   },

@@ -9,13 +9,23 @@ import {
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WindowServiceService } from './window-service.service';
-import {  RecaptchaVerifier } from "firebase/auth";
+import { RecaptchaVerifier } from "firebase/auth";
+import { UsersService } from './database/users.service';
+import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit{
-  userData: any; // Save logged in user data
+  userData: any;
+  userDataMapped: UserAuthModel = {
+          uid: '',
+          email: '',
+          displayName: '',
+          photoURL: '',
+          emailVerified: false,
+          userName: ''
+  };
   windowRef: any;
 
   private loading: BehaviorSubject<boolean>;
@@ -24,29 +34,21 @@ export class AuthService implements OnInit{
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone, // NgZone service to remove outside scope warning
-    private win: WindowServiceService
+    public ngZone: NgZone, // NgZone service to remove outside scope warning,
+    private _userService: UsersService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
-      }
+      this._userService.pushToLocalStorage(user, 'user');
     });
     this.loading = new BehaviorSubject<boolean>(false);
 
-
   }
-
 
   ngOnInit() {
   }
+
 
   // Sign in with email/password
   async SignIn(email: string, password: string) {
@@ -55,15 +57,32 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
+        this._userService.SetUserData(result.user);
         this.goDashboard()
       })
       .catch((error) => {
         window.alert(error.message);
+        console.log('es esto')
       })
       .finally(() => {
         this.setStateLoading(false)
       });
+  }
+
+
+  mapUser(rawUserData?: any):UserAuthModel {
+    var userNameSelector = 'User';
+    var displayNameSelector = 'User';
+
+    var userDataMapped:UserAuthModel =  {
+      uid: rawUserData.uid,
+      email: rawUserData.email,
+      displayName: displayNameSelector,
+      photoURL: rawUserData.photoURL,
+      emailVerified: rawUserData.emailVerified,
+      userName: userNameSelector
+    }
+    return userDataMapped
   }
 
   // Sign up with email / password
@@ -72,15 +91,15 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
-        this.SetUserData(result.user);
+        this._userService.SetUserData(this.mapUser(result.user));
+        this.SendVerificationMail();
       })
       .catch((error) => {
-        window.alert(error.message);
+
+        this.setStateLoading(false)
+        window.alert(error.message+'tu puta madre como hayas fallado tu cabron');
       })
       .finally(() => {
-        this.SendVerificationMail();
       });
   }
 
@@ -121,7 +140,8 @@ export class AuthService implements OnInit{
   async GoogleAuth() {
     this.setStateLoading(true);
     return await this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-
+      console.log(res)
+      this._userService.SetUserData(this.mapUser(res.user));
     })
     .catch((error) => {
       window.alert(error);
@@ -136,7 +156,7 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         window.alert(error);
@@ -145,24 +165,6 @@ export class AuthService implements OnInit{
         this.goDashboard()
       })
       ;
-  }
-  /* Setting up user data when sign in with username/password,
-  sign up with username/password and sign in with social auth
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-    };
-    return userRef.set(userData, {
-      merge: true,
-    });
   }
   // Sign out
   async SignOut() {
@@ -195,7 +197,7 @@ export class AuthService implements OnInit{
   }
 
 
-
+// recaptcha
   async reCaptcha() {
     let error = false;
     return await new Promise((resolve, reject) => {
@@ -214,9 +216,9 @@ export class AuthService implements OnInit{
 
   }
 
-   confirmationRes:any;
+  confirmationRes:any;
 
-
+// sign in/Register with phone
   async signInWithPhone(phoneNumber: string, appVerifier: any) {
 
     this.setStateLoading(true);
@@ -230,8 +232,9 @@ export class AuthService implements OnInit{
           this.router.navigate(['auth/verify-phone-number']);
           this.setStateLoading(false);
         });
-    }
+  }
 
+  // Verify code number
   verifyLoginCode(verificationCode: string) {
 
     this.setStateLoading(true);
@@ -239,14 +242,15 @@ export class AuthService implements OnInit{
           .confirm(verificationCode)
           .then( (res:any) => {
             this.userData = res.user;
-            this.SetUserData(res.user);
+            // this.SetUserData(res.user);
       })
         .catch( (err:any) => {
           console.log(err, "Incorrect code entered?")
         })
         .finally(() => {
-          this.goDashboard();
+          this.router.navigate(['auth/create-user']);
           this.setStateLoading(false);
+          alert('NEW USER REGISTERED!')
         });;
   }
 
