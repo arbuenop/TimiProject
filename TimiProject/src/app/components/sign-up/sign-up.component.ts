@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ApplicationVerifier } from 'firebase/auth';
 import { AuthService } from "../../shared/services/auth.service";
 
-
+//ESTO ES UN PRUEBA
 
 @Component({
   selector: 'app-sign-up',
