@@ -1,31 +1,37 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, OnInit } from '@angular/core';
 import { User } from '../services/user';
 import * as auth from 'firebase/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireAuth, } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import Swal from 'sweetalert2';
+
+import { WindowServiceService } from './window-service.service';
+import { runInThisContext } from 'vm';
+import { RecaptchaVerifier } from 'firebase/auth';
+import { SwalService } from './swal.service';
+
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnInit{
   userData: any; // Save logged in user data
+  windowRef: any;
 
   private loading: BehaviorSubject<boolean>;
-
-  //SweetAlerts
-  titleAlert = '';
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private win: WindowServiceService,
+    private swal: SwalService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -40,28 +46,33 @@ export class AuthService {
       }
     });
     this.loading = new BehaviorSubject<boolean>(false);
+
+
   }
+
+
+  ngOnInit() {
+  }
+
   // Sign in with email/password
-  SignIn(email: string, password: string) {
+  async SignIn(email: string, password: string) {
 
     this.setStateLoading(true)
-    return this.afAuth
+    return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
+        this.goDashboard()
       })
       .catch((error) => {
-        window.alert(error.message);
-        console.log(error.message)
-        this.titleAlert = 'Password is required';
-        Swal.fire('Error', this.titleAlert , 'error');
+        this.swal.messageErr(this.swal.getErrorMsg(error.code))
       })
       .finally(() => {
         this.setStateLoading(false)
-        this.goDashboard()
       });
   }
-  // Sign up with email/password
+
+  // Sign up with email / password
   async SignUp(email: string, password: string) {
     this.setStateLoading(true)
     return await this.afAuth
@@ -72,17 +83,17 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.swal.messageErr(this.swal.getErrorMsg(error.code))
       })
       .finally(() => {
         this.SendVerificationMail();
-        this.setStateLoading(false)
       });
   }
+
   // Send email verfificaiton when new user sign up
-  SendVerificationMail() {
+  async SendVerificationMail() {
     this.setStateLoading(true);
-    return this.afAuth.currentUser
+    return await this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
         this.router.navigate(['/auth/verify-email-address']);
@@ -91,10 +102,11 @@ export class AuthService {
         this.setStateLoading(false);
       });
   }
+
   // Reset Forggot password
-  ForgotPassword(passwordResetEmail: string) {
+  async ForgotPassword(passwordResetEmail: string) {
     this.setStateLoading(true)
-    return this.afAuth
+    return await this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
@@ -115,22 +127,19 @@ export class AuthService {
   async GoogleAuth() {
     this.setStateLoading(true);
     return await this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      // if (res) {
-      //   this.goDashboard()
-      // }
+
     })
     .catch((error) => {
       window.alert(error);
     })
     .finally(() => {
-      this.setStateLoading(false);
-      this.goDashboard()
+      this.goDashboard();
     });
   }
   // Auth logic to run auth providers
-  AuthLogin(provider: any) {
+  async AuthLogin(provider: any) {
     this.setStateLoading(true)
-    return this.afAuth
+    return await this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
         this.SetUserData(result.user);
@@ -139,7 +148,6 @@ export class AuthService {
         window.alert(error);
       })
       .finally(() => {
-        this.setStateLoading(false);
         this.goDashboard()
       })
       ;
@@ -163,8 +171,8 @@ export class AuthService {
     });
   }
   // Sign out
-  SignOut() {
-    return this.afAuth.signOut().then(() => {
+  async SignOut() {
+    return await this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['/auth/init']);
     });
@@ -179,11 +187,37 @@ export class AuthService {
   }
 
   goDashboard() {
-    this.ngZone.run(() => {
-      this.router.navigate(['/dashboard']);
-    });
 
-    this.router.navigate(['/dashboard']);
+    setTimeout(()=>{
+      if (this.isLoggedIn) {
+        this.ngZone.run(() => {
+          this.router.navigate(['/dashboard']);
+        });
+      } else {
+        alert('Something went wrong. Please try again')
+      }
+      this.setStateLoading(false);
+    }, 0);
   }
 
+  async signInWithPhone(phoneNumber: string,) {
+
+    const appVerifier = this.windowRef.recaptchaVerifier;
+      this.afAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(result => {
+          this.windowRef.confirmationResult = result;
+        })
+        .catch( error => console.log(error) );
+    }
+
+    verifyLoginCode(verificationCode:string) {
+      return this.windowRef.confirmationResult
+          .confirm(verificationCode)
+          .then( (res:any) => {
+            this.userData = res.user;
+      })
+        .catch( (err:any) => {
+          console.log(err, "Incorrect code entered?")
+        });
+    }
 }
