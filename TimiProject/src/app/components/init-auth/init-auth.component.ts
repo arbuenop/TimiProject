@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UsersService } from 'src/app/shared/services/database/users.service';
 
 @Component({
   selector: 'app-init-auth',
@@ -7,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InitAuthComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public usersService: UsersService) { }
   ngOnInit(): void {
   }
 
