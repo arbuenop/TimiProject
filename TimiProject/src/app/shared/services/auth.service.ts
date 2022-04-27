@@ -12,6 +12,7 @@ import { WindowServiceService } from './window-service.service';
 import { RecaptchaVerifier } from "firebase/auth";
 import { UsersService } from './database/users.service';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
+import { SwalService } from './swal.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,8 @@ export class AuthService implements OnInit{
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning,
-    private _userService: UsersService
+    private _userService: UsersService,
+    public swal: SwalService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -61,8 +63,7 @@ export class AuthService implements OnInit{
         this.goDashboard()
       })
       .catch((error) => {
-        window.alert(error.message);
-        console.log('es esto')
+        this.swal.getErrorMsg(this.swal.messageErr(error.code))
       })
       .finally(() => {
         this.setStateLoading(false)
@@ -95,9 +96,8 @@ export class AuthService implements OnInit{
         this.SendVerificationMail();
       })
       .catch((error) => {
-
         this.setStateLoading(false)
-        window.alert(error.message+'tu puta madre como hayas fallado tu cabron');
+        this.swal.getErrorMsg(this.swal.messageErr(error.code))
       })
       .finally(() => {
       });
@@ -122,10 +122,10 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        this.swal.messageSucc('Password reset email sent, check your inbox.')
       })
       .catch((error) => {
-        window.alert(error);
+        this.swal.getErrorMsg(this.swal.messageErr(error.code))
       })
       .finally(() => {
         this.setStateLoading(false)
@@ -144,7 +144,7 @@ export class AuthService implements OnInit{
       this._userService.SetUserData(this.mapUser(res.user));
     })
     .catch((error) => {
-      window.alert(error);
+      this.swal.getErrorMsg(this.swal.messageErr(error.code))
     })
     .finally(() => {
       this.goDashboard();
@@ -159,7 +159,7 @@ export class AuthService implements OnInit{
         // this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error);
+        this.swal.getErrorMsg(this.swal.messageErr(error.code))
       })
       .finally(() => {
         this.goDashboard()
@@ -190,7 +190,7 @@ export class AuthService implements OnInit{
           this.router.navigate(['/dashboard']);
         });
       } else {
-        alert('Something went wrong. Please try again')
+        this.swal.messageErr('Something went wrong. Please try again')
       }
       this.setStateLoading(false);
     }, 0);
@@ -250,7 +250,7 @@ export class AuthService implements OnInit{
         .finally(() => {
           this.router.navigate(['auth/create-user']);
           this.setStateLoading(false);
-          alert('NEW USER REGISTERED!')
+          this.swal.messageSucc('NEW USER REGISTERED!')
         });;
   }
 

@@ -10,12 +10,10 @@ export interface Alert{
 @Injectable({
   providedIn: 'root'
 })
+
 export class SwalService {
-  titleAlert = '';
-  alert: Alert = {
-    title: 'Error',
-    msg: 'Password is required',
-  }
+
+  constructor() { }
 
   messageErr(error: string) {
       Swal.fire({
@@ -27,14 +25,19 @@ export class SwalService {
         backdrop: 'blur(5px)',
         background: `rgba(0, 1, 0, 0.95)`
       })
-      console.log(error);
   }
 
-  message(error: string) {
-    Swal.fire( this.alert.title, this.alert.msg , "error");
+  messageSucc(msg: string) {
+    Swal.fire({
+      icon: 'success',
+      title: msg,
+      width: 600,
+      padding: '3em',
+      color: 'yellow',
+      backdrop: 'blur(5px)',
+      background: `rgba(0, 1, 0, 0.95)`
+    })
 }
-  constructor() { }
-
 
   /*Error Metod*/
   getErrorMsg(err:any):string {
