@@ -59,12 +59,14 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
 
   emailLabel = 'Correo Electrónico';
 
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl('', [Validators.required,
+                              Validators.email]);
   emailErrorLabelReq = 'El correo electrónico és obligatório!';
   emailErrorLabelFormat = 'Formato de correo electrónico inválido';
 
 
-  phoneform = new FormControl('', [Validators.required]);
+  phoneform = new FormControl('', [Validators.required]
+                                  );
 
   getErrorMessage() {
       if (this.email.hasError('required')) {
