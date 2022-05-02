@@ -9,3 +9,15 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.swal2-container.swal2-backdrop-show {
+    backdrop-filter: blur(10px);
+}
+
+.swal-button {
+    background-color: white;
+}
+
+.swal2-styled.swal2-confirm {
+    color: #000000 !important;
+}

@@ -22,20 +22,30 @@ export class SwalService {
         width: 600,
         padding: '3em',
         color: 'yellow',
-        backdrop: 'blur(5px)',
-        background: `rgba(0, 1, 0, 0.95)`
+        background: `rgb(41, 41, 41)`,
+        confirmButtonColor: "yellow"
       })
   }
 
   messageSucc(msg: string) {
-    Swal.fire({
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
       icon: 'success',
       title: msg,
-      width: 600,
-      padding: '3em',
       color: 'yellow',
-      backdrop: 'blur(5px)',
-      background: `rgba(0, 1, 0, 0.95)`
+      width: 390,
+      background: `rgb(41, 41, 41)`
     })
 }
 
@@ -263,6 +273,10 @@ export class SwalService {
       }
       case 'auth/wrong-password': {
         msg = 'Contraseña incorrecta'
+        break;
+      }
+      case 'auth/email-already-in-use': {
+        msg = 'El correo electrónico está actualmente en uso'
         break;
       }
       default:{

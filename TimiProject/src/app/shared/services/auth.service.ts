@@ -97,7 +97,7 @@ export class AuthService implements OnInit{
       })
       .catch((error) => {
         this.setStateLoading(false)
-        this.swal.getErrorMsg(this.swal.messageErr(error.code))
+        this.swal.messageErr(this.swal.getErrorMsg(error.code))
       })
       .finally(() => {
       });
@@ -144,9 +144,10 @@ export class AuthService implements OnInit{
       this._userService.SetUserData(this.mapUser(res.user));
     })
     .catch((error) => {
-      this.swal.getErrorMsg(this.swal.messageErr(error.code))
+      this.swal.messageErr(this.swal.getErrorMsg(error.code))
     })
-    .finally(() => {
+      .finally(() => {
+        this.swal.messageSucc('Has iniciado sesión correctamente')
       this.goDashboard();
     });
   }
