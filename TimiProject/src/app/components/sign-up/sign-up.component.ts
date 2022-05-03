@@ -64,6 +64,9 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
   emailErrorLabelReq = 'El correo electrónico és obligatório!';
   emailErrorLabelFormat = 'Formato de correo electrónico inválido';
 
+  phoneErrorLabelReq = 'El número de teléfono és obligatório';
+  phoneErrorLabelFormat = 'El número de teléfono debe tener 9 dígitos';
+
 
   phoneform = new FormControl('', [Validators.required]
                                   );
