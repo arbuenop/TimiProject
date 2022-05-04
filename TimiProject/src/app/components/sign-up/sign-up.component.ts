@@ -3,6 +3,8 @@ import { Component,  OnInit,   } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplicationVerifier } from 'firebase/auth';
+import { UsersService } from 'src/app/shared/services/database/users.service';
+import { SwalService } from 'src/app/shared/services/swal.service';
 import { AuthService } from "../../shared/services/auth.service";
 
 //ESTO ES UN PRUEBA
@@ -84,9 +86,24 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
   registerAction() {
     if (this.method == 'phone') {
       this.authService.signInWithPhone(this.phoneform.value, this.rec);
+      /*ESTO ES LA COMPORBACION DEL TELEFONO*/
+      /*
+      this.userService.serchUserByPhone(this.phoneform.value).subscribe(doc => {
+        if(doc.length == 0){
+
+        }else{
+          this.swal.messageErr("Este telefono ya está en uso")
+        }
+      })*/
     } else {
       if (this.email.valid) {
-        this.router.navigate(['auth/create-user/'+this.email.value])
+        this.userService.serchUserByMail(this.email.value).subscribe(doc => {
+          if(doc.length == 0){
+            this.router.navigate(['auth/create-user/'+this.email.value])
+          }else{
+            this.swal.messageErr("Este email ya está en uso")
+          }
+        })
         } else {
           this.email.markAsTouched();
        }
@@ -96,7 +113,9 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
 
   constructor(
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    public userService: UsersService,
+    public swal: SwalService
   ) { }
    rec: any;
   ngOnInit() {

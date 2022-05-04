@@ -251,7 +251,7 @@ export class AuthService implements OnInit{
         .finally(() => {
           this.router.navigate(['auth/create-user']);
           this.setStateLoading(false);
-          this.swal.messageSucc('NEW USER REGISTERED!')
+          this.swal.messageSucc('PHONE VERIFIED')
         });;
   }
 

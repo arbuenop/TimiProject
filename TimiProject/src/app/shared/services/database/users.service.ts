@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection ,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { doc, getDoc } from "firebase/firestore";
+import { Observable } from 'rxjs';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
-import { User } from '../user';
 
 
 export interface test{
@@ -15,13 +15,12 @@ export interface test{
   providedIn: 'root'
 })
 export class UsersService {
-
-  userData: any; // Save logged in user data
-
-  testmode?: test;
   constructor(
     public afs: AngularFirestore,
   ) { }
+
+  userData: any; // Save logged in user data
+  testmode?: test;
 
   getUserData() {
     return this.userData;
@@ -83,18 +82,26 @@ export class UsersService {
     });
 
   }
+//SEARCH USERS BY MAIL
+// --------------------------------------
+
+serchUserByMail(email:any):Observable<any>{
+  this.afs.collection('users').doc('1').delete()
+  return  this.afs.collection('users', ref => ref.where('email', '==' , email)).valueChanges()
+}
+
+//SEARCH USERS BY PHONE
+// --------------------------------------
+
+serchUserByPhone(phone:any):Observable<any>{
+  return  this.afs.collection('users', ref => ref.where('phone', '==' , phone)).valueChanges()
+}
+
 
 // PULL USERS FROM BD
 // --------------------------------------
 
-  pullDbUserData() {
-
-  }
-
-
-
-
-
+  pullDbUserData() {}
 
 // PUSH USERS TO BD
 // --------------------------------------
@@ -118,9 +125,12 @@ export class UsersService {
   }
 
 
+// DELETE USER
+// --------------------------------------
 
-
-
+deleteUserById(id:string){
+  this.afs.collection('users').doc(id).delete()
+}
 
 
 // SET LOCALSTORAGE USER DATA
