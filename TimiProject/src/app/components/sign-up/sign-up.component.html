@@ -1,5 +1,5 @@
 <section class="main-reg-log">
-    <section>
+    <section class="reg-with-tel-email">
 
         <h2><strong>{{ signUpTitle }}</strong></h2>
 
@@ -7,49 +7,58 @@
             <mat-button-toggle class="toogle" (click)="toggle()" value="phone">{{methodPhoneLabel}}</mat-button-toggle>
             <mat-button-toggle class="toogle" (click)="toggle()" value="email">{{methodEmailLabel}}</mat-button-toggle>
         </mat-button-toggle-group>
+
+
+        <div *ngIf="method=='phone'; then phoneForm else emailForm"></div>
+
+
+        <ng-template #phoneForm>
+            <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'" style="flex-direction:column">
+
+                <mat-form-field appearance="outline" class="register-login" id="test">
+                    <ngx-mat-intl-tel-input matInput [formControl]="phoneform" [preferredCountries]="['es', 'gb']" [enablePlaceholder]="true" [enableSearch]="true" #phone>
+                    </ngx-mat-intl-tel-input>
+                    <mat-error *ngIf="phoneForm">{{getPhoneErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <div></div>
+            </div>
+
+        </ng-template>
+
+        <ng-template #emailForm class="form-template">
+
+            <div></div>
+
+            <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'">
+
+                <mat-form-field appearance="outline" class="register-login">
+                    <mat-label>{{ emailLabel }}</mat-label>
+                    <input matInput placeholder="Ex. TimiEmail@domain.com" [formControl]="email" style="color: white;" #userName required>
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+
+            </div>
+
+        </ng-template>
+
+        <div class="privacy-container">
+          <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
+        </div>
+
     </section>
 
-    <div *ngIf="method=='phone'; then phoneForm else emailForm"></div>
+    <section class="btns-reg">
 
-    <ng-template #phoneForm>
-        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'" style="flex-direction:column">
+      <button mat-stroked-button (click)="registerAction()" id="recaptcha-container" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
 
-            <mat-form-field appearance="outline" class="register-login" id="test">
-                <ngx-mat-intl-tel-input matInput [formControl]="phoneform" [preferredCountries]="['es', 'gb']" [enablePlaceholder]="true" [enableSearch]="true" #phone>
-                </ngx-mat-intl-tel-input>
-                <mat-error *ngIf="phoneForm">{{getPhoneErrorMessage()}}</mat-error>
-            </mat-form-field>
-            <div></div>
-        </div>
+      <span style="align-self: center;" class="or">{{orLabel}}</span>
 
-    </ng-template>
+      <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn">
+        <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;position:absolute;left:0;" alt="Google login icon"><strong>
+        {{GLoginBtnLabel}}</strong>
+      </button>
 
-    <ng-template #emailForm class="form-template">
-
-        <div></div>
-
-        <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'">
-
-            <mat-form-field appearance="outline" class="register-login">
-                <mat-label>{{ emailLabel }}</mat-label>
-                <input matInput placeholder="Ex. TimiEmail@domain.com" [formControl]="email" style="color: white;" #userName required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-
-        </div>
-
-    </ng-template>
-
-    <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
-
-    <button mat-stroked-button (click)="registerAction()" id="recaptcha-container" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
-
-    <span style="align-self: center;" class="or">{{orLabel}}</span>
-
-    <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn">
-      <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;position:absolute;left:0;" alt="Google login icon"><strong>
-      {{GLoginBtnLabel}}</strong>
-    </button>
+    </section>
 
 
 </section>

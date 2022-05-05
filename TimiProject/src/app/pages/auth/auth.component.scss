@@ -92,3 +92,9 @@
 .back-btn:hover {
     background-color: #ffffff23;
 }
+
+@media screen and ( max-height: 32rem) {
+  .timiTitle{
+    height: 0;
+  }
+}
