@@ -17,6 +17,7 @@
             <mat-form-field appearance="outline" class="register-login" id="test">
                 <ngx-mat-intl-tel-input matInput [formControl]="phoneform" [preferredCountries]="['es', 'gb']" [enablePlaceholder]="true" [enableSearch]="true" #phone>
                 </ngx-mat-intl-tel-input>
+                <mat-error *ngIf="phoneForm">{{getPhoneErrorMessage()}}</mat-error>
             </mat-form-field>
             <div></div>
         </div>
