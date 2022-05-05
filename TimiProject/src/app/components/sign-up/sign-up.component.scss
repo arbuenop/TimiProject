@@ -1,12 +1,11 @@
 .main-reg-log {
     display: flex;
     flex-direction: column;
-    margin: 1em;
     justify-content: center;
+    margin: 1em;
     transition: 0.5s;
     color: white;
-
-    max-width: 20rem;
+    max-width: 30rem;
 }
 
 p,
@@ -123,13 +122,15 @@ mat-error{
 .btns-reg{
   display: flex;
   flex-direction: column;
-
+  margin-top: 20px;
 }
 
 button:hover {
     background-color: rgb(206, 209, 178);
     transform: scale(1.03);
 }
+
+
 
 @media only screen and (hover: none) and (pointer: coarse) and (orientation:landscape) {
     .main-reg-log {
