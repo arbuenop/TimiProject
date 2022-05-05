@@ -1,8 +1,8 @@
+<h2><strong>{{ signUpTitle }}</strong></h2>
+
 <section class="main-reg-log">
+
     <section class="reg-with-tel-email">
-
-        <h2><strong>{{ signUpTitle }}</strong></h2>
-
         <mat-button-toggle-group [(ngModel)]="method" aria-label="Method" class="method-chooser">
             <mat-button-toggle class="toogle" (click)="toggle()" value="phone">{{methodPhoneLabel}}</mat-button-toggle>
             <mat-button-toggle class="toogle" (click)="toggle()" value="email">{{methodEmailLabel}}</mat-button-toggle>
@@ -16,7 +16,7 @@
             <div class="form-template" [@openClose]="isOpen ? 'phone' : 'mail'" style="flex-direction:column">
 
                 <mat-form-field appearance="outline" class="register-login" id="test">
-                    <ngx-mat-intl-tel-input matInput [formControl]="phoneform" [preferredCountries]="['es', 'gb']" [enablePlaceholder]="true" [enableSearch]="true" #phone>
+                  <ngx-mat-intl-tel-input matInput [formControl]="phoneform" [preferredCountries]="['es', 'gb']" [enablePlaceholder]="true" [enableSearch]="true" #phone>
                     </ngx-mat-intl-tel-input>
                     <mat-error *ngIf="phoneForm">{{getPhoneErrorMessage()}}</mat-error>
                 </mat-form-field>
@@ -41,10 +41,6 @@
 
         </ng-template>
 
-        <div class="privacy-container">
-          <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
-        </div>
-
     </section>
 
     <section class="btns-reg">
@@ -60,10 +56,11 @@
 
     </section>
 
-
 </section>
 
-
+<div class="privacy-container">
+  <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
+</div>
 
 
 
