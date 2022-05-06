@@ -9,9 +9,8 @@
 
     <app-loading-spinner *ngIf="showSpinner">
     </app-loading-spinner>
-
     <main [@authAnimations]="getRouteAnimationData()">
         <router-outlet></router-outlet>
+        <div id="recaptcha-container" style="display:none"></div>
     </main>
-    <div id="recaptcha-container" style="display:none"></div>
 </div>

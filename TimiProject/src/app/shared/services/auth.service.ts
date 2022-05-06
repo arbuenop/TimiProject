@@ -239,7 +239,6 @@ export class AuthService implements OnInit{
 
   // Verify code number
   verifyLoginCode(verificationCode: string) {
-
     this.setStateLoading(true);
       return this.confirmationRes
         .confirm(verificationCode)
@@ -248,6 +247,8 @@ export class AuthService implements OnInit{
               // this.SetUserData(res.user);
             this.swal.messageSucc('PHONE VERIFIED')
             this.router.navigate(['auth/create-user']);
+
+    debugger;
         })
         .catch( (err:any) => {
             this.swal.messageErr('Codigo de verificación incorrecto. Porfavor inténtalo de nuevo.');
