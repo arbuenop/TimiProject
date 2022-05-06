@@ -59,7 +59,8 @@
 
     <div class="btns-reg">
 
-        <button mat-stroked-button (click)="registerAction()" id="recaptcha-container" class="btn" id="next"><strong> {{ loginBtnLabel }} </strong></button>
+
+        <button mat-stroked-button (click)="registerAction()" class="btn" id="next"><strong> {{ loginBtnLabel }} </strong></button>
 
         <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn" id="google">
           <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;margin-left: 1vw;" alt="Google login icon">
@@ -72,7 +73,6 @@
 <div class="privacy-container">
     <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
 </div>
-
 
 
 
