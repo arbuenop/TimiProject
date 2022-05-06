@@ -228,7 +228,9 @@ export class AuthService implements OnInit{
           console.log(result)
           this.confirmationRes = result;
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+        })
         .finally(() => {
           this.router.navigate(['auth/verify-phone-number']);
           this.setStateLoading(false);
@@ -240,19 +242,28 @@ export class AuthService implements OnInit{
 
     this.setStateLoading(true);
       return this.confirmationRes
-          .confirm(verificationCode)
-          .then( (res:any) => {
+        .confirm(verificationCode)
+        .then( (res:any) => {
             this.userData = res.user;
-            // this.SetUserData(res.user);
-      })
+              // this.SetUserData(res.user);
+            this.swal.messageSucc('PHONE VERIFIED')
+            this.router.navigate(['auth/create-user']);
+        })
         .catch( (err:any) => {
-          console.log(err, "Incorrect code entered?")
+            this.swal.messageErr('Codigo de verificación incorrecto. Porfavor inténtalo de nuevo.');
         })
         .finally(() => {
-          this.router.navigate(['auth/create-user']);
-          this.setStateLoading(false);
-          this.swal.messageSucc('PHONE VERIFIED')
-        });;
+           this.setStateLoading(false);
+        });
   }
 
+  // Save number on sessionStorage
+
+  setNumberOnSs(number:string){
+    sessionStorage.setItem('userNumber', number);
+  }
+  get NumberOfSs():any{
+    if(sessionStorage.getItem('userNumber'))
+    return sessionStorage.getItem('userNumber')? sessionStorage.getItem('userNumber'): '';
+  }
 }
