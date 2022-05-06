@@ -85,6 +85,22 @@ button {
     opacity: 1 !important;
     bottom: 8px !important;
     color: white !important;
+    font-size: 1.5em !important;
+    letter-spacing: .1em;
+    margin-right: .2em !important;
+}
+
+::ng-deep .mat-button-wrapper {
+    margin-right: .5em !important;
+}
+
+::ng-deep .mat-input-element {
+    opacity: 1 !important;
+    bottom: 0.1em !important;
+    color: white !important;
+    font-size: 1.5em !important;
+    letter-spacing: .1em;
+    margin-left: .5em !important;
 }
 
 button:hover {
