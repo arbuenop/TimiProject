@@ -116,14 +116,6 @@ button {
     padding: 0!important;
 }
 
-mat-error{
-  margin-top: 20px!important;
-}
-
-.btns-reg{
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
 mat-error {
     margin-top: 20px!important;
 }
@@ -132,8 +124,6 @@ button:hover {
     background-color: rgb(206, 209, 178);
     transform: scale(1.03);
 }
-
-
 
 @media only screen and (hover: none) and (pointer: coarse) and (orientation:landscape) {
     .main-reg-log {
