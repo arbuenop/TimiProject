@@ -1,0 +1,137 @@
+.main-reg-log {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    justify-content: center;
+    transition: 0.5s;
+    color: white;
+    width: 95vw;
+    max-width: 20rem;
+}
+
+p,
+h2 {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p,
+h2 {
+    flex-direction: column;
+    font-size: 1.5em;
+}
+
+// mat-icon-stepper selected color change
+ ::ng-deep .mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: red!important;
+}
+
+//input outline color
+ ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(92, 92, 92)!important;
+    backdrop-filter: blur(8px);
+    // opacity: 1!important;
+}
+
+//mat-input focused color
+ ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: rgb(92, 92, 92)!important;
+}
+
+// mat-input error outline color
+ ::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+    color: rgb(92, 92, 92)!important;
+    opacity: 0.8!important;
+}
+
+// mat-input carent color
+ ::ng-deep .mat-input-element {
+    caret-color: rgb(92, 92, 92)!important;
+}
+
+// mat-input error carent color
+ ::ng-deep .mat-form-field-invalid .mat-input-element,
+.mat-warn .mat-input-element {
+    caret-color: rgb(92, 92, 92)!important;
+}
+
+// mat-label normal state style
+ ::ng-deep .mat-form-field-label {
+    color: rgba(175, 175, 175, 0.707)!important;
+    // color: $mainColor!important;
+}
+
+// mat-label focused style
+ ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: rgb(92, 92, 92)!important;
+}
+
+// mat-label error style
+ ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: red!important;
+}
+
+button {
+    margin-top: .3em;
+    margin-bottom: .3em;
+    background-color: white;
+    color: black;
+    transition: ease all .2s;
+}
+
+button:hover {
+    background-color: rgb(206, 209, 178);
+    transform: scale(1.03);
+}
+
+@media only screen and (hover: none) and (pointer: coarse) and (orientation:landscape) {
+    .main-reg-log {
+        display: block;
+        width: 100%;
+        max-width: none;
+    }
+    .register-login {
+        width: 48%;
+        margin: 1%;
+    }
+    .btn {
+        width: 47vw;
+    }
+    .or {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+}
+
+@media screen and ( max-height: 32rem) {
+    .main-reg-log {
+        display: block;
+        width: 100%;
+        max-width: none;
+    }
+    .register-login {
+        width: 48%;
+        margin: 1%;
+    }
+    .btn {
+        width: 47vw;
+    }
+    .or {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+}
+
+.privacy {
+    color: yellow;
+    font-style: italic;
+    align-self: center;
+    cursor: pointer;
+    transition: ease all .2s;
+}
+
+.privacy:hover {
+    color: rgb(183, 176, 0);
+}

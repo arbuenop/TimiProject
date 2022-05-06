@@ -1,0 +1,35 @@
+mat-card {
+    border-radius: 7px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(10px);
+    border: 1px solid whitesmoke;
+}
+
+mat-card-subtitle {
+    color: whitesmoke;
+}
+
+button {
+    border-radius: 7px;
+    border: 1px solid whitesmoke;
+    transition: ease all .2s;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.202);
+}
+
+.sent {
+    padding-top: .2em;
+    padding-bottom: .2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: lightgreen;
+    color: black;
+    border-radius: 10px;
+    width: 6em;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}

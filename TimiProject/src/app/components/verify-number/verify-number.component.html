@@ -1,0 +1,17 @@
+<section class="main-reg-log">
+
+
+    <h2><strong>{{ verifyNumberTitle }}</strong></h2>
+    <p> {{ verifyNumberSubTitle }}</p>
+
+    <!-- <div class="inputWrapper">
+        <input *ngFor="let index of [0,1,2,3,4,5];let indice=index" type="number" class="numberInput" pattern="[0-9]*" inputtype="numeric" id="otc-{{index}}">
+    </div> -->
+    <div class="inputWrapper">
+        <code-input [codeLength]="6" (codeCompleted)="verify($event)"></code-input>
+    </div>
+    <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
+
+    <!-- <button mat-stroked-button (click)="verify($event)" id="recaptcha-container" class="btn"><strong> {{ nextLabel }} </strong></button> -->
+
+</section>

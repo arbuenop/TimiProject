@@ -1,0 +1,34 @@
+<section class="main-reg-log">
+
+    <h2><strong>{{ createUserTitle }}</strong></h2>
+
+    <mat-form-field appearance="outline" color="secondary" class="register-login">
+        <mat-label>{{ userNameLabel }}</mat-label>
+        <input matInput type="text" style="color: white;" [formControl]="userName">
+
+        <!-- <mat-error *ngIf="passwd.invalid">{{getErrorMessage()}}</mat-error> -->
+    </mat-form-field>
+
+    <h2><strong>{{ passwdTitle }}</strong></h2>
+    <mat-form-field appearance="outline" color="secondary" class="register-login">
+        <mat-label>{{ passwdLabel }}</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" style="color: white;" [formControl]="passwd" #userPassword>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
+    <mat-icon style="color:rgb(129, 129, 129)">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+        <!-- <mat-error *ngIf="passwd.invalid">{{getErrorMessage()}}</mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="secondary" class="register-login">
+        <mat-label>{{ repeatPasswdLabel }}</mat-label>
+        <input matInput [type]="hideR ? 'password' : 'text'" style="color: white;" [formControl]="passwd" #userPassword>
+        <button mat-icon-button matSuffix (click)="hideR = !hideR" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
+  <mat-icon style="color:rgb(129, 129, 129)">{{hideR ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </button>
+        <!-- <mat-error *ngIf="passwd.invalid">{{getErrorMessage()}}</mat-error> -->
+    </mat-form-field>
+
+    <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
+
+    <button mat-stroked-button (click)="send()" class="btn"><strong> {{ registerBtnLabel }} </strong></button>
+
+</section>
