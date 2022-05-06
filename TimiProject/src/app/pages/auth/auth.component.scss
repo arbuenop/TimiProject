@@ -25,10 +25,12 @@
     box-shadow: inset 50px 50px 50px -18px #000000, inset -50px -50px 50px -18px #000000, inset -50px 50px 50px -18px #000000, inset 50px -50px 50px -18px
 }
 
-.swal2-confirm{
+main {
+    margin: 1em;
+}
 
-  background-color: yellow;
-
+.swal2-confirm {
+    background-color: yellow;
 }
 
 @keyframes bg-motion {
@@ -91,4 +93,10 @@
 
 .back-btn:hover {
     background-color: #ffffff23;
+}
+
+@media screen and ( max-height: 32rem) {
+    .timiTitle {
+        height: 0;
+    }
 }

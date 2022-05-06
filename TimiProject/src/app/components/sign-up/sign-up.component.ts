@@ -52,7 +52,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
   hide=true;
 
   methodPhoneLabel = 'Teléfono';
-  methodEmailLabel = 'Correo electrónico';
+  methodEmailLabel = 'E-mail';
 
   orLabel = 'O';
   GLoginBtnLabel = 'Registrarse con google';
