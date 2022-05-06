@@ -98,6 +98,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
       if (this.phoneform.valid){
         this.userService.serchUserByPhone(this.phoneform.value).subscribe(doc => {
           if(doc.length == 0){
+            this.authService.setNumberOnSs(this.phoneform.value);
             this.authService.signInWithPhone(this.phoneform.value, this.rec);
           }else{
             this.swal.messageErr("Este telefono ya está en uso")
@@ -139,7 +140,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
   ) { }
    rec: any;
   ngOnInit() {
-
+    this.phoneform.patchValue(this.authService.NumberOfSs);
     this.rec = this.authService.reCaptcha().then((x) => {
        this.rec=x
      })
