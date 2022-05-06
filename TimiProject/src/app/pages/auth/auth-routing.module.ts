@@ -10,6 +10,7 @@ import { VerifyEmailComponent } from 'src/app/components/verify-email/verify-ema
 import { VerifyNumberComponent } from 'src/app/components/verify-number/verify-number.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 import { CreateUserGuardGuard } from 'src/app/shared/guard/create-user-guard.guard';
+import { VerifyIdentityGuard } from 'src/app/shared/guard/verify-identity.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { AuthComponent } from './auth.component';
 
@@ -22,8 +23,7 @@ const routes: Routes = [
       { path: 'register-user', component: SignUpComponent, data: { animation: 'register' } },
       { path: 'forgot-password', component: ForgotPasswordComponent, data: { animation: 'forgotPasswd' } },
       { path: 'verify-email-address', component: VerifyEmailComponent, data: { animation: 'verifyEmail' } },
-      { path: 'create-user/:email', component: CreateUserComponent, data: { animation: 'createUser' }, canActivate: [CreateUserGuardGuard] },
-      { path: 'verify-phone-number', component: VerifyNumberComponent, data: { animation: 'verifyNumber' } , canActivate: [CreateUserGuardGuard] },
+      { path: 'verify-phone-number', component: VerifyNumberComponent, data: { animation: 'verifyNumber' }, canActivate: [VerifyIdentityGuard]  },
       { path: 'create-user', component: CreateUserComponent, data: { animation: 'createUser' } , canActivate: [CreateUserGuardGuard] },
       { path: 'create-user/**', component: CreateUserComponent, data: { animation: 'createUser' }, canActivate: [CreateUserGuardGuard] },
     ],

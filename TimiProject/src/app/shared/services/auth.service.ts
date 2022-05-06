@@ -29,6 +29,7 @@ export class AuthService implements OnInit{
   };
   windowRef: any;
 
+  reCaptchaVerifyer: any;
   private loading: BehaviorSubject<boolean>;
 
   constructor(
@@ -197,10 +198,13 @@ export class AuthService implements OnInit{
     }, 0);
   }
 
-
+  get reCaptcha() {
+    return this.reCaptchaVerifyer;
+  }
 // recaptcha
-  async reCaptcha() {
+  async checkReCaptcha() {
     let error = false;
+
     return await new Promise((resolve, reject) => {
         if (error) {
           reject('error'); // pass values
@@ -208,11 +212,13 @@ export class AuthService implements OnInit{
           var rec = new RecaptchaVerifier('recaptcha-container', {
             'size': 'invisible',
           }, auth.getAuth());
-          console.log(rec)
           rec.verify()
           rec.render()
           resolve(rec); // pass values
+          this.reCaptchaVerifyer = rec;
         }
+    }).catch((err) => {
+      console.log('ReCaptcha failed. Put in contact with the admins of the page to solve it.')
     });
 
   }
@@ -221,11 +227,9 @@ export class AuthService implements OnInit{
 
 // sign in/Register with phone
   async signInWithPhone(phoneNumber: string, appVerifier: any) {
-
     this.setStateLoading(true);
       this.afAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
         .then(result => {
-          console.log(result)
           this.confirmationRes = result;
         })
         .catch(error => {
@@ -245,10 +249,9 @@ export class AuthService implements OnInit{
         .then( (res:any) => {
             this.userData = res.user;
               // this.SetUserData(res.user);
-            this.swal.messageSucc('PHONE VERIFIED')
+          this.swal.messageSucc('PHONE VERIFIED')
+            sessionStorage.setItem('user-key',this.userData.uid)
             this.router.navigate(['auth/create-user']);
-
-    debugger;
         })
         .catch( (err:any) => {
             this.swal.messageErr('Codigo de verificación incorrecto. Porfavor inténtalo de nuevo.');

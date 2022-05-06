@@ -40,14 +40,14 @@ export class CreateUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(route => {
-      if (route) {
-        this.email = route['email']
-      }
-    })
-    if (this.email == '') {
-      this.router.navigate(['404-not-found'])
-    }
+    // this.activatedRoute.params.subscribe(route => {
+    //   if (route) {
+    //     this.email = route['email']
+    //   }
+    // })
+    // if (this.email == '') {
+    //   this.router.navigate(['404-not-found'])
+    // }
 
   }
 
