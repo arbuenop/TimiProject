@@ -19,9 +19,9 @@ export class VerifyIdentityGuard implements CanActivate {
     if (this.authService.NumberOfSs == ''|| !this.authService.NumberOfSs) {
       this.router.navigate(['/auth/register-user'])
     }
-    if (this.db.serchUserByPhone(sessionStorage.getItem('userNumber'))) {
-      this.router.navigate(['/auth/create-user'])
-    }
+    // if (this.db.serchUserByPhone(sessionStorage.getItem('userNumber'))) {
+    //   this.router.navigate(['/auth/create-user'])
+    // }
     return true;
   }
 

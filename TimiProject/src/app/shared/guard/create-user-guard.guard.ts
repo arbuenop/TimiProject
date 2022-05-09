@@ -16,7 +16,11 @@ export class CreateUserGuardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (!sessionStorage.getItem('user-key')) {
-      this.router.navigate(['/auth/register-user'])
+      if(sessionStorage.getItem('userNumber')){
+        this.router.navigate(['/auth/verify-phone-number'])
+      }else {
+        this.router.navigate(['/auth/register-user'])
+      }
     }
     return true;
   }
