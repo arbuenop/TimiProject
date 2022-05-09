@@ -19,6 +19,7 @@ export class AuthComponent implements OnInit {
   backBtnLabel = 'Atrás';
   public showSpinner:any;
   windowRef: any;
+  recap: any;
 
   /**
    * Check if the router url contains the specified route
@@ -45,6 +46,8 @@ export class AuthComponent implements OnInit {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
   ngOnInit(): void {
+
+    this.authService.checkReCaptcha();
     this.authService.isLoading().subscribe((value) => {
       this.showSpinner = value;
     });

@@ -16,7 +16,6 @@ export class VerifyNumberComponent implements OnInit {
 
 
   verify(event:any) {
-    console.log(event)
     this.authService.verifyLoginCode(event);
   }
 

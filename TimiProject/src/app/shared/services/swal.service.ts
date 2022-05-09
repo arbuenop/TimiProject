@@ -45,7 +45,7 @@ export class SwalService {
       title: msg,
       color: 'yellow',
       width: 390,
-      background: `rgb(41, 41, 41)`
+      background: `rgb(41, 41, 41)`,
     })
 }
 
