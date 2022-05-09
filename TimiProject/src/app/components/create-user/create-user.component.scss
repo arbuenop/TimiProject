@@ -1,145 +1,149 @@
 .main-reg-log {
-  margin-top: 1em;
-  transition: 0.5s;
-  color: white;
-  width: 95vw;
-  max-width: 20rem;
+    margin-top: 1em;
+    transition: 0.5s;
+    color: white;
+    width: 95vw;
+    max-width: 20rem;
+}
+
+mat-error {
+    font-family: Arial, Helvetica, sans-serif;
+    top: -10;
 }
 
 p,
 h2 {
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0 !important;
+    margin-top: .5em !important;
 }
 
 p,
 h2 {
-  flex-direction: column;
-  font-size: 1.5em;
+    flex-direction: column;
+    font-size: 1.5em;
 }
 
 // mat-icon-stepper selected color change
 ::ng-deep .mat-step-header .mat-step-icon-selected,
 .mat-step-header .mat-step-icon-state-done,
 .mat-step-header .mat-step-icon-state-edit {
-  background-color: red!important;
+    background-color: red!important;
 }
 
 //input outline color
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: rgb(92, 92, 92)!important;
-  backdrop-filter: blur(8px);
-  // opacity: 1!important;
+    color: rgb(92, 92, 92)!important;
+    backdrop-filter: blur(8px);
+    // opacity: 1!important;
 }
 
 //mat-input focused color
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-  color: rgb(92, 92, 92)!important;
+    color: rgb(92, 92, 92)!important;
 }
 
 // mat-input error outline color
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
-  color: rgb(92, 92, 92)!important;
-  opacity: 0.8!important;
+    color: rgb(92, 92, 92)!important;
+    opacity: 0.8!important;
 }
 
 // mat-input carent color
 ::ng-deep .mat-input-element {
-  caret-color: rgb(92, 92, 92)!important;
+    caret-color: rgb(92, 92, 92)!important;
 }
 
 // mat-input error carent color
 ::ng-deep .mat-form-field-invalid .mat-input-element,
 .mat-warn .mat-input-element {
-  caret-color: rgb(92, 92, 92)!important;
+    caret-color: rgb(92, 92, 92)!important;
 }
 
 // mat-label normal state style
 ::ng-deep .mat-form-field-label {
-  color: rgba(175, 175, 175, 0.707)!important;
-  // color: $mainColor!important;
+    color: rgba(175, 175, 175, 0.707)!important;
+    // color: $mainColor!important;
 }
 
 // mat-label focused style
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-  color: rgb(92, 92, 92)!important;
+    color: rgb(92, 92, 92)!important;
 }
 
 // mat-label error style
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
-  color: red!important;
+    color: red!important;
 }
 
 ::ng-deep .mat-form-field-wrapper {
-padding: 0!important;
-margin: 0!important;
+    padding: 0!important;
+    margin: 0!important;
 }
 
-::ng-deep .mat-form-field{
-width: 100%;
+::ng-deep .mat-form-field {
+    width: 100%;
 }
 
 button {
-  margin-top: .3em;
-  margin-bottom: .3em;
-  background-color: white;
-  color: black;
-  transition: ease all .2s;
-  width: 100%;
+    margin-top: .3em;
+    margin-bottom: .3em;
+    background-color: white;
+    color: black;
+    transition: ease all .2s;
+    width: 100%;
 }
 
 button:hover {
-  background-color: rgb(206, 209, 178);
-  transform: scale(1.03);
+    background-color: rgb(206, 209, 178);
+    transform: scale(1.03);
 }
 
-.privacy-container{
-  text-align: center;
+.privacy-container {
+    text-align: center;
 }
 
-.space-for-inputs{
-margin-bottom: 1rem;
+.space-for-inputs {
+    margin-top: 1rem;
 }
+
 
 /*NEW*/
-.err-msg{
-  position: absolute;
-  top: 0;
-}
 
 @media screen and ( max-height: 32rem) {
-  .main-reg-log {
-      width: 100%;
-      max-width: none;
-  }
-  .pass{
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-  }
-  .register-login-pass1{
-    margin-right: 0.5rem;
-  }
-  .register-login-pass2{
-    margin-left: 0.5rem;
-  }
-  .or {
-      margin-left: 1vw;
-      margin-right: 1vw;
-  }
-  h2{
-    margin: 0 0 0 0.5rem;
-  }
+    .main-reg-log {
+        width: 100%;
+        max-width: none;
+    }
+    .pass {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+    .register-login-pass1 {
+        margin-right: 0.5rem;
+    }
+    .register-login-pass2 {
+        margin-left: 0.5rem;
+    }
+    .or {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+    h2 {
+        margin: 0 0 0 0.5rem;
+    }
 }
 
 .privacy {
-  color: yellow;
-  font-style: italic;
-  align-self: center;
-  cursor: pointer;
-  transition: ease all .2s;
+    color: yellow;
+    font-style: italic;
+    align-self: center;
+    cursor: pointer;
+    transition: ease all .2s;
 }
 
 .privacy:hover {
-  color: rgb(183, 176, 0);
+    color: rgb(183, 176, 0);
 }
