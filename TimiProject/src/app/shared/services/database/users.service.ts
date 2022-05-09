@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection ,AngularFirestoreDocument 
 import { doc, getDoc } from "firebase/firestore";
 import { Observable } from 'rxjs';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
+import { FormGroup } from '@angular/forms';
 
 
 export interface test{
@@ -85,7 +86,7 @@ export class UsersService {
 //SEARCH USERS BY MAIL
 // --------------------------------------
 
-serchUserByMail(email:any):Observable<any>{
+searchUserByMail(email:any):Observable<any>{
   this.afs.collection('users').doc('1').delete()
   return  this.afs.collection('users', ref => ref.where('email', '==' , email)).valueChanges()
 }
@@ -93,8 +94,15 @@ serchUserByMail(email:any):Observable<any>{
 //SEARCH USERS BY PHONE
 // --------------------------------------
 
-serchUserByPhone(phone:any):Observable<any>{
+searchUserByPhone(phone:any):Observable<any>{
   return  this.afs.collection('users', ref => ref.where('phone', '==' , phone)).valueChanges()
+}
+
+//SEARCH USERS BY NAME
+// --------------------------------------
+
+searchUserByName(name:any):Observable<any>{
+  return  this.afs.collection('users', ref => ref.where('displayName', '==' , name)).valueChanges()
 }
 
 
@@ -147,7 +155,12 @@ deleteUserById(id:string){
     }
   }
 
+// VALIDATE USERS PASSWORDS FROM REGISTER USER
+// ---------------------------------------------
 
+  validatePasswords(val:FormGroup ){
+
+  }
 
 
 

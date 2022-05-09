@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
+import { confirmPasswordReset } from 'firebase/auth';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UsersService } from 'src/app/shared/services/database/users.service';
+import { SwalService } from 'src/app/shared/services/swal.service';
+
 
 @Component({
   selector: 'app-create-user',
@@ -25,19 +29,63 @@ export class CreateUserComponent implements OnInit {
   passwdLabel = 'Crea una contraseña';
   repeatPasswdLabel = 'Repite tu contraseña'
 
-  userName = new FormControl('', [Validators.required]);
-  passwd = new FormControl('', [Validators.required]);
-  passwdErrorLabelReq = 'La contraseña és obligatória!';
+  reactiveForm:FormGroup;
+  submitted:boolean = false;
 
-  send() {
-    this.authService.SignUp(this.email, this.passwd.value)
-  }
 
   constructor(
     public authService: AuthService,
     public router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    public userService: UsersService,
+    public swal: SwalService,
+    private formBuilder: FormBuilder
+  ) {
+
+
+    this.reactiveForm = this.formBuilder.group({
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required , Validators.minLength(6)]),
+      passwordConfirm: new FormControl(null, [Validators.required])
+    },{
+      validators: this.MustMatch('password','passwordConfirm')
+    })
+  }
+
+
+  MustMatch(controlName: string, matchingControlName: string){
+    return(formGroup:FormGroup)=>{
+      const control = formGroup.controls[controlName]
+      const matchingControl = formGroup.controls[matchingControlName];
+      if(matchingControl.errors && !matchingControl.errors["MustMatch"]){
+        return
+      }
+      if(control.value !== matchingControl.value){
+        matchingControl.setErrors({MustMatch:true})
+      }else{
+        matchingControl.setErrors(null)
+      }
+    }
+  }
+
+  send() {
+    this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
+      if(doc.length == 0){
+        this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
+      }else{
+        this.swal.messageErr("Este nombre de usuario ya está en uso")
+      }
+    })
+  }
+  get f (){return this.reactiveForm.controls}
+
+  onSubmit(){
+    if(this.reactiveForm.invalid){
+      return ;
+    }else{
+      this.send()
+    }
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(route => {
@@ -52,3 +100,5 @@ export class CreateUserComponent implements OnInit {
   }
 
 }
+
+

@@ -96,7 +96,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
   registerAction() {
     if (this.method == 'phone') {
       if (this.phoneform.valid){
-        this.userService.serchUserByPhone(this.phoneform.value).subscribe(doc => {
+        this.userService.searchUserByPhone(this.phoneform.value).subscribe(doc => {
           if(doc.length == 0){
             this.authService.setNumberOnSs(this.phoneform.value);
             this.authService.signInWithPhone(this.phoneform.value, this.rec);
@@ -118,7 +118,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
       })*/
     } else {
       if (this.email.valid) {
-        this.userService.serchUserByMail(this.email.value).subscribe(doc => {
+        this.userService.searchUserByMail(this.email.value).subscribe(doc => {
           if(doc.length == 0){
             this.router.navigate(['auth/create-user/'+this.email.value])
           }else{

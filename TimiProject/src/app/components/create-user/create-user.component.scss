@@ -101,6 +101,11 @@ button:hover {
 margin-bottom: 1rem;
 }
 
+/*NEW*/
+.err-msg{
+  position: absolute;
+  top: 0;
+}
 
 @media screen and ( max-height: 32rem) {
   .main-reg-log {
