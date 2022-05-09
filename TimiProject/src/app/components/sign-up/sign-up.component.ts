@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component,  OnInit,   } from '@angular/core';
+import { Component,  Input,  OnInit,   } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplicationVerifier } from 'firebase/auth';
@@ -37,6 +37,9 @@ import { AuthService } from "../../shared/services/auth.service";
   ])],
 })
 export class SignUpComponent implements OnInit {
+
+  @Input() verifyer: any;
+
   isOpen = true;
   toggle() {
     this.isOpen = !this.isOpen;
@@ -99,7 +102,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
         this.userService.serchUserByPhone(this.phoneform.value).subscribe(doc => {
           if(doc.length == 0){
             this.authService.setNumberOnSs(this.phoneform.value);
-            this.authService.signInWithPhone(this.phoneform.value, this.rec);
+            this.authService.signInWithPhone(this.phoneform.value, this.reCaptcha);
           }else{
             this.swal.messageErr("Este telefono ya está en uso")
           }
@@ -141,8 +144,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
    rec: any;
   ngOnInit() {
     this.phoneform.patchValue(this.authService.NumberOfSs);
-    this.rec = this.authService.reCaptcha().then((x) => {
-       this.rec=x
-     })
+    this.reCaptcha = this.authService.reCaptcha;
+    console.log(this.authService.reCaptcha)
   }
 }
