@@ -80,7 +80,7 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
       return 'El número de teléfono és obligatório!'
     }
     else if(this.phoneform.value != 9) {
-      return 'Longitud del número incorrecta'
+      return 'Formato del número incorrecto'
     }
     else {
       return '';

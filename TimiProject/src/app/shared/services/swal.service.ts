@@ -40,8 +40,8 @@ export class SwalService {
       showCancelButton: true,
       cancelButtonText:'Cancelar',
       confirmButtonColor: "yellow",
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Volver atrás!',
+      cancelButtonColor: '#d33',
       width: 600,
       padding: '3em',
       color: 'yellow',
@@ -54,7 +54,9 @@ export class SwalService {
           icon: 'success',
           padding: '3em',
           color: 'yellow',
-          background: `rgb(41, 41, 41)`
+          background: `rgb(41, 41, 41)`,
+          confirmButtonColor: "yellow",
+          confirmButtonText: 'Volver atrás!',
         })
         if (sessionStorage.getItem('userNumber')||sessionStorage.getItem('userNumber')=='') sessionStorage.removeItem('userNumber')
         if (sessionStorage.getItem('user-key') || sessionStorage.getItem('user-key') == '') {
