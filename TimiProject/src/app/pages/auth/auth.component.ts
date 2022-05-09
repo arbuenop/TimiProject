@@ -3,6 +3,7 @@ import { ChildrenOutletContexts, Router, RouterOutlet } from '@angular/router';
 import { authAnimations } from 'src/app/animations/auth-animations';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/shared/services/swal.service';
 
 
 @Component({
@@ -33,13 +34,21 @@ export class AuthComponent implements OnInit {
   }
   prueba = 'hola';
   back(): void {
-    this.location.back()
+    // deleteUserInfoSwal()
+    var sure = false;
+    if(window.location.href.includes('create-user')){
+      sure = this._swal.deleteUserInfoSwal();
+    }
+    console.log( window.location.href)
+
+    if(!sure) this.location.back()
   }
   constructor(
     public authService: AuthService,
     private router: Router,
     private contexts: ChildrenOutletContexts,
     private location: Location,
+    private _swal: SwalService
   ) { }
 
   getRouteAnimationData() {

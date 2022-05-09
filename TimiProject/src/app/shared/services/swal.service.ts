@@ -27,6 +27,34 @@ export class SwalService {
       })
   }
 
+  deleteUserInfoSwal(){
+    var sure = false;
+    Swal.fire({
+      title: 'Alerta!',
+      text: 'Si vuelves hacia atrás la información de usuario existente desaparecerá y deberas volver a verificar el número de teléfono!',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Cancelar',
+      confirmButtonColor: "yellow",
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Volver atrás!',
+      width: 600,
+      padding: '3em',
+      color: 'yellow',
+      background: `rgb(41, 41, 41)`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Eliminado!',
+          'La información de usuario ha sido eliminada.',
+          'success'
+        )
+        sure = true;
+      }
+    })
+    return sure;
+  }
+
   messageSucc(msg: string) {
     const Toast = Swal.mixin({
       toast: true,

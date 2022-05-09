@@ -130,6 +130,8 @@ serchUserByPhone(phone:any):Observable<any>{
 
 deleteUserById(id:string){
   this.afs.collection('users').doc(id).delete()
+  if (sessionStorage.getItem('userNumber'))sessionStorage.removeItem('userNumber');
+
 }
 
 
