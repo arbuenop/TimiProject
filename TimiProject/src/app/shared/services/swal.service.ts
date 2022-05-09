@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { filter } from 'rxjs';
 import Swal from 'sweetalert2';
+import { UsersService } from './database/users.service';
 
 export interface Alert{
   title: string,
@@ -13,7 +15,10 @@ export interface Alert{
 
 export class SwalService {
 
-  constructor() { }
+  constructor(
+    private _router: Router,
+    private db: UsersService
+  ) { }
 
   messageErr(error: string) {
       Swal.fire({
@@ -28,7 +33,6 @@ export class SwalService {
   }
 
   deleteUserInfoSwal(){
-    var sure = false;
     Swal.fire({
       title: 'Alerta!',
       text: 'Si vuelves hacia atrás la información de usuario existente desaparecerá y deberas volver a verificar el número de teléfono!',
@@ -44,15 +48,25 @@ export class SwalService {
       background: `rgb(41, 41, 41)`
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Eliminado!',
-          'La información de usuario ha sido eliminada.',
-          'success'
-        )
-        sure = true;
+        Swal.fire({
+          title: 'Eliminado!',
+          text: 'La información de usuario ha sido eliminada.',
+          icon: 'success',
+          padding: '3em',
+          color: 'yellow',
+          background: `rgb(41, 41, 41)`
+        })
+        if (sessionStorage.getItem('userNumber')||sessionStorage.getItem('userNumber')=='') sessionStorage.removeItem('userNumber')
+        if (sessionStorage.getItem('user-key') || sessionStorage.getItem('user-key') == '') {
+          var uid = sessionStorage.getItem('user-key');
+          if (uid) this.db.deleteUserById(uid);
+          sessionStorage.removeItem('user-key')
+        }
+        if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
+
+        this._router.navigate(['auth/'])
       }
     })
-    return sure;
   }
 
   messageSucc(msg: string) {

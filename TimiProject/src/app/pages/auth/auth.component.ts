@@ -34,14 +34,12 @@ export class AuthComponent implements OnInit {
   }
   prueba = 'hola';
   back(): void {
-    // deleteUserInfoSwal()
-    var sure = false;
     if(window.location.href.includes('create-user')){
-      sure = this._swal.deleteUserInfoSwal();
+       this._swal.deleteUserInfoSwal();
+    } else {
+      this.location.back()
     }
-    console.log( window.location.href)
 
-    if(!sure) this.location.back()
   }
   constructor(
     public authService: AuthService,
