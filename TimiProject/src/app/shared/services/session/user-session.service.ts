@@ -5,17 +5,23 @@ import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
   providedIn: 'root'
 })
 export class UserSessionService {
-  userData: UserAuthModel = {
-    uid: '',
-    email: '',
-    displayName: '',
-    photoURL: '',
-    passwd: '',
-    emailVerified: false,
-    userName: '',
-    phoneNumber: '',
-};
-  constructor() { }
+  userData: UserAuthModel;
+  constructor() {
+    this.clearUserData();
+  }
+
+  clearUserData() {
+    this.userData = {
+      uid: '',
+      email: '',
+      displayName: '',
+      photoURL: '',
+      passwd: '',
+      emailVerified: false,
+      userName: '',
+      phoneNumber: '',
+  };
+  }
 
   setUserData(user: any) {
     this.userData = {

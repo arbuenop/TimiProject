@@ -41,7 +41,8 @@ export class CreateUserComponent implements OnInit {
     public userService: UsersService,
     public swal: SwalService,
     private formBuilder: FormBuilder,
-    private _userSessionService: UserSessionService
+    private _userSessionService: UserSessionService,
+    public db: UsersService
   ) {
 
 
@@ -74,13 +75,18 @@ export class CreateUserComponent implements OnInit {
     this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
 
       if (doc.length == 0) {
-        console.log()
-        this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
-        this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
+        if (!sessionStorage.getItem('userNumber') || sessionStorage.getItem('userNumber') == '') {
+          this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
+        } else {
+          this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
+          this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
+          this._userSessionService.UserAuthData.uid = sessionStorage.getItem('user-key')
 
-        this._userSessionService.setUserData(this._userSessionService.UserAuthData);
-        this._userSessionService.pushToLocalStorage('user-auth-data')
-        // this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
+          this._userSessionService.setUserData(this._userSessionService.UserAuthData);
+          this._userSessionService.pushToLocalStorage('user-auth-data')
+
+          this.db.pushUserDataToBd(this._userSessionService.UserAuthData)
+        }
       }else{
         this.swal.messageErr("Este nombre de usuario ya está en uso")
       }

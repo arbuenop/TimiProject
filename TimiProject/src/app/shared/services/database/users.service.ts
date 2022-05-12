@@ -116,21 +116,23 @@ searchUserByName(name:any):Observable<any>{
 // --------------------------------------
   pushUserDataToBd(user: any) {
 
+    this.afs.collection("auth-data").doc(user.uid).set({
+      uid: user.uid ? user.uid : '',
+      email: user.email ? user.email : '',
+      displayName: user.userName ? user.userName : 'TimiUser',
+      photoURL: user.photoURL ? user.photoURL : 'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-PNG.png',
+      emailVerified: user.emailVerified ? user.emailVerified : false,
+      userName: user.userName ? user.userName : '',
+      passwd: user.passwd ? user.passwd : '',
+      phoneNumber: user.phoneNumber ? user.phoneNumber : ''
+   })
 
-  //   this.afs.collection("auth-data").doc(user.uid).set({
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: user.displayName,
-  //     photoURL: user.photoURL,
-  //     emailVerified: user.emailVerified,
-  //  })
 
-
-    // this.afs
-    //   .collection("auth-data")
-    //   .doc('user-auth-data').set(user)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+    this.afs
+      .collection("auth-data")
+      .doc('user-auth-data').set(user)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 
 
