@@ -14,6 +14,7 @@ import { UsersService } from './database/users.service';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
 import { SwalService } from './swal.service';
 import { UserSessionService } from './session/user-session.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -55,6 +56,28 @@ export class AuthService implements OnInit{
   ngOnInit() {
   }
 
+  iniciarSessionConUsuario(name: string, pass: string) {
+    this.setStateLoading(true);
+    this._userService.searchUserByName(name)
+      .subscribe({
+        next(data) {
+          if (data[0]) {
+            if (data[0].passwd === pass) {
+              console.log('Iniciando sesión...')
+              localStorage.setItem('user', JSON.stringify(data[0]));
+
+            } else {
+              console.log('Error con la contraseña...')
+            }
+          } else {
+            console.log('No se ha encontrado ningún usuario...')
+          }
+        },
+        error(err) {
+          console.log(err)
+        }
+      })
+  }
 
   async pushUserRegisteredByPhoneToBd() {
     this.setStateLoading(true)
@@ -156,7 +179,7 @@ export class AuthService implements OnInit{
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null;
   }
   // Sign in with Google
   async GoogleAuth() {
@@ -217,7 +240,10 @@ export class AuthService implements OnInit{
       this.setStateLoading(false);
     }, 0);
   }
-
+  quitLoaderAndSetError() {
+    this.swal.messageErr('Nombre de usuario o contraseña incorrectos.')
+    this.setStateLoading(false);
+  }
   get reCaptcha() {
     return this.reCaptchaVerifyer;
   }

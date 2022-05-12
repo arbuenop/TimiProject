@@ -20,7 +20,7 @@
     <span routerLink="/auth/forgot-password" class="forgotPasswd">{{ forgotPasswdLabel }}</span>
 
     <br>
-    <button mat-stroked-button (click)="authService.SignIn(userName.value, userPassword.value)" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
+    <button mat-stroked-button (click)="submit()" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
 
     <span style="align-self: center;" class="or">{{orLabel}}</span>
 

@@ -88,23 +88,25 @@ export class UsersService {
 // --------------------------------------
 
 searchUserByMail(email:any):Observable<any>{
-  this.afs.collection('users').doc('1').delete()
-  return  this.afs.collection('users', ref => ref.where('email', '==' , email)).valueChanges()
+  this.afs.collection('auth-data').doc('1').delete()
+  return  this.afs.collection('auth-data', ref => ref.where('email', '==' , email)).valueChanges()
 }
 
 //SEARCH USERS BY PHONE
 // --------------------------------------
 
 searchUserByPhone(phone:any):Observable<any>{
-  return  this.afs.collection('users', ref => ref.where('phone', '==' , phone)).valueChanges()
+  return  this.afs.collection('auth-data', ref => ref.where('phone', '==' , phone)).valueChanges()
 }
 
 //SEARCH USERS BY NAME
 // --------------------------------------
 
 searchUserByName(name:any):Observable<any>{
-  return  this.afs.collection('users', ref => ref.where('displayName', '==' , name)).valueChanges()
+  return  this.afs.collection('auth-data', ref => ref.where('userName', '==' , name)).valueChanges()
+
 }
+
 
 
 // PULL USERS FROM BD
