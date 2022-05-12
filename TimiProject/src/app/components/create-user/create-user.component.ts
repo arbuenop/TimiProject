@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { confirmPasswordReset } from 'firebase/auth';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsersService } from 'src/app/shared/services/database/users.service';
+import { UserSessionService } from 'src/app/shared/services/session/user-session.service';
 import { SwalService } from 'src/app/shared/services/swal.service';
 
 
@@ -39,13 +40,14 @@ export class CreateUserComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public userService: UsersService,
     public swal: SwalService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _userSessionService: UserSessionService
   ) {
 
 
     this.reactiveForm = this.formBuilder.group({
-      username: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required , Validators.minLength(6)]),
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required , Validators.minLength(6)]),
       passwordConfirm: new FormControl(null, [Validators.required])
     },{
       validators: this.MustMatch('password','passwordConfirm')
@@ -70,8 +72,15 @@ export class CreateUserComponent implements OnInit {
 
   send() {
     this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
-      if(doc.length == 0){
-        this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
+
+      if (doc.length == 0) {
+        console.log()
+        this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
+        this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
+
+        this._userSessionService.setUserData(this._userSessionService.UserAuthData);
+        this._userSessionService.pushToLocalStorage('user-auth-data')
+        // this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
       }else{
         this.swal.messageErr("Este nombre de usuario ya está en uso")
       }

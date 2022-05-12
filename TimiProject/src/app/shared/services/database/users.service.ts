@@ -27,27 +27,28 @@ export class UsersService {
     return this.userData;
   }
 
-  SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    console.log()
-    const userData: UserAuthModel = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      userName: user.userName
-    };
+  // SetUserData(user: any) {
+  //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+  //     `users/${user.uid}`
+  //   );
+  //   console.log()
+  //   const userData: UserAuthModel = {
+  //     uid: user.uid,
+  //     email: user.email,
+  //     displayName: user.displayName,
+  //     passwd: user.passwd,
+  //     photoURL: user.photoURL,
+  //     emailVerified: user.emailVerified,
+  //     userName: user.userName
+  //   };
 
-    console.log(userData)
-    this.userData = userData;
-    console.log(this.userData)
-    return userRef.set(userData, {
-      merge: true,
-    });
-  }
+  //   console.log(userData)
+  //   this.userData = userData;
+  //   console.log(this.userData)
+  //   return userRef.set(userData, {
+  //     merge: true,
+  //   });
+  // }
 
 
 
@@ -146,16 +147,16 @@ deleteUserById(id:string){
 // SET LOCALSTORAGE USER DATA
 // --------------------------------------
 
-  pushToLocalStorage(element:any, key:string) {
-    if (element) {
-      this.userData = element;
-      localStorage.setItem(key, JSON.stringify(this.userData));
-      JSON.parse(localStorage.getItem(key)!);
-    } else {
-      localStorage.setItem(key, 'null');
-      JSON.parse(localStorage.getItem(key)!);
-    }
-  }
+  // pushToLocalStorage(element:any, key:string) {
+  //   if (element) {
+  //     this.userData = element;
+  //     localStorage.setItem(key, JSON.stringify(this.userData));
+  //     JSON.parse(localStorage.getItem(key)!);
+  //   } else {
+  //     localStorage.setItem(key, 'null');
+  //     JSON.parse(localStorage.getItem(key)!);
+  //   }
+  // }
 
 // VALIDATE USERS PASSWORDS FROM REGISTER USER
 // ---------------------------------------------

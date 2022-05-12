@@ -13,17 +13,18 @@ import { RecaptchaVerifier } from "firebase/auth";
 import { UsersService } from './database/users.service';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
 import { SwalService } from './swal.service';
+import { UserSessionService } from './session/user-session.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit{
-  userData: any;
-  userDataMapped: UserAuthModel = {
+  userData: UserAuthModel = {
           uid: '',
           email: '',
           displayName: '',
           photoURL: '',
+          passwd: '',
           emailVerified: false,
           userName: ''
   };
@@ -38,15 +39,17 @@ export class AuthService implements OnInit{
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning,
     private _userService: UsersService,
+    private _userSessionService: UserSessionService,
     public swal: SwalService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
-      this._userService.pushToLocalStorage(user, 'user');
+      if (!user) this._userSessionService.setUserData(user);
+      else this._userSessionService.setUserData(this.userData);
+      this._userSessionService.pushToLocalStorage('user-auth-data');
     });
     this.loading = new BehaviorSubject<boolean>(false);
-
   }
 
   ngOnInit() {
@@ -60,7 +63,6 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this._userService.SetUserData(result.user);
         this.goDashboard()
       })
       .catch((error) => {
@@ -72,20 +74,20 @@ export class AuthService implements OnInit{
   }
 
 
-  mapUser(rawUserData?: any):UserAuthModel {
-    var userNameSelector = 'User';
-    var displayNameSelector = 'User';
+  // mapUser(rawUserData?: any):UserAuthModel {
+    // var userNameSelector = 'User';
+    // var displayNameSelector = 'User';
 
-    var userDataMapped:UserAuthModel =  {
-      uid: rawUserData.uid,
-      email: rawUserData.email,
-      displayName: displayNameSelector,
-      photoURL: rawUserData.photoURL,
-      emailVerified: rawUserData.emailVerified,
-      userName: userNameSelector
-    }
-    return userDataMapped
-  }
+    // var userDataMapped:UserAuthModel =  {
+    //   uid: rawUserData.uid,
+    //   email: rawUserData.email,
+    //   displayName: displayNameSelector,
+    //   photoURL: rawUserData.photoURL,
+    //   emailVerified: rawUserData.emailVerified,
+    //   userName: userNameSelector
+    // }
+    // return userData
+  // }
 
   // Sign up with email / password
   async SignUp(email: string, password: string) {
@@ -93,7 +95,6 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this._userService.SetUserData(this.mapUser(result.user));
         this.SendVerificationMail();
       })
       .catch((error) => {
@@ -142,7 +143,6 @@ export class AuthService implements OnInit{
     this.setStateLoading(true);
     return await this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       console.log(res)
-      this._userService.SetUserData(this.mapUser(res.user));
     })
     .catch((error) => {
       this.swal.messageErr(this.swal.getErrorMsg(error.code))

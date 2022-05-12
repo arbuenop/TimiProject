@@ -64,6 +64,7 @@ export class SwalService {
           if (uid) this.db.deleteUserById(uid);
           sessionStorage.removeItem('user-key')
         }
+        if (localStorage.getItem('user-auth-data')) localStorage.removeItem('user-auth-data');
         if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
 
         this._router.navigate(['auth/'])
