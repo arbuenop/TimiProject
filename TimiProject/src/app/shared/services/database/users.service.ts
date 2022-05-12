@@ -116,7 +116,7 @@ searchUserByName(name:any):Observable<any>{
 // --------------------------------------
   pushUserDataToBd(user: any) {
 
-    this.afs.collection("auth-data").doc(user.uid).set({
+    return this.afs.collection("auth-data").doc(user.uid).set({
       uid: user.uid ? user.uid : '',
       email: user.email ? user.email : '',
       displayName: user.userName ? user.userName : 'TimiUser',

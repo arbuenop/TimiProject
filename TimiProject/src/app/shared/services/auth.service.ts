@@ -56,6 +56,26 @@ export class AuthService implements OnInit{
   }
 
 
+  async pushUserRegisteredByPhoneToBd() {
+    this.setStateLoading(true)
+    return await this._userService.pushUserDataToBd(this._userSessionService.UserAuthData)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['/auth/sign-in']);
+        });
+        if (sessionStorage.getItem('userNumber')||sessionStorage.getItem('userNumber')=='') sessionStorage.removeItem('userNumber')
+        if (localStorage.getItem('user-auth-data')) localStorage.removeItem('user-auth-data');
+        if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
+      })
+      .catch((error) => {
+        this.swal.getErrorMsg(this.swal.messageErr(error.code))
+      })
+      .finally(() => {
+        this.setStateLoading(false)
+      });
+
+  }
+
   // Sign in with email/password
   async SignIn(email: string, password: string) {
 

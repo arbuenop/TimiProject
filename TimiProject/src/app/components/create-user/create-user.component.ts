@@ -84,8 +84,7 @@ export class CreateUserComponent implements OnInit {
 
           this._userSessionService.setUserData(this._userSessionService.UserAuthData);
           this._userSessionService.pushToLocalStorage('user-auth-data')
-
-          this.db.pushUserDataToBd(this._userSessionService.UserAuthData)
+          this.authService.pushUserRegisteredByPhoneToBd();
         }
       }else{
         this.swal.messageErr("Este nombre de usuario ya está en uso")

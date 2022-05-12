@@ -11,6 +11,7 @@ export class UserSessionService {
   }
 
   clearUserData() {
+
     this.userData = {
       uid: '',
       email: '',
@@ -22,6 +23,8 @@ export class UserSessionService {
       phoneNumber: '',
   };
   }
+
+
 
   setUserData(user: any) {
     this.userData = {
