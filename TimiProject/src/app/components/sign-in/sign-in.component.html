@@ -20,13 +20,24 @@
     <span routerLink="/auth/forgot-password" class="forgotPasswd">{{ forgotPasswdLabel }}</span>
 
     <br>
-    <button mat-stroked-button (click)="submit()" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
+
+
+    <div class="btns-reg">
+        <button mat-stroked-button (click)="submit()" class="btn" id="next"><strong> {{ loginBtnLabel }} </strong></button>
+        <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn" id="google">
+        <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;margin-left: 1vw;" alt="Google login icon">
+      </button>
+    </div>
+
+
+
+    <!-- <button mat-stroked-button (click)="submit()" class="btn"><strong> {{ loginBtnLabel }} </strong></button>
 
     <span style="align-self: center;" class="or">{{orLabel}}</span>
 
     <button mat-stroked-button (click)="authService.GoogleAuth()" class="btn">
       <img src="https://img.icons8.com/plasticine/344/google-logo.png" style="width:2.5em;position:absolute;left:0;" alt="Google login icon"><strong>
       {{GLoginBtnLabel}}</strong>
-    </button>
+    </button> -->
 
 </section>

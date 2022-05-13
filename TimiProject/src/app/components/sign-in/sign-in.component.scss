@@ -3,7 +3,6 @@
     flex-direction: column;
     margin-top: 1em;
     justify-content: center;
-    transition: 0.5s;
     color: white;
     width: 95vw;
     max-width: 20rem;
@@ -14,7 +13,6 @@
     font-style: italic;
     align-self: center;
     cursor: pointer;
-    transition: ease all .2s;
 }
 
 .forgotPasswd:hover {
@@ -90,7 +88,6 @@ button {
     margin-bottom: .3em;
     background-color: white;
     color: black;
-    transition: ease all .2s;
 }
 
 button:hover {
@@ -117,21 +114,44 @@ button:hover {
     }
 }
 
-@media screen and ( max-height: 32rem) {
+@media screen and ( max-height: 30rem) and ( max-width: 32rem) {
     .main-reg-log {
-        display: block;
-        width: 100%;
-        max-width: none;
+        flex-direction: column;
+        margin-top: 1em;
+        justify-content: center;
+        color: white;
+        width: 95vw;
+        max-width: 20rem;
+        display: flex;
+        padding-right: .5em;
     }
     .input-login {
-        width: 48%;
+        width: 100%;
         margin: 1%;
     }
     .btn {
-        width: 47vw;
+        width: 100%;
     }
     .or {
-        margin-left: 1vw;
-        margin-right: 1vw;
+        margin-left: 0vw;
+        margin-right: 0vw;
     }
+}
+
+.btns-reg {
+    margin-top: 1em;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    height: 4em;
+}
+
+#next {
+    width: 70%;
+    clip-path: polygon(0 0, 100% 0%, 86% 100%, 0% 100%);
+}
+
+#google {
+    width: 30%;
+    clip-path: polygon(30% 0, 100% 0%, 100% 100%, 0% 100%);
 }

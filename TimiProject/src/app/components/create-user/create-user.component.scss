@@ -1,6 +1,5 @@
 .main-reg-log {
     margin-top: 1em;
-    transition: 0.5s;
     color: white;
     width: 95vw;
     max-width: 20rem;
@@ -126,6 +125,31 @@ button:hover {
     }
     .register-login-pass2 {
         margin-left: 0.5rem;
+    }
+    .or {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+    h2 {
+        margin: 0 0 0 0.5rem;
+    }
+}
+
+@media screen and ( max-height: 32rem) and ( max-width: 32rem) {
+    .main-reg-log {
+        margin-top: 1em;
+        color: white;
+        width: 95vw;
+        max-width: 20rem;
+    }
+    .pass {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .register-login-pass1,
+    .register-login-pass2 {
+        margin-left: 0rem;
     }
     .or {
         margin-left: 1vw;
