@@ -71,6 +71,27 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
+  checkUserName(name: string) {
+
+
+    this.db.searchUserByName(name)
+    .subscribe({
+      next(data) {
+        if (data[0]) {
+          if (data[0].userName === name) {
+
+            console.log('Error con la contraseña...')
+            // this.swal.messageErr("Este nombre de usuario ya está en uso")
+          }
+        }
+      },
+      error(err) {
+        console.log(err)
+      }
+    })
+
+  }
+
   send() {
     this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
 
@@ -86,9 +107,8 @@ export class CreateUserComponent implements OnInit {
           this._userSessionService.pushToLocalStorage('user-auth-data')
           this.authService.pushUserRegisteredByPhoneToBd();
         }
-      }else{
-        this.swal.messageErr("Este nombre de usuario ya está en uso")
       }
+
     })
   }
   get f (){return this.reactiveForm.controls}

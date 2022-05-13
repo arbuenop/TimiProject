@@ -214,6 +214,7 @@ export class AuthService implements OnInit{
   // Sign out
   async SignOut() {
     return await this.afAuth.signOut().then(() => {
+      localStorage.removeItem('user-auth-data');
       localStorage.removeItem('user');
       this.router.navigate(['/auth/init']);
     });
