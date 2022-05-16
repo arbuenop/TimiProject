@@ -96,7 +96,7 @@ searchUserByMail(email:any):Observable<any>{
 // --------------------------------------
 
 searchUserByPhone(phone:any):Observable<any>{
-  return  this.afs.collection('auth-data', ref => ref.where('phone', '==' , phone)).valueChanges()
+  return  this.afs.collection('auth-data', ref => ref.where('phoneNumber', '==' , phone)).valueChanges()
 }
 
 //SEARCH USERS BY NAME
