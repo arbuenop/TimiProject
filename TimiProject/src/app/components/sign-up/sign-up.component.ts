@@ -45,10 +45,12 @@ export class SignUpComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
+  phoneComp = false;
+
   reCaptcha: any;
 
 
-signUpTitle = 'Introduce tu telefono o correo electrónico'
+  signUpTitle = 'Introduce tu telefono o correo electrónico'
 
   method = 'phone'
   nextStepCompleted = false;
@@ -101,10 +103,13 @@ signUpTitle = 'Introduce tu telefono o correo electrónico'
       if (this.phoneform.valid){
         this.userService.searchUserByPhone(this.phoneform.value).subscribe(doc => {
           if(doc.length == 0){
+            this.phoneComp = true;
             this.authService.setNumberOnSs(this.phoneform.value);
             this.authService.signInWithPhone(this.phoneform.value, this.reCaptcha);
           }else{
-            this.swal.messageErr("Este telefono ya está en uso")
+            if(this.phoneComp == false){
+              this.swal.messageErr("Este telefono ya está en uso")
+            }
           }
         })
       } else {
