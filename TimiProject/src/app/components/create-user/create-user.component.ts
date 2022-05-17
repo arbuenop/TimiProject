@@ -94,7 +94,6 @@ export class CreateUserComponent implements OnInit {
 
   send() {
     this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
-
       if (doc.length == 0) {
         if (!sessionStorage.getItem('userNumber') || sessionStorage.getItem('userNumber') == '') {
           this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
@@ -111,26 +110,49 @@ export class CreateUserComponent implements OnInit {
 
     })
   }
+
+  sendByEmail() {
+    this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
+    if (doc.length == 0) {
+      if (!sessionStorage.getItem('userEmail') || sessionStorage.getItem('userEmail') == '') {
+        this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
+      } else {
+        this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
+        this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
+        this._userSessionService.UserAuthData.email = sessionStorage.getItem('userEmail')
+
+        this._userSessionService.setUserData(this._userSessionService.UserAuthData);
+        this._userSessionService.pushToLocalStorage('user-auth-data')
+
+
+        this.authService.SignUp(sessionStorage.getItem('userEmail'), this.reactiveForm.get('password')?.value);
+        this.authService.pushUserRegisteredByMailToBd();
+      }
+    }
+
+  })
+
+  }
+
   get f (){return this.reactiveForm.controls}
 
   onSubmit() {
     this.submitted = true;
     if(this.reactiveForm.invalid){
       return ;
-    }else{
-      this.send()
+    } else {
+      if (sessionStorage.getItem('userEmail')&&sessionStorage.getItem('userEmail')!='') {
+        this.sendByEmail()
+
+      } else if (sessionStorage.getItem('userNumber')&& sessionStorage.getItem('userNumber')!= '') {
+        this.send()
+      } else {
+        this.sendByEmail()
+      }
     }
   }
 
   ngOnInit(): void {
-    // this.activatedRoute.params.subscribe(route => {
-    //   if (route) {
-    //     this.email = route['email']
-    //   }
-    // })
-    // if (this.email == '') {
-    //   this.router.navigate(['404-not-found'])
-    // }
 
   }
 

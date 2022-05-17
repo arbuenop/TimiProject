@@ -66,7 +66,7 @@ export class SignUpComponent implements OnInit {
 
   emailLabel = 'Correo Electrónico';
 
-  email = new FormControl('', [Validators.required,
+  email = new FormControl(sessionStorage.getItem('userEmail'), [Validators.required,
                               Validators.email]);
   emailErrorLabelReq = 'El correo electrónico és obligatório!';
   emailErrorLabelFormat = 'Formato de correo electrónico inválido';
@@ -115,20 +115,12 @@ export class SignUpComponent implements OnInit {
       } else {
         this.swal.messageErr("El teléfono introducido és incorrecto!")
       }
-      /*ESTO ES LA COMPORBACION DEL TELEFONO*/
-      /*
-      this.userService.serchUserByPhone(this.phoneform.value).subscribe(doc => {
-        if(doc.length == 0){
-
-        }else{
-          this.swal.messageErr("Este telefono ya está en uso")
-        }
-      })*/
     } else {
       if (this.email.valid) {
         this.userService.searchUserByMail(this.email.value).subscribe(doc => {
-          if(doc.length == 0){
-            this.router.navigate(['auth/create-user/'+this.email.value])
+          if (doc.length == 0) {
+            sessionStorage.setItem('userEmail', this.email.value);
+            this.router.navigate(['auth/create-user/'])
           }else{
             this.swal.messageErr("Este email ya está en uso")
           }

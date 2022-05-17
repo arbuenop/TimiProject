@@ -18,7 +18,9 @@ export class CreateUserGuardGuard implements CanActivate {
     if (!sessionStorage.getItem('user-key')) {
       if(sessionStorage.getItem('userNumber')){
         this.router.navigate(['/auth/verify-phone-number'])
-      }else {
+      } else if (sessionStorage.getItem('userEmail')) {
+        return true;
+      } else {
         this.router.navigate(['/auth/register-user'])
       }
     }

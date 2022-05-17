@@ -79,6 +79,29 @@ export class AuthService implements OnInit{
       })
   }
 
+
+
+  async pushUserRegisteredByMailToBd() {
+    // this.setStateLoading(true)
+    // console.log(this.afAuth.fetchSignInMethodsForEmail(sessionStorage.getItem('userEmail')))
+    // return await this._userService.pushUserDataToBd(this._userSessionService.UserAuthData)
+    //   .then((result) => {
+    //     this.ngZone.run(() => {
+    //       this.router.navigate(['/auth/sign-in']);
+    //     });
+    //     if (sessionStorage.getItem('userEmail')||sessionStorage.getItem('userEmail')=='') sessionStorage.removeItem('userEmail')
+    //     if (localStorage.getItem('user-auth-data')) localStorage.removeItem('user-auth-data');
+    //     if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
+    //   })
+    //   .catch((error) => {
+    //     this.swal.getErrorMsg(this.swal.messageErr(error.code))
+    //   })
+    //   .finally(() => {
+    //     this.setStateLoading(false)
+    //   });
+
+  }
+
   async pushUserRegisteredByPhoneToBd() {
     this.setStateLoading(true)
     return await this._userService.pushUserDataToBd(this._userSessionService.UserAuthData)
@@ -139,6 +162,7 @@ export class AuthService implements OnInit{
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SendVerificationMail();
+
       })
       .catch((error) => {
         this.setStateLoading(false)

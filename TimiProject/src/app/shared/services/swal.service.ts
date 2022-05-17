@@ -64,6 +64,7 @@ export class SwalService {
           if (uid) this.db.deleteUserById(uid);
           sessionStorage.removeItem('user-key')
         }
+        if (sessionStorage.getItem('userEmail') || sessionStorage.getItem('userEmail') == '') sessionStorage.removeItem('userEmail');
         if (localStorage.getItem('user-auth-data')) localStorage.removeItem('user-auth-data');
         if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
 
