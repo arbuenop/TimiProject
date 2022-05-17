@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection ,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { doc, getDoc } from "firebase/firestore";
+import { Observable } from 'rxjs';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
-import { User } from '../user';
+import { FormGroup } from '@angular/forms';
 
 
 export interface test{
@@ -15,39 +16,39 @@ export interface test{
   providedIn: 'root'
 })
 export class UsersService {
-
-  userData: any; // Save logged in user data
-
-  testmode?: test;
   constructor(
     public afs: AngularFirestore,
   ) { }
+
+  userData: any; // Save logged in user data
+  testmode?: test;
 
   getUserData() {
     return this.userData;
   }
 
-  SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    console.log()
-    const userData: UserAuthModel = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      userName: user.userName
-    };
+  // SetUserData(user: any) {
+  //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+  //     `users/${user.uid}`
+  //   );
+  //   console.log()
+  //   const userData: UserAuthModel = {
+  //     uid: user.uid,
+  //     email: user.email,
+  //     displayName: user.displayName,
+  //     passwd: user.passwd,
+  //     photoURL: user.photoURL,
+  //     emailVerified: user.emailVerified,
+  //     userName: user.userName
+  //   };
 
-    console.log(userData)
-    this.userData = userData;
-    console.log(this.userData)
-    return userRef.set(userData, {
-      merge: true,
-    });
-  }
+  //   console.log(userData)
+  //   this.userData = userData;
+  //   console.log(this.userData)
+  //   return userRef.set(userData, {
+  //     merge: true,
+  //   });
+  // }
 
 
 
@@ -83,61 +84,90 @@ export class UsersService {
     });
 
   }
+//SEARCH USERS BY MAIL
+// --------------------------------------
+
+searchUserByMail(email:any):Observable<any>{
+  this.afs.collection('auth-data').doc('1').delete()
+  return  this.afs.collection('auth-data', ref => ref.where('email', '==' , email)).valueChanges()
+}
+
+//SEARCH USERS BY PHONE
+// --------------------------------------
+
+searchUserByPhone(phone:any):Observable<any>{
+  return  this.afs.collection('auth-data', ref => ref.where('phoneNumber', '==' , phone)).valueChanges()
+}
+
+//SEARCH USERS BY NAME
+// --------------------------------------
+
+searchUserByName(name:any):Observable<any>{
+  return  this.afs.collection('auth-data', ref => ref.where('userName', '==' , name)).valueChanges()
+
+}
+
+
 
 // PULL USERS FROM BD
 // --------------------------------------
 
-  pullDbUserData() {
-
-  }
-
-
-
-
-
+  pullDbUserData() {}
 
 // PUSH USERS TO BD
 // --------------------------------------
   pushUserDataToBd(user: any) {
 
+    return this.afs.collection("auth-data").doc(user.uid).set({
+      uid: user.uid ? user.uid : '',
+      email: user.email ? user.email : '',
+      displayName: user.userName ? user.userName : 'TimiUser',
+      photoURL: user.photoURL ? user.photoURL : 'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-PNG.png',
+      emailVerified: user.emailVerified ? user.emailVerified : false,
+      userName: user.userName ? user.userName : '',
+      passwd: user.passwd ? user.passwd : '',
+      phoneNumber: user.phoneNumber ? user.phoneNumber : ''
+   })
 
-  //   this.afs.collection("auth-data").doc(user.uid).set({
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: user.displayName,
-  //     photoURL: user.photoURL,
-  //     emailVerified: user.emailVerified,
-  //  })
 
-
-    // this.afs
-    //   .collection("auth-data")
-    //   .doc('user-auth-data').set(user)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+    this.afs
+      .collection("auth-data")
+      .doc('user-auth-data').set(user)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 
 
+// DELETE USER
+// --------------------------------------
 
+deleteUserById(id:string){
+  this.afs.collection('users').doc(id).delete()
+  if (sessionStorage.getItem('userNumber'))sessionStorage.removeItem('userNumber');
 
-
+}
 
 
 // SET LOCALSTORAGE USER DATA
 // --------------------------------------
 
-  pushToLocalStorage(element:any, key:string) {
-    if (element) {
-      this.userData = element;
-      localStorage.setItem(key, JSON.stringify(this.userData));
-      JSON.parse(localStorage.getItem(key)!);
-    } else {
-      localStorage.setItem(key, 'null');
-      JSON.parse(localStorage.getItem(key)!);
-    }
+  // pushToLocalStorage(element:any, key:string) {
+  //   if (element) {
+  //     this.userData = element;
+  //     localStorage.setItem(key, JSON.stringify(this.userData));
+  //     JSON.parse(localStorage.getItem(key)!);
+  //   } else {
+  //     localStorage.setItem(key, 'null');
+  //     JSON.parse(localStorage.getItem(key)!);
+  //   }
+  // }
+
+// VALIDATE USERS PASSWORDS FROM REGISTER USER
+// ---------------------------------------------
+
+  validatePasswords(val:FormGroup ){
+
   }
-
-
 
 
 

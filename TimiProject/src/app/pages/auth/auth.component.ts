@@ -3,6 +3,7 @@ import { ChildrenOutletContexts, Router, RouterOutlet } from '@angular/router';
 import { authAnimations } from 'src/app/animations/auth-animations';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/app/shared/services/swal.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class AuthComponent implements OnInit {
   backBtnLabel = 'Atrás';
   public showSpinner:any;
   windowRef: any;
+  recap: any;
 
   /**
    * Check if the router url contains the specified route
@@ -32,19 +34,27 @@ export class AuthComponent implements OnInit {
   }
   prueba = 'hola';
   back(): void {
-    this.location.back()
+    if(window.location.href.includes('create-user')){
+       this._swal.deleteUserInfoSwal();
+    } else {
+      this.location.back()
+    }
+
   }
   constructor(
     public authService: AuthService,
     private router: Router,
     private contexts: ChildrenOutletContexts,
     private location: Location,
+    private _swal: SwalService
   ) { }
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
   ngOnInit(): void {
+
+    this.authService.checkReCaptcha();
     this.authService.isLoading().subscribe((value) => {
       this.showSpinner = value;
     });

@@ -13,22 +13,25 @@ import { RecaptchaVerifier } from "firebase/auth";
 import { UsersService } from './database/users.service';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
 import { SwalService } from './swal.service';
+import { UserSessionService } from './session/user-session.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit{
-  userData: any;
-  userDataMapped: UserAuthModel = {
+  userData: UserAuthModel = {
           uid: '',
           email: '',
           displayName: '',
           photoURL: '',
+          passwd: '',
           emailVerified: false,
           userName: ''
   };
   windowRef: any;
 
+  reCaptchaVerifyer: any;
   private loading: BehaviorSubject<boolean>;
 
   constructor(
@@ -37,20 +40,64 @@ export class AuthService implements OnInit{
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning,
     private _userService: UsersService,
+    private _userSessionService: UserSessionService,
     public swal: SwalService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
-      this._userService.pushToLocalStorage(user, 'user');
+      if (!user) this._userSessionService.setUserData(user);
+      else this._userSessionService.setUserData(this.userData);
+      this._userSessionService.pushToLocalStorage('user-auth-data');
     });
     this.loading = new BehaviorSubject<boolean>(false);
-
   }
 
   ngOnInit() {
   }
 
+  iniciarSessionConUsuario(name: string, pass: string) {
+    this.setStateLoading(true);
+    this._userService.searchUserByName(name)
+      .subscribe({
+        next(data) {
+          if (data[0]) {
+            if (data[0].passwd === pass) {
+              console.log('Iniciando sesión...')
+              localStorage.setItem('user', JSON.stringify(data[0]));
+
+            } else {
+              console.log('Error con la contraseña...')
+            }
+          } else {
+            console.log('No se ha encontrado ningún usuario...')
+          }
+        },
+        error(err) {
+          console.log(err)
+        }
+      })
+  }
+
+  async pushUserRegisteredByPhoneToBd() {
+    this.setStateLoading(true)
+    return await this._userService.pushUserDataToBd(this._userSessionService.UserAuthData)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['/auth/sign-in']);
+        });
+        if (sessionStorage.getItem('userNumber')||sessionStorage.getItem('userNumber')=='') sessionStorage.removeItem('userNumber')
+        if (localStorage.getItem('user-auth-data')) localStorage.removeItem('user-auth-data');
+        if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
+      })
+      .catch((error) => {
+        this.swal.getErrorMsg(this.swal.messageErr(error.code))
+      })
+      .finally(() => {
+        this.setStateLoading(false)
+      });
+
+  }
 
   // Sign in with email/password
   async SignIn(email: string, password: string) {
@@ -59,7 +106,6 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this._userService.SetUserData(result.user);
         this.goDashboard()
       })
       .catch((error) => {
@@ -71,20 +117,20 @@ export class AuthService implements OnInit{
   }
 
 
-  mapUser(rawUserData?: any):UserAuthModel {
-    var userNameSelector = 'User';
-    var displayNameSelector = 'User';
+  // mapUser(rawUserData?: any):UserAuthModel {
+    // var userNameSelector = 'User';
+    // var displayNameSelector = 'User';
 
-    var userDataMapped:UserAuthModel =  {
-      uid: rawUserData.uid,
-      email: rawUserData.email,
-      displayName: displayNameSelector,
-      photoURL: rawUserData.photoURL,
-      emailVerified: rawUserData.emailVerified,
-      userName: userNameSelector
-    }
-    return userDataMapped
-  }
+    // var userDataMapped:UserAuthModel =  {
+    //   uid: rawUserData.uid,
+    //   email: rawUserData.email,
+    //   displayName: displayNameSelector,
+    //   photoURL: rawUserData.photoURL,
+    //   emailVerified: rawUserData.emailVerified,
+    //   userName: userNameSelector
+    // }
+    // return userData
+  // }
 
   // Sign up with email / password
   async SignUp(email: string, password: string) {
@@ -92,7 +138,6 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this._userService.SetUserData(this.mapUser(result.user));
         this.SendVerificationMail();
       })
       .catch((error) => {
@@ -134,14 +179,13 @@ export class AuthService implements OnInit{
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null;
   }
   // Sign in with Google
   async GoogleAuth() {
     this.setStateLoading(true);
     return await this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       console.log(res)
-      this._userService.SetUserData(this.mapUser(res.user));
     })
     .catch((error) => {
       this.swal.messageErr(this.swal.getErrorMsg(error.code))
@@ -170,6 +214,7 @@ export class AuthService implements OnInit{
   // Sign out
   async SignOut() {
     return await this.afAuth.signOut().then(() => {
+      localStorage.removeItem('user-auth-data');
       localStorage.removeItem('user');
       this.router.navigate(['/auth/init']);
     });
@@ -196,11 +241,17 @@ export class AuthService implements OnInit{
       this.setStateLoading(false);
     }, 0);
   }
-
-
+  quitLoaderAndSetError() {
+    this.swal.messageErr('Nombre de usuario o contraseña incorrectos.')
+    this.setStateLoading(false);
+  }
+  get reCaptcha() {
+    return this.reCaptchaVerifyer;
+  }
 // recaptcha
-  async reCaptcha() {
+  async checkReCaptcha() {
     let error = false;
+
     return await new Promise((resolve, reject) => {
         if (error) {
           reject('error'); // pass values
@@ -208,11 +259,13 @@ export class AuthService implements OnInit{
           var rec = new RecaptchaVerifier('recaptcha-container', {
             'size': 'invisible',
           }, auth.getAuth());
-          console.log(rec)
           rec.verify()
           rec.render()
           resolve(rec); // pass values
+          this.reCaptchaVerifyer = rec;
         }
+    }).catch((err) => {
+      console.log('ReCaptcha failed. Put in contact with the admins of the page to solve it.')
     });
 
   }
@@ -221,14 +274,14 @@ export class AuthService implements OnInit{
 
 // sign in/Register with phone
   async signInWithPhone(phoneNumber: string, appVerifier: any) {
-
     this.setStateLoading(true);
       this.afAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
         .then(result => {
-          console.log(result)
           this.confirmationRes = result;
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+        })
         .finally(() => {
           this.router.navigate(['auth/verify-phone-number']);
           this.setStateLoading(false);
@@ -237,22 +290,31 @@ export class AuthService implements OnInit{
 
   // Verify code number
   verifyLoginCode(verificationCode: string) {
-
     this.setStateLoading(true);
       return this.confirmationRes
-          .confirm(verificationCode)
-          .then( (res:any) => {
+        .confirm(verificationCode)
+        .then( (res:any) => {
             this.userData = res.user;
-            // this.SetUserData(res.user);
-      })
+              // this.SetUserData(res.user);
+          this.swal.messageSucc('PHONE VERIFIED')
+            sessionStorage.setItem('user-key',this.userData.uid)
+            this.router.navigate(['auth/create-user']);
+        })
         .catch( (err:any) => {
-          console.log(err, "Incorrect code entered?")
+            this.swal.messageErr('Codigo de verificación incorrecto. Porfavor inténtalo de nuevo.');
         })
         .finally(() => {
-          this.router.navigate(['auth/create-user']);
-          this.setStateLoading(false);
-          this.swal.messageSucc('NEW USER REGISTERED!')
-        });;
+           this.setStateLoading(false);
+        });
   }
 
+  // Save number on sessionStorage
+
+  setNumberOnSs(number:string){
+    sessionStorage.setItem('userNumber', number);
+  }
+  get NumberOfSs():any{
+    if(sessionStorage.getItem('userNumber'))
+    return sessionStorage.getItem('userNumber')? sessionStorage.getItem('userNumber'): '';
+  }
 }

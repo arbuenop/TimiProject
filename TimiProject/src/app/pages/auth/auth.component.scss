@@ -25,10 +25,22 @@
     box-shadow: inset 50px 50px 50px -18px #000000, inset -50px -50px 50px -18px #000000, inset -50px 50px 50px -18px #000000, inset 50px -50px 50px -18px
 }
 
-.swal2-confirm{
+@media screen and ( max-height: 30rem) and ( max-width: 32rem) {
+    main {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 100%;
+        margin-top: 5em !important;
+        padding-right: .5em;
+    }
+}
 
-  background-color: yellow;
+main {
+    margin: 1em;
+}
 
+.swal2-confirm {
+    background-color: yellow;
 }
 
 @keyframes bg-motion {
@@ -74,11 +86,11 @@
     width: 55vh;
     align-self: center;
     max-width: 20em;
-    -moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-    -webkit-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-    -moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-    -o-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-    transition: width 1s ease-in-out, left 1.5s ease-in-out;
+    -moz-transition: ease all .2s;
+    -webkit-transition: ease all .2s;
+    -moz-transition: ease all .2s;
+    -o-transition: ease all .2s;
+    transition: ease all .2s;
 }
 
 .back-btn {
@@ -91,4 +103,11 @@
 
 .back-btn:hover {
     background-color: #ffffff23;
+}
+
+@media screen and ( max-height: 32rem) {
+    .timiTitle {
+        height: 0em;
+        width: 0;
+    }
 }

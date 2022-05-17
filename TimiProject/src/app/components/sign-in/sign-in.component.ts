@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { SwalService } from 'src/app/shared/services/swal.service';
 import { AuthService } from "../../shared/services/auth.service";
 
 @Component({
@@ -15,7 +16,7 @@ hide=true;
 
 // Labels
 hidePasswdLabel = 'Ocultar contraseña';
-emailLabel = 'Correo Electrónico';
+emailLabel = 'Correo Electrónico o Nombre de usuario';
 passwdLabel = 'Contraseña';
 forgotPasswdLabel='¿Olvidaste tu contraseña?';
 loginBtnLabel = 'Iniciar sesión';
@@ -24,12 +25,30 @@ orLabel = 'O';
 
 // Error Labels
 passwdErrorLabelReq = 'La contraseña és obligatória!';
-emailErrorLabelReq = 'El correo electrónico és obligatório!';
+emailErrorLabelReq = 'El correo electrónico o nombre de usuario és obligatório!';
 emailErrorLabelFormat = 'Formato de correo electrónico inválido';
 
 // Form controls
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl('', [Validators.required]);
   passwd = new FormControl('', [Validators.required]);
+
+  submit() {
+    if (this.email.value.includes('@')) {
+      this.authService.SignIn(this.email.value, this.passwd.value)
+    } else {
+
+      this.authService.iniciarSessionConUsuario(this.email.value, this.passwd.value);
+
+      setTimeout(() => {
+        var user = JSON.parse(localStorage.getItem('user')!);
+        if (user != null) this.authService.goDashboard()
+        else {
+          this.authService.quitLoaderAndSetError();
+        }
+      }, 1000);
+    }
+
+  }
 
   getErrorMessage(variable:number) {
       if(variable == 0){
@@ -47,7 +66,8 @@ emailErrorLabelFormat = 'Formato de correo electrónico inválido';
       }
   }
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public swal: SwalService
   ) { }
   ngOnInit() { }
 }

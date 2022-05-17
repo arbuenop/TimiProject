@@ -1,16 +1,14 @@
 .main-reg-log {
     display: flex;
     flex-direction: column;
-    margin-top: 1em;
     justify-content: center;
-    transition: 0.5s;
     color: white;
-    width: 95vw;
-    max-width: 20rem;
+    width: 100%;
 }
 
 p,
 h2 {
+    text-align: center;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -19,6 +17,14 @@ p,
 h2 {
     flex-direction: column;
     font-size: 1.5em;
+}
+
+h2 {
+    width: 100%;
+}
+
+.mat-input-element::placeholder {
+    color: #4a4a4a;
 }
 
 // mat-icon-stepper selected color change
@@ -30,31 +36,31 @@ h2 {
 
 //input outline color
  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: rgb(92, 92, 92)!important;
+    color: rgb(214, 211, 211)!important;
     backdrop-filter: blur(8px);
     // opacity: 1!important;
 }
 
 //mat-input focused color
  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: rgb(92, 92, 92)!important;
+    color: rgb(214, 211, 211)!important;
 }
 
 // mat-input error outline color
  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
-    color: rgb(92, 92, 92)!important;
+    color: rgb(214, 211, 211)!important;
     opacity: 0.8!important;
 }
 
 // mat-input carent color
  ::ng-deep .mat-input-element {
-    caret-color: rgb(92, 92, 92)!important;
+    caret-color: rgb(214, 211, 211)!important;
 }
 
 // mat-input error carent color
  ::ng-deep .mat-form-field-invalid .mat-input-element,
 .mat-warn .mat-input-element {
-    caret-color: rgb(92, 92, 92)!important;
+    caret-color: rgb(214, 211, 211)!important;
 }
 
 // mat-label normal state style
@@ -65,7 +71,7 @@ h2 {
 
 // mat-label focused style
  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color: rgb(92, 92, 92)!important;
+    color: rgb(214, 211, 211)!important;
 }
 
 // mat-label error style
@@ -85,6 +91,30 @@ button {
     opacity: 1 !important;
     bottom: 8px !important;
     color: white !important;
+    font-size: 1em !important;
+    letter-spacing: .1em;
+    margin-right: .2em !important;
+}
+
+::ng-deep .mat-button-wrapper {
+    margin-right: .5em !important;
+}
+
+::ng-deep .mat-input-element {
+    opacity: 1 !important;
+    bottom: 0.1em !important;
+    color: white !important;
+    font-size: 1em !important;
+    letter-spacing: .1em;
+    margin-left: .5em !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    padding: 0!important;
+}
+
+mat-error {
+    margin-top: 20px!important;
 }
 
 button:hover {
@@ -112,17 +142,44 @@ button:hover {
 }
 
 @media screen and ( max-height: 32rem) {
+    #next {
+        clip-path: none !important;
+        width: 100% !important;
+        margin-bottom: .5em;
+    }
+    #google {
+        width: 100% !important;
+        clip-path: none !important;
+        margin-top: .5em;
+    }
+    .reg-with-tel-email {
+        width: 50%;
+        margin: 0 1vw 0 1vw;
+        justify-content: center;
+    }
+    .btns-reg {
+        justify-content: center;
+        flex-direction: column;
+        width: 30% !important;
+        height: 100% !important;
+        margin: 0vw 1vw 0 1vw!important;
+    }
     .main-reg-log {
-        display: block;
-        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        width: 90vw;
         max-width: none;
+    }
+    .privacy {
+        text-align: center;
     }
     .register-login {
         width: 48%;
         margin: 1%;
     }
     .btn {
-        width: 47vw;
+        width: auto;
     }
     .or {
         margin-left: 1vw;
@@ -131,11 +188,11 @@ button:hover {
 }
 
 .form-template {
-    min-height: 7em;
+    padding-top: 1em;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1em;
+    margin-top: 0;
 }
 
 .register-login {
@@ -167,6 +224,13 @@ button:hover {
     box-shadow: inset 0px 15px 33px -13px #000000;
 }
 
+.privacy-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
 .privacy {
     color: yellow;
     font-style: italic;
@@ -177,4 +241,22 @@ button:hover {
 
 .privacy:hover {
     color: rgb(183, 176, 0);
+}
+
+.btns-reg {
+    margin-top: 1em;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    height: 4em;
+}
+
+#next {
+    width: 70%;
+    clip-path: polygon(0 0, 100% 0%, 86% 100%, 0% 100%);
+}
+
+#google {
+    width: 30%;
+    clip-path: polygon(30% 0, 100% 0%, 100% 100%, 0% 100%);
 }

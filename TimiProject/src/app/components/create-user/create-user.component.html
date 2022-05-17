@@ -1,34 +1,52 @@
-<section class="main-reg-log">
-
+<form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm" class="main-reg-log">
     <h2><strong>{{ createUserTitle }}</strong></h2>
 
-    <mat-form-field appearance="outline" color="secondary" class="register-login">
+    <mat-form-field appearance="outline" color="secondary" class="register-login-name space-for-inputs">
         <mat-label>{{ userNameLabel }}</mat-label>
-        <input matInput type="text" style="color: white;" [formControl]="userName">
+        <input matInput type="text" style="color: white;" name="username" formControlName="username">
 
-        <!-- <mat-error *ngIf="passwd.invalid">{{getErrorMessage()}}</mat-error> -->
     </mat-form-field>
+    <div class="err-msg" *ngIf="submitted && f['username'].errors">
+        <mat-error *ngIf="f['username'].errors['required']">Username Is Required</mat-error>
+    </div>
 
     <h2><strong>{{ passwdTitle }}</strong></h2>
-    <mat-form-field appearance="outline" color="secondary" class="register-login">
-        <mat-label>{{ passwdLabel }}</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" style="color: white;" [formControl]="passwd" #userPassword>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
-    <mat-icon style="color:rgb(129, 129, 129)">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-        <!-- <mat-error *ngIf="passwd.invalid">{{getErrorMessage()}}</mat-error> -->
-    </mat-form-field>
-    <mat-form-field appearance="outline" color="secondary" class="register-login">
-        <mat-label>{{ repeatPasswdLabel }}</mat-label>
-        <input matInput [type]="hideR ? 'password' : 'text'" style="color: white;" [formControl]="passwd" #userPassword>
-        <button mat-icon-button matSuffix (click)="hideR = !hideR" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
-  <mat-icon style="color:rgb(129, 129, 129)">{{hideR ? 'visibility_off' : 'visibility'}}</mat-icon>
-  </button>
-        <!-- <mat-error *ngIf="passwd.invalid">{{getErrorMessage()}}</mat-error> -->
-    </mat-form-field>
 
+    <div class="pass">
+
+        <div class="input-plus-error">
+            <mat-form-field appearance="outline" color="secondary" class="register-login-pass1 space-for-inputs">
+                <mat-label>{{ passwdLabel }}</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" style="color: white;" name="password" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
+          <mat-icon style="color:rgb(129, 129, 129)">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+            </mat-form-field>
+            <div class="err-msg" *ngIf="submitted && f['password'].errors">
+                <mat-error *ngIf="f['password'].errors['required']">Password Is Required</mat-error>
+                <mat-error *ngIf="f['password'].errors['minlength']">Password at least 6</mat-error>
+            </div>
+        </div>
+
+        <div class="input-plus-error">
+            <mat-form-field appearance="outline" color="secondary" class="register-login-pass2 space-for-inputs">
+                <mat-label>{{ repeatPasswdLabel }}</mat-label>
+                <input matInput [type]="hideR ? 'password' : 'text'" style="color: white;" name="passwordConfirm" formControlName="passwordConfirm">
+                <button mat-icon-button matSuffix (click)="hideR = !hideR" [attr.aria-label]="'{{hidePasswdLabel}}'" [attr.aria-pressed]="hide" style="background-color:rgba(0, 0, 0, 0)">
+            <mat-icon style="color:rgb(129, 129, 129)">{{hideR ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+            </mat-form-field>
+            <div class="err-msg" *ngIf="submitted && f['passwordConfirm'].errors" style="margin-left:.6em">
+                <mat-error *ngIf="f['passwordConfirm'].errors['required']">Confirm password is Required</mat-error>
+                <mat-error *ngIf="f['passwordConfirm'].errors['MustMutch']">Confirm password is Required</mat-error>
+            </div>
+        </div>
+    </div>
+
+    <button mat-stroked-button class="btn" type="submit" style="margin-top:1em"><strong> {{ registerBtnLabel }} </strong></button>
+
+</form>
+
+<div class="privacy-container">
     <span routerLink="/privacy-policy" class="privacy">{{ privacyPolicyLabel }}</span><br>
-
-    <button mat-stroked-button (click)="send()" class="btn"><strong> {{ registerBtnLabel }} </strong></button>
-
-</section>
+</div>
