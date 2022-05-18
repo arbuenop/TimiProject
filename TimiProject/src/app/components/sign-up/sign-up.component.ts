@@ -46,6 +46,7 @@ export class SignUpComponent implements OnInit {
   }
 
   phoneComp = false;
+  mailComp = false;
 
   reCaptcha: any;
 
@@ -106,10 +107,8 @@ export class SignUpComponent implements OnInit {
             this.phoneComp = true;
             this.authService.setNumberOnSs(this.phoneform.value);
             this.authService.signInWithPhone(this.phoneform.value, this.reCaptcha);
-          }else{
-            if(this.phoneComp == false){
-              this.swal.messageErr("Este telefono ya está en uso")
-            }
+          }else if(!this.phoneComp){
+            this.swal.messageErr("Este telefono ya está en uso")
           }
         })
       } else {
@@ -119,9 +118,10 @@ export class SignUpComponent implements OnInit {
       if (this.email.valid) {
         this.userService.searchUserByMail(this.email.value).subscribe(doc => {
           if (doc.length == 0) {
+            this.mailComp = true
             sessionStorage.setItem('userEmail', this.email.value);
             this.router.navigate(['auth/create-user/'])
-          }else{
+          }else if(!this.mailComp){
             this.swal.messageErr("Este email ya está en uso")
           }
         })

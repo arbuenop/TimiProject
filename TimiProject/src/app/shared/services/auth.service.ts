@@ -129,8 +129,9 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-
-        this.emailUser = result;
+        console.log(result.user.providerData[0])
+        this._userSessionService.setUserData(result.user.providerData[0])
+        this._userSessionService.pushToLocalStorage("user-auth-data")
         this.goDashboard()
       })
       .catch((error) => {
