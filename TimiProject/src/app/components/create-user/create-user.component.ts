@@ -110,23 +110,30 @@ export class CreateUserComponent implements OnInit {
     })
   }
 
+
+  userExists = false;
   sendByEmail() {
     this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
     if (doc.length == 0) {
+      this.userExists = true;
         this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
         this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
         this._userSessionService.UserAuthData.email = sessionStorage.getItem('userEmail')
 
         this._userSessionService.setUserData(this._userSessionService.UserAuthData);
-        this._userSessionService.pushToLocalStorage('user-auth-data')
-      }
-    })
+      this._userSessionService.pushToLocalStorage('user-auth-data')
+      }else if (!this.userExists) {
+        this.swal.messageErr('El nombre de usuario ya ha sido registrado!')
 
-    if (this._userSessionService.UserAuthData.userName != '' && this._userSessionService.UserAuthData.userName) {
-      this.authService.SignUp(sessionStorage.getItem('userEmail'), this.reactiveForm.get('password')?.value);
-    } else {
-      this.swal.messageErr('El nombre de usuario ya ha sido registrado!')
+      }
     }
+
+    )
+    setTimeout(()=>{
+      if (this._userSessionService.UserAuthData.userName != '' && this._userSessionService.UserAuthData.userName) {
+        this.authService.SignUp(sessionStorage.getItem('userEmail'), this.reactiveForm.get('password')?.value);
+      }
+    }, 300);
 
   }
 

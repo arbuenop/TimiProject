@@ -95,7 +95,6 @@ export class AuthService implements OnInit{
         if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
       })
       .catch((error) => {
-        this.swal.getErrorMsg(this.swal.messageErr(error.code))
       })
       .finally(() => {
         this.setStateLoading(false)
@@ -169,7 +168,6 @@ export class AuthService implements OnInit{
       })
       .catch((error) => {
         this.setStateLoading(false)
-        this.swal.messageErr(this.swal.getErrorMsg(error.code))
       })
       .finally(() => {
         this.pushUserRegisteredByMailToBd();
