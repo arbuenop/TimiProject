@@ -96,7 +96,6 @@ export class CreateUserComponent implements OnInit {
     this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
       if (doc.length == 0) {
         if (!sessionStorage.getItem('userNumber') || sessionStorage.getItem('userNumber') == '') {
-          this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
         } else {
           this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
           this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
@@ -114,23 +113,20 @@ export class CreateUserComponent implements OnInit {
   sendByEmail() {
     this.userService.searchUserByName(this.reactiveForm.get('username')?.value).subscribe(doc => {
     if (doc.length == 0) {
-      if (!sessionStorage.getItem('userEmail') || sessionStorage.getItem('userEmail') == '') {
-        this.authService.SignUp(this.email, this.reactiveForm.get('username')?.value)
-      } else {
         this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
         this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
         this._userSessionService.UserAuthData.email = sessionStorage.getItem('userEmail')
 
         this._userSessionService.setUserData(this._userSessionService.UserAuthData);
         this._userSessionService.pushToLocalStorage('user-auth-data')
-
-
-        this.authService.SignUp(sessionStorage.getItem('userEmail'), this.reactiveForm.get('password')?.value);
-        this.authService.pushUserRegisteredByMailToBd();
       }
-    }
+    })
 
-  })
+    if (this._userSessionService.UserAuthData.userName != '' && this._userSessionService.UserAuthData.userName) {
+      this.authService.SignUp(sessionStorage.getItem('userEmail'), this.reactiveForm.get('password')?.value);
+    } else {
+      this.swal.messageErr('El nombre de usuario ya ha sido registrado!')
+    }
 
   }
 

@@ -82,23 +82,24 @@ export class AuthService implements OnInit{
 
 
   async pushUserRegisteredByMailToBd() {
-    // this.setStateLoading(true)
-    // console.log(this.afAuth.fetchSignInMethodsForEmail(sessionStorage.getItem('userEmail')))
-    // return await this._userService.pushUserDataToBd(this._userSessionService.UserAuthData)
-    //   .then((result) => {
-    //     this.ngZone.run(() => {
-    //       this.router.navigate(['/auth/sign-in']);
-    //     });
-    //     if (sessionStorage.getItem('userEmail')||sessionStorage.getItem('userEmail')=='') sessionStorage.removeItem('userEmail')
-    //     if (localStorage.getItem('user-auth-data')) localStorage.removeItem('user-auth-data');
-    //     if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
-    //   })
-    //   .catch((error) => {
-    //     this.swal.getErrorMsg(this.swal.messageErr(error.code))
-    //   })
-    //   .finally(() => {
-    //     this.setStateLoading(false)
-    //   });
+    this.setStateLoading(true)
+    this._userSessionService.userData.uid = sessionStorage.getItem('user-key');
+    this._userSessionService.pushToLocalStorage('user-auth-data');
+    return await this._userService.pushUserDataToBd(this._userSessionService.UserAuthData)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['/auth/sign-in']);
+        });
+        if (sessionStorage.getItem('userEmail')||sessionStorage.getItem('userEmail')=='') sessionStorage.removeItem('userEmail')
+        if (localStorage.getItem('user-auth-data')) localStorage.removeItem('user-auth-data');
+        if (sessionStorage.getItem('user')||sessionStorage.getItem('user-key')=='') sessionStorage.removeItem('user')
+      })
+      .catch((error) => {
+        this.swal.getErrorMsg(this.swal.messageErr(error.code))
+      })
+      .finally(() => {
+        this.setStateLoading(false)
+      });
 
   }
 
@@ -121,7 +122,7 @@ export class AuthService implements OnInit{
       });
 
   }
-
+  emailUser: any;
   // Sign in with email/password
   async SignIn(email: string, password: string) {
 
@@ -129,6 +130,8 @@ export class AuthService implements OnInit{
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+
+        this.emailUser = result;
         this.goDashboard()
       })
       .catch((error) => {
@@ -162,13 +165,14 @@ export class AuthService implements OnInit{
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SendVerificationMail();
-
+        sessionStorage.setItem('user-key', result.user.uid)
       })
       .catch((error) => {
         this.setStateLoading(false)
         this.swal.messageErr(this.swal.getErrorMsg(error.code))
       })
       .finally(() => {
+        this.pushUserRegisteredByMailToBd();
       });
   }
 
