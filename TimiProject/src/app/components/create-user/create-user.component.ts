@@ -119,12 +119,10 @@ export class CreateUserComponent implements OnInit {
         this._userSessionService.UserAuthData.userName = this.reactiveForm.get('username')?.value;
         this._userSessionService.UserAuthData.passwd = this.reactiveForm.get('password')?.value;
         this._userSessionService.UserAuthData.email = sessionStorage.getItem('userEmail')
-
         this._userSessionService.setUserData(this._userSessionService.UserAuthData);
       this._userSessionService.pushToLocalStorage('user-auth-data')
       }else if (!this.userExists) {
         this.swal.messageErr('El nombre de usuario ya ha sido registrado!')
-
       }
     }
 
