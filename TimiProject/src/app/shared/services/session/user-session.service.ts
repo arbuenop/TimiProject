@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
+import { User } from '../user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserSessionService {
   userData: UserAuthModel;
+
+  user:User;
+
   constructor() {
     this.clearUserData();
   }
@@ -21,6 +25,16 @@ export class UserSessionService {
       emailVerified: false,
       userName: '',
       phoneNumber: '',
+  };
+  }
+  clearLoginUserData() {
+
+    this.user = {
+      uid: '',
+      email: '',
+      displayName: '',
+      photoURL: '',
+      emailVerified: false,
   };
   }
 
@@ -46,6 +60,24 @@ export class UserSessionService {
   pushToLocalStorage(key: string) {
       localStorage.setItem(key, JSON.stringify(this.userData));
       JSON.parse(localStorage.getItem(key)!);
+  }
+
+
+  setLoginUserData(user:any){
+    this.user = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified
+    }
+    localStorage.setItem('user',JSON.stringify(this.user));
+    JSON.parse(localStorage.getItem('user'))
+  }
+
+
+  get LoginUserData(){
+    return this.user;
   }
 
 }
