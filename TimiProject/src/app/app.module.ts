@@ -31,6 +31,7 @@ import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { CodeInputComponent } from './components/code-input/code-input.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TopBarComponent } from './components/shared/top-bar/top-bar.component';
+import { SideNavComponent } from './components/shared/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TopBarComponent } from './components/shared/top-bar/top-bar.component';
     VerifyNumberComponent,
     CodeInputComponent,
     HomeComponent,
-    TopBarComponent
+    TopBarComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,

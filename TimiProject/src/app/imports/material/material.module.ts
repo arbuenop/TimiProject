@@ -8,6 +8,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [],
@@ -21,7 +23,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDividerModule,
     MatButtonToggleModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSidenavModule,
+    MatToolbarModule
   ]
 })
 export class MaterialModule { }
