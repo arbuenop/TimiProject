@@ -12,7 +12,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
@@ -30,12 +29,14 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { VerifyNumberComponent } from './components/verify-number/verify-number.component';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { CodeInputComponent } from './components/code-input/code-input.component';
+import { HomeComponent } from './pages/home/home.component';
+import { TopBarComponent } from './components/shared/top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
-    DashboardComponent,
+    HomeComponent,
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
@@ -45,7 +46,9 @@ import { CodeInputComponent } from './components/code-input/code-input.component
     NotFoundComponent,
     CreateUserComponent,
     VerifyNumberComponent,
-    CodeInputComponent
+    CodeInputComponent,
+    HomeComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,

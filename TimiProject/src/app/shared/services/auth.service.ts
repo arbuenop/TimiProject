@@ -223,7 +223,7 @@ export class AuthService implements OnInit{
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       if (res) {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['home']);
       }
     });
   }
@@ -233,7 +233,7 @@ export class AuthService implements OnInit{
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
         });
         this._userSessionService.setLoginUserData(result.user);
       })
@@ -265,7 +265,7 @@ export class AuthService implements OnInit{
     setTimeout(()=>{
       if (this.isLoggedIn) {
         this.ngZone.run(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/home']);
         });
       } else {
         this.swal.messageErr('Something went wrong. Please try again')
