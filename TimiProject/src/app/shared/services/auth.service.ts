@@ -207,35 +207,42 @@ export class AuthService implements OnInit{
     return user !== null;
   }
   // Sign in with Google
-  async GoogleAuth() {
-    this.setStateLoading(true);
-    return await this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      console.log(res)
-    })
-    .catch((error) => {
-      this.swal.messageErr(this.swal.getErrorMsg(error.code))
-    })
-      .finally(() => {
-        this.swal.messageSucc('Has iniciado sesión correctamente')
-      this.goDashboard();
+
+
+
+
+
+
+
+
+
+
+
+
+
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+      if (res) {
+        this.router.navigate(['dashboard']);
+      }
     });
   }
   // Auth logic to run auth providers
-  async AuthLogin(provider: any) {
-    this.setStateLoading(true)
-    return await this.afAuth
+  AuthLogin(provider: any) {
+    return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        // this.SetUserData(result.user);
+        this.ngZone.run(() => {
+          this.router.navigate(['dashboard']);
+        });
+        this._userSessionService.setLoginUserData(result.user);
       })
       .catch((error) => {
-        this.swal.getErrorMsg(this.swal.messageErr(error.code))
-      })
-      .finally(() => {
-        this.goDashboard()
-      })
-      ;
+        window.alert(error);
+      });
   }
+
+
   // Sign out
   async SignOut() {
     return await this.afAuth.signOut().then(() => {
