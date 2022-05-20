@@ -1,0 +1,32 @@
+* {
+    // outline: 1px solid red
+}
+
+main {
+    background-color: #070707;
+    height: 100%;
+    padding-top: 10em;
+    color: white;
+}
+
+.option-section {
+    padding: 1em;
+    min-height: 7em;
+}
+
+.subscription-icons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.crown {
+    color: yellow;
+}
+
+.divider {
+    height: 3em;
+    width: 1px;
+    background-color: darkgrey;
+}

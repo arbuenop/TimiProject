@@ -10,6 +10,8 @@ import { MatCardModule } from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [],
@@ -25,7 +27,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatChipsModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FontAwesomeModule
   ]
 })
 export class MaterialModule { }

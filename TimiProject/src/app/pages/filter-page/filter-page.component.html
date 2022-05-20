@@ -1,0 +1,40 @@
+<app-top-bar [search]=true style="position: fixed;">
+</app-top-bar>
+<main>
+    <section class="option-section" [hidden]="!recentSearches">
+        <h3>{{recentlySearchLab}}</h3>
+
+    </section>
+    <section class="option-section">
+        <h4>{{platformSelectLab}}</h4>
+
+    </section>
+    <section class="option-section">
+        <h4>{{targetLab}}</h4>
+
+    </section>
+    <section class="option-section">
+        <h4>{{levelLab}}</h4>
+
+    </section>
+    <section class="option-section">
+        <h4>{{ageLab}}</h4>
+
+    </section>
+    <section class="option-section">
+        <h4>{{locationLab}}</h4>
+
+    </section>
+    <section class="option-section">
+        <h4>{{ratingLab}}</h4>
+
+    </section>
+    <section class="option-section">
+        <h4>{{subscriptionLab}}</h4>
+        <div class="subscription-icons">
+            <fa-icon [icon]="faCrown" size="4x" class="crown"></fa-icon>
+            <div class="divider"></div>
+            <fa-icon [icon]="faUsers" size="4x"></fa-icon>
+        </div>
+    </section>
+</main>

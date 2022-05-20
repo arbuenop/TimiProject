@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { SidenavService } from 'src/app/shared/services/home/sidenav.service';
 
@@ -10,6 +10,8 @@ import { SidenavService } from 'src/app/shared/services/home/sidenav.service';
 })
 export class TopBarComponent implements OnInit {
   searchBarLabel = 'Buscar...';
+  @Input() search = false;
+  timiTitleClass='';
 
   constructor(
     private location: Location,
@@ -23,6 +25,8 @@ export class TopBarComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    if (this.search) this.timiTitleClass = 'timiTitleSearch'
+    else this.timiTitleClass = ''
   }
 
 }

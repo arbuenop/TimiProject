@@ -1,46 +1,46 @@
 <aside class="sidenav-wrapper">
-  <div class="top-wrapper">
-      <div class="top-layout">
-          <section class="profile-info">
-              <img class="profile-navbar-image" src="{{ photoUrl }}" alt="Photo of a Shiba Inu">
-              <div class="user-info-wrapper">
-                  <div class="online-status"></div>
-                  <h2 style="text-overflow: ellipsis;">userName}}</h2>
-              </div>
-          </section>
-          <section class="nav-list" style="margin-left: -10em; margin-top: -3em;">
-            <ul style="list-style: none;">
-                <li>
-                  <button mat-button> <mat-icon>person_add</mat-icon>Chats</button>
+    <div class="top-wrapper">
+        <div class="top-layout">
+            <section class="profile-info">
+                <img class="profile-navbar-image" src="{{ photoUrl }}" alt="Photo of a Shiba Inu">
+                <div class="user-info-wrapper">
+                    <div class="online-status"></div>
+                    <h2 style="text-overflow: ellipsis;">{{userName}}</h2>
+                </div>
+            </section>
+            <section class="nav-list2" style="margin-left: -5em; margin-top: -3em;">
+                <ul style="list-style: none;">
+                    <li>
+                        <button mat-button> <mat-icon>person_add</mat-icon>Chats</button>
 
-                </li>
-                <li>
-                  <button mat-button> <mat-icon>manage_accounts</mat-icon>Mi cuenta</button>
+                    </li>
+                    <li>
+                        <button mat-button> <mat-icon>manage_accounts</mat-icon>Mi cuenta</button>
 
-        </li>
-        </ul>
-      </section>
-      </div>
-  </div>
-  <div class="bottom-wrapper">
-      <div class="bot-layout">
-          <section class="nav-list">
-              <ul style="list-style: none;">
-                  <li>
-                      <button mat-button><mat-icon>visibility</mat-icon>TimiNews
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <div class="bottom-wrapper">
+        <div class="bot-layout">
+            <section class="nav-list">
+                <ul style="list-style: none;top:0;">
+                    <li>
+                        <button mat-button><mat-icon>visibility</mat-icon>TimiNews
             </button>
-                  </li>
-                  <li>
-                      <button mat-button><mat-icon>store</mat-icon>TimiMarket
+                    </li>
+                    <li>
+                        <button mat-button><mat-icon>store</mat-icon>TimiMarket
             </button>
-          </li>
-          <li>
-          <button mat-button><mat-icon>settings</mat-icon>Configuración</button>
-        </li>
-        </ul>
-          </section>
-          <button mat-button style="color:red" (click)="logout()"><mat-icon>logout</mat-icon>Cerrar sesión</button>
+                    </li>
+                    <li>
+                        <button mat-button><mat-icon>settings</mat-icon>Configuración</button>
+                    </li>
+                </ul>
+            </section>
+            <button mat-button style="color:red" (click)="logout()"><mat-icon>logout</mat-icon>Cerrar sesión</button>
 
-      </div>
-  </div>
+        </div>
+    </div>
 </aside>

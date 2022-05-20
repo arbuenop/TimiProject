@@ -32,6 +32,8 @@ import { CodeInputComponent } from './components/code-input/code-input.component
 import { HomeComponent } from './pages/home/home.component';
 import { TopBarComponent } from './components/shared/top-bar/top-bar.component';
 import { SideNavComponent } from './components/shared/side-nav/side-nav.component';
+import { FilterPageComponent } from './pages/filter-page/filter-page.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { SideNavComponent } from './components/shared/side-nav/side-nav.componen
     CodeInputComponent,
     HomeComponent,
     TopBarComponent,
-    SideNavComponent
+    SideNavComponent,
+    FilterPageComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { SideNavComponent } from './components/shared/side-nav/side-nav.componen
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMatIntlTelInputModule
+    NgxMatIntlTelInputModule,
+    FontAwesomeModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

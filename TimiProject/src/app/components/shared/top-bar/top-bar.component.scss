@@ -1,129 +1,140 @@
 #bg-motion {
-  background-color: rgb(7, 7, 7);
-  font-family: Androgyne;
-  background-image: url('../../../../assets/images/auth-images/corndog-tile-1.png'), url('../../../../assets/images/auth-images/corndog-tile.png'), url('../../../../assets/images/auth-images/corndog-tile-2.png');
-  height: 25vh;
-  min-height: 15em;
-  left: 0;
-  position: relative;
-  top: 0;
-  width: 100%;
-  z-index: 0;
-  -webkit-animation: bg-motion 1000s linear infinite;
-  -moz-animation: bg-motion 1000s linear infinite;
-  -ms-animation: bg-motion 1000s linear infinite;
-  animation: bg-motion 1000s linear infinite;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  -webkit-box-shadow: inset 5px 5px 5px -18px #000000, inset -50px -50px 50px -18px #000000, inset -50px 50px 50px -18px #000000, inset 50px -50px 50px -18px #000000, inset 50px -50px 50px -18px #000000;
-  box-shadow: inset 5px 5px 5px -18px #000000, inset -50px -50px 50px -18px #000000, inset -50px 50px 50px -18px #000000, inset 50px -50px 50px -18px
+    background-color: rgb(7, 7, 7);
+    font-family: Androgyne;
+    background-image: url('../../../../assets/images/auth-images/corndog-tile-1.png'), url('../../../../assets/images/auth-images/corndog-tile.png'), url('../../../../assets/images/auth-images/corndog-tile-2.png');
+    height: 25vh;
+    min-height: 15em;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+    -webkit-animation: bg-motion 1000s linear infinite;
+    -moz-animation: bg-motion 1000s linear infinite;
+    -ms-animation: bg-motion 1000s linear infinite;
+    animation: bg-motion 1000s linear infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    -webkit-box-shadow: inset 5px 5px 5px -18px #070707, inset -50px -50px 50px -18px #070707, inset -50px 50px 50px -18px #070707, inset 50px -50px 50px -18px #070707, inset 50px -50px 50px -18px #070707;
+    box-shadow: inset 5px 5px 5px -18px #070707, inset -50px -50px 50px -18px #070707, inset -50px 50px 50px -18px #070707, inset 50px -50px 50px -18px
+}
+
+.timiTitleSearch {
+    height: 15vh !important;
+    min-height: 10em !important;
 }
 
 @keyframes bg-motion {
-  0% {
-      background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  100% {
-      background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
-  }
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
 }
 
 @-moz-keyframes bg-motion {
-  0% {
-      background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  100% {
-      background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
-  }
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
 }
 
 @-webkit-keyframes bg-motion {
-  0% {
-      background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  100% {
-      background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
-  }
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
 }
 
 @-ms-keyframes bg-motion {
-  0% {
-      background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  100% {
-      background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
-  }
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+        background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+    }
 }
 
-
-.timiTitle{
-  width: 15vh;
-  min-width: 10em;
-  padding: 5px;
-  margin-top:5px;
+.timiTitle {
+    width: 15vh;
+    min-width: 10em;
+    padding: 5px;
+    margin-top: 5px;
 }
 
 .back-btn {
-  position: absolute;
-  top: .5rem;
-  left: .5rem;
-  color: white;
-  transition: ease all .2s;
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    color: white;
+    transition: ease all .2s;
 }
 
 .back-btn:hover {
-  background-color: #ffffff23;
+    background-color: #ffffff23;
 }
 
-header{
-  height: 9vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding-top: 1vh;
-  justify-content: center;
-}
-header>*{
-  margin:1em;
+header {
+    height: 9vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-top: 1vh;
+    justify-content: center;
 }
 
-.searchBar{
-  color:white;
-  height: .5em;
-  margin:1em;
-  width: 70vw;
+header>* {
+    margin: 1em;
 }
 
-.create-ad{
-  background-color: yellow;
-  width: 3em ;
-  height: 3em;
-  margin: 0 !important;
-  margin-right: 1em !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1.2em !important;
+.searchBar {
+    color: white;
+    height: .5em;
+    margin: 1em;
+    width: 70vw;
 }
-.create-ad-icon{
-  transition: .5s;
+
+.create-ad {
+    background-color: yellow;
+    width: 3em;
+    height: 3em;
+    margin: 0 !important;
+    margin-right: 1em !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.2em !important;
 }
+
+.create-ad-icon {
+    transition: .5s;
+}
+
 .create-ad:hover .create-ad-icon {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
-
 
 // CSS Para el searchBar
-:ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
-::ng-deep .mat-form-field-label-wrapper { top: -1.2em; }
+:ng-deep .mat-form-field-flex>.mat-form-field-infix {
+    padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+    top: -1.2em;
+}
 
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
     transform: translateY(-1.1em) scale(.75);
@@ -183,52 +194,54 @@ header>*{
     color: red!important;
 }
 
-
 // Media Querys
 // Acordarse de añadir el boton en el grid de anuncios!!!
 @media screen and (max-width:380px) {
-  .create-ad{
-    display: none;
-  }
+    .create-ad {
+        display: none;
+    }
 }
-
 
 // Sidenav Button
-
-.sidenav-button{
-  width: 3em ;
-  height: 3em;
-  margin-left: 1em !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.sidenav-button {
+    width: 3em;
+    height: 3em;
+    margin-left: 1em !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.line1, .line2, .line3{
-  margin-top:3px;
-  margin-bottom: 3px;
-  background-color: white;
-  width: 2em;
-  height: 3px;
-  border-radius: 5px;
-  transition: .2s;
+.line1,
+.line2,
+.line3 {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: white;
+    width: 2em;
+    height: 3px;
+    border-radius: 5px;
+    transition: .2s;
 }
+
 .sidenav-button-clicked {
-  width: 3em ;
-  height: 3em;
-}
-.line1-clicked{
-  transform: rotate(-45deg);
-  margin:0;
-}
-.line2-clicked{
-  transform: rotate(90deg);
-  display: none;
-  margin:0;
-}
-.line3-clicked{
-  transform: rotate(45deg);
-  margin:0;
+    width: 3em;
+    height: 3em;
 }
 
+.line1-clicked {
+    transform: rotate(-45deg);
+    margin: 0;
+}
+
+.line2-clicked {
+    transform: rotate(90deg);
+    display: none;
+    margin: 0;
+}
+
+.line3-clicked {
+    transform: rotate(45deg);
+    margin: 0;
+}
