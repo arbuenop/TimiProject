@@ -6,7 +6,9 @@
                 <img class="profile-navbar-image" src="{{ photoUrl }}" alt="Profile Image" onerror="this.onerror=null;this.src='../../../assets/images/auth-images/default-profile-img.png';">
                 <div class="user-info-wrapper">
                     <div class="online-status"></div>
-                    <h2 style="text-overflow: ellipsis;">{{userName}}</h2>
+                    <div class="user-name-wrapper">
+                        <h2 class="user-name">{{userName}}</h2>
+                    </div>
                 </div>
             </section>
             <section class="nav-list2" style="margin-left: -5em; margin-top: -3em;">

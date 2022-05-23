@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { SidenavService } from 'src/app/shared/services/home/sidenav.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class TopBarComponent implements OnInit {
 
   constructor(
     private location: Location,
-    public sidenav: SidenavService
+    public sidenav: SidenavService,
+    public router: Router
     ) { }
   back(): void {
     if(window.location.href.includes('create-user')){
@@ -24,6 +26,9 @@ export class TopBarComponent implements OnInit {
       this.location.back()
     }
 
+  }
+  hasRoute(route: string) {
+    return this.router.url.includes(route);
   }
   ngOnInit(): void {
     if (this.search) {

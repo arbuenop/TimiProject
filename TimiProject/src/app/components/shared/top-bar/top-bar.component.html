@@ -1,6 +1,6 @@
 <div id="bg-motion" class="{{timiTitleClass}}">
-    <button mat-button (click)='back()' routerLinkActive="router-link-active " class="back-btn ">
-  <mat-icon>arrow_back_ios</mat-icon>Atrás
+    <button mat-button (click)='back()' routerLinkActive="router-link-active " class="back-btn " *ngIf="!hasRoute('/home')">
+    <mat-icon>arrow_back_ios</mat-icon>Atrás
   </button>
     <img src="../../../../assets/images/auth-images/TimiTitle.svg " [hidden]="search " class="timiTitle " id="timiTitle " alt=" ">
     <header class={{headerClass}}>
