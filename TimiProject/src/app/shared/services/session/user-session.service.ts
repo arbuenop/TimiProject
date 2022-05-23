@@ -45,7 +45,7 @@ export class UserSessionService {
       uid: user.uid ? user.uid : '',
       email: user.email ? user.email : '',
       displayName: user.userName ? user.userName : 'TimiUser',
-      photoURL: user.photoURL ? user.photoURL : 'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-PNG.png',
+      photoURL: user.photoURL ? user.photoURL : '../../../assets/images/auth-images/default-profile-img.png',
       emailVerified: user.emailVerified ? user.emailVerified : false,
       userName: user.userName ? user.userName : '',
       passwd: user.passwd ? user.passwd : '',

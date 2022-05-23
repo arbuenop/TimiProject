@@ -1,4 +1,4 @@
-<app-top-bar [search]=true style="position: fixed;">
+<app-top-bar [search]=true style="position: fixed; z-index: 10; box-shadow:0px 3px 15px 6px #070707">
 </app-top-bar>
 <main>
     <section class="option-section" [hidden]="!recentSearches">
@@ -8,33 +8,174 @@
     <section class="option-section">
         <h4>{{platformSelectLab}}</h4>
 
-    </section>
+        <div class="platform-choser">
+          <span class="icon-box" (click)="selected('mouse')">
+            <span class="ripple-circle"></span>
+
+            <img src="../../../assets/icons/mouse-icon.svg"  class="icon" alt="">
+            PC
+          </span>
+
+
+        <div class="divider"></div>
+          <span class="icon-box">
+            <span class="ripple-circle"></span>
+            <img src="../../../assets/icons/playstation-icon.svg" class="icon" alt="">
+            PS
+        </span>
+          <div class="divider"></div>
+
+        <span class="icon-box" (click)="selected('xbox')">
+          <span class="ripple-circle"></span>
+
+          <img src="../../../assets/icons/xbox-icon.svg" class="icon" alt="">
+          XBOX
+        </span>
+
+        <img src="../../../assets/icons/" alt="">
+          <div class="divider"></div>
+
+          <span class="icon-box clicked" (click)="selected('xbox')">
+            <span class="ripple-circle"></span>
+
+            <img src="../../../assets/icons/other-icon.svg" class="icon" alt="">
+            OTHER
+          </span>
+
+
+
+        </div>
+      </section>
+      <div class="section-divider"><br></div>
     <section class="option-section">
         <h4>{{targetLab}}</h4>
 
+        <section class="platform-choser">
+
+        <span class="icon-box" (click)="selected('xbox')">
+          <span class="ripple-circle"></span>
+
+          <img src="../../../assets/icons/competitive-icon.svg" class="icon" alt="">
+          {{competitiveLab}}
+        </span>
+
+        <img src="../../../assets/icons/" alt="">
+          <div class="divider"></div>
+
+          <span class="icon-box clicked" (click)="selected('xbox')">
+            <span class="ripple-circle"></span>
+
+            <img src="../../../assets/icons/friendly-icon.svg" class="icon" alt="">
+            {{friendlyLab}}
+          </span>
+
+      </section>
+
     </section>
+    <div class="section-divider"><br></div>
     <section class="option-section">
         <h4>{{levelLab}}</h4>
 
+        <section class="platform-choser">
+        <mat-form-field appearance="legacy" class="level-input">
+          <mat-label>Min.</mat-label>
+          <input matInput placeholder="Min level" type="number">
+        </mat-form-field>
+
+        <div class="divider" ></div>
+
+        <mat-form-field appearance="legacy" class="level-input">
+          <mat-label>Max.</mat-label>
+          <input matInput placeholder="Max level" type="number">
+        </mat-form-field>
+
+</section>
+
+
     </section>
+    <div class="section-divider"><br></div>
     <section class="option-section">
         <h4>{{ageLab}}</h4>
 
+        <section class="platform-choser">
+          <div class="age-option" style="color: yellow;">18-24</div>
+          <div class="divider"></div>
+          <div class="age-option">25-30</div>
+          <div class="divider"></div>
+          <div class="age-option">31-40</div>
+          <div class="divider"></div>
+          <div class="age-option">+40</div>
+        </section>
+
     </section>
+    <div class="section-divider"><br></div>
     <section class="option-section">
         <h4>{{locationLab}}</h4>
 
+
+        <section class="platform-choser">
+          <mat-form-field appearance="legacy" class="level-input">
+            <mat-label>País</mat-label>
+            <input matInput placeholder="Min level">
+          </mat-form-field>
+
+          <div class="divider" ></div>
+
+          <mat-form-field appearance="legacy" class="level-input">
+            <mat-label>Ciudad</mat-label>
+            <input matInput placeholder="Max level">
+          </mat-form-field>
+          </section>
+
+
     </section>
+    <div class="section-divider"><br></div>
     <section class="option-section">
         <h4>{{ratingLab}}</h4>
 
+
+
+        <section class="platform-choser">
+        <div class="rating-lab">0</div>
+        <div class="rating-input">
+          <div class="point selected" id="rating-point-0"></div>
+          <div class="point selected" id="rating-point-1"></div>
+          <div class="point selected" id="rating-point-2"></div>
+          <div class="point selected" id="rating-point-3"></div>
+          <div class="point selected" id="rating-point-4"></div>
+          <div class="point" id="rating-point-5"></div>
+          <div class="point" id="rating-point-6"></div>
+          <div class="point" id="rating-point-7"></div>
+          <div class="point" id="rating-point-8"></div>
+          <div class="point" id="rating-point-9"></div>
+        </div>
+
+        <div class="rating-lab">10</div>
+
+        </section>
+
+
+
+
     </section>
+    <div class="section-divider"><br></div>
     <section class="option-section">
         <h4>{{subscriptionLab}}</h4>
         <div class="subscription-icons">
-            <fa-icon [icon]="faCrown" size="4x" class="crown"></fa-icon>
+            <span class="icon-box" style="color:yellow">
+              <img src="../../../assets/icons/crown-icon.png" class="crown" alt="">
+              TIMI PRO
+            </span>
             <div class="divider"></div>
-            <fa-icon [icon]="faUsers" size="4x"></fa-icon>
+            <span class="icon-box">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="group" fill="white" class="bi bi-people-fill" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+              </svg>
+              TIMI PLAYERS
+            </span>
         </div>
     </section>
 </main>

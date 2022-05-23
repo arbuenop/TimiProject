@@ -2,7 +2,8 @@
     <div class="top-wrapper">
         <div class="top-layout">
             <section class="profile-info">
-                <img class="profile-navbar-image" src="{{ photoUrl }}" alt="Photo of a Shiba Inu">
+
+                <img class="profile-navbar-image" src="{{ photoUrl }}" alt="Profile Image" onerror="this.onerror=null;this.src='../../../assets/images/auth-images/default-profile-img.png';">
                 <div class="user-info-wrapper">
                     <div class="online-status"></div>
                     <h2 style="text-overflow: ellipsis;">{{userName}}</h2>

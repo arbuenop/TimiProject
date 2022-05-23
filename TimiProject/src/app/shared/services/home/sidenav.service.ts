@@ -16,6 +16,10 @@ export class SidenavService {
     return this.opened;
   }
 
+  close(){
+    this.opened.next(false)
+  }
+
   toogle(){
     if(this.isOpened){
       this.opened.next(true);

@@ -12,6 +12,7 @@ export class TopBarComponent implements OnInit {
   searchBarLabel = 'Buscar...';
   @Input() search = false;
   timiTitleClass='';
+  headerClass = 'default-header';
 
   constructor(
     private location: Location,
@@ -25,8 +26,13 @@ export class TopBarComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    if (this.search) this.timiTitleClass = 'timiTitleSearch'
-    else this.timiTitleClass = ''
+    if (this.search) {
+      this.timiTitleClass = 'timiTitleSearch'
+      this.headerClass = 'search-header'
+    }else{
+      this.timiTitleClass = ''
+      this.headerClass = 'default-header'
+    }
   }
 
 }

@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
       this.sidenav.isOpened().subscribe((value) => {
         this.opened = value;
       });
+      this.sidenav.close();
     }
 
   ngOnInit(): void {

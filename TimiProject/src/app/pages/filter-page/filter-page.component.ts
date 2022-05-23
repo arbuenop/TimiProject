@@ -8,7 +8,6 @@ import { faCoffee, faCrown, faUserGroup } from '@fortawesome/free-solid-svg-icon
 })
 export class FilterPageComponent implements OnInit {
 
-
   faCrown = faCrown;
   faUsers = faUserGroup;
   // LABELS
@@ -21,10 +20,15 @@ export class FilterPageComponent implements OnInit {
   ratingLab = 'Valoración';
   ratingAdvert = '*La valoración no tiene porqué corresponderse con la experiéncia de juego de cada usuario.';
   subscriptionLab = 'Tipo de jugador';
+  friendlyLab = 'AMISTOSO';
+  competitiveLab = 'COMPETITIVO';
   // END LABELS
 
   recentSearches=false;
 
+  selected(option:string){
+
+  }
 
   constructor() { }
 
