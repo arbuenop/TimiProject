@@ -32,6 +32,7 @@ import { CodeInputComponent } from './components/code-input/code-input.component
 import { HomeComponent } from './pages/home/home.component';
 import { TopBarComponent } from './components/shared/top-bar/top-bar.component';
 import { SideNavComponent } from './components/shared/side-nav/side-nav.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SideNavComponent } from './components/shared/side-nav/side-nav.componen
     CodeInputComponent,
     HomeComponent,
     TopBarComponent,
-    SideNavComponent
+    SideNavComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatChipsModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule { }
