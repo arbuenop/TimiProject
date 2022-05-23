@@ -1,0 +1,63 @@
+<header class="white-header" [@settingsAnimations]>
+    <button mat-button style="position: absolute; top:0; left:0;" (click)="back()">
+        <mat-icon>arrow_back_ios</mat-icon>
+        {{backBtnLabel}}
+    </button>
+    <button mat-flat-button class="white-header-button"> <mat-icon>settings</mat-icon> {{settingsLab}}</button>
+</header>
+<main class="{{ mainClass }} settings-main-wrapper">
+    <section class="settings-list-item hover-action pointer" (click)="select(1)">
+        <h3><strong>{{ notificationsLab }}</strong></h3>
+        <mat-slide-toggle style=" margin-right:.8em;" [color]="color" [checked]="checked" [disabled]="disabled">
+        </mat-slide-toggle>
+    </section>
+
+    <div class="list-divider"></div>
+
+    <section class="settings-list-item hover-action pointer" (click)="toogleLanguage()">
+        <h3><strong>{{ languageLab }}</strong></h3>
+        <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
+    </section>
+
+    <div class="list-divider"></div>
+
+    <section class="settings-list-item hover-action pointer">
+        <h3><strong>{{ privacyPolicyLab }}</strong></h3>
+    </section>
+
+    <div class="list-divider"></div>
+
+    <section class="settings-list-item hover-action pointer" (click)="logout()">
+        <h3><strong>{{ closeSessionLab }}</strong></h3>
+    </section>
+
+    <div class="list-divider"></div>
+
+    <section class="settings-list-item hover-action pointer">
+        <h3 class="h3"><strong>{{ removeAccountLab }}</strong></h3>
+    </section>
+
+    <div class="list-divider"></div>
+</main>
+
+
+
+
+
+
+<main class="settings-main-wrapper {{ languageClass }}">
+
+    <section class="settings-list-item hover-action pointer">
+        <h3><strong>{{ accountLangLab }}</strong></h3>
+        <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
+    </section>
+
+    <div class="list-divider"></div>
+
+    <section class="settings-list-item hover-action pointer">
+        <h3><strong>{{ playerLangLab }}</strong></h3>
+        <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
+    </section>
+
+    <div class="list-divider"></div>
+</main>

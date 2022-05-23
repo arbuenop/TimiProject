@@ -12,6 +12,7 @@ import { loadavg } from 'os';
 import { AuthRoutingModule } from './pages/auth/auth-routing.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 import { FilterPageComponent } from './pages/filter-page/filter-page.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'auth', loadChildren: () => import('./pages/auth/auth-routing.module').then(m=>m.AuthRoutingModule)},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'search-users', component: FilterPageComponent, canActivate: [AuthGuard]},
   { path: '404-not-found', component: NotFoundComponent },
   { path: '**', redirectTo:'404-not-found', pathMatch: 'full' },

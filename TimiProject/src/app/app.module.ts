@@ -32,6 +32,7 @@ import { CodeInputComponent } from './components/code-input/code-input.component
 import { HomeComponent } from './pages/home/home.component';
 import { TopBarComponent } from './components/shared/top-bar/top-bar.component';
 import { SideNavComponent } from './components/shared/side-nav/side-nav.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 import { FilterPageComponent } from './pages/filter-page/filter-page.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -53,6 +54,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HomeComponent,
     TopBarComponent,
     SideNavComponent,
+    SettingsComponent
     FilterPageComponent
   ],
   imports: [
