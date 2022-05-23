@@ -236,6 +236,7 @@ export class AuthService implements OnInit{
           this.router.navigate(['home']);
         });
         this._userSessionService.setLoginUserData(result.user);
+        this._userService.pushGoogleUserDataToBd(result.user);
       })
       .catch((error) => {
         window.alert(error);

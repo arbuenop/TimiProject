@@ -137,6 +137,19 @@ searchUserByName(name:any):Observable<any>{
       .catch((err) => console.log(err));
   }
 
+  pushGoogleUserDataToBd(user: any) {
+
+    return this.afs.collection("auth-data").doc(user.uid).set({
+      uid: user.uid ? user.uid : '',
+      email: user.email ? user.email : '',
+      displayName: user.displayName ? user.displayName : 'TimiUser',
+      photoURL: user.photoURL ? user.photoURL : 'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-PNG.png',
+      emailVerified: user.emailVerified ? user.emailVerified : false,
+      userName: user.displayName ? user.displayName : '',
+      passwd: user.passwd ? user.passwd : '',
+      phoneNumber: user.phoneNumber ? user.phoneNumber : ''
+   })
+  }
 
 // DELETE USER
 // --------------------------------------
