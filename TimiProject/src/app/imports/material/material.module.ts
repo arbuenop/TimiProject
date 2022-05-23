@@ -29,7 +29,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatChipsModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
     FontAwesomeModule
   ]
 })

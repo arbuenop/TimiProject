@@ -1,23 +1,54 @@
 <div id="bg-motion" class="{{timiTitleClass}}">
     <button mat-button (click)='back()' routerLinkActive="router-link-active " class="back-btn " *ngIf="!hasRoute('/home')">
     <mat-icon>arrow_back_ios</mat-icon>Atrás
-  </button>
+    </button>
     <img src="../../../../assets/images/auth-images/TimiTitle.svg " [hidden]="search " class="timiTitle " id="timiTitle " alt=" ">
-    <header class={{headerClass}}>
-        <div class="sidenav-button " (click)="this.sidenav.toogle() " [hidden]="search ">
-            <div class="line1 "></div>
-            <div class="line2 "></div>
-            <div class="line3 "></div>
-        </div>
 
-        <mat-form-field appearance="outline" class="searchBar">
-            <mat-label>{{searchBarLabel}}</mat-label>
-            <input matInput placeholder="{{searchBarLabel}}">
-            <mat-icon matSuffix style="position:relative !important;top: -.2em !important;">search</mat-icon>
-        </mat-form-field>
+    <div *ngIf="!search then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
 
-        <button mat-fab mat-raised-button class="create-ad">
+        <header class={{headerClass}}>
+            <div class="sidenav-button " (click)="this.sidenav.toogle() " [hidden]="search ">
+                <div class="line1 "></div>
+                <div class="line2 "></div>
+                <div class="line3 "></div>
+            </div>
+
+
+            <mat-form-field appearance="outline" class="searchBar" [routerLink]="['/search-users']" routerLinkActive="router-link-active">
+                <mat-label>{{searchBarLabel}}</mat-label>
+                <input matInput placeholder="{{searchBarLabel}}">
+                <mat-icon matSuffix style="position:relative !important;top: -.2em !important;">search</mat-icon>
+            </mat-form-field>
+
+
+
+            <button mat-fab mat-raised-button class="create-ad " [hidden]="search ">
       <mat-icon  style="color:black" class="create-ad-icon">add</mat-icon>
     </button>
-    </header>
+        </header>
+
+
+    </ng-template>
+    <ng-template #elseBlock>
+
+
+
+        <header class={{headerClass}}>
+
+            <mat-form-field appearance="outline" class="searchBar" [routerLink]="['/search-users']" routerLinkActive="router-link-active" [@settingsAnimations]>
+                <mat-label>{{searchBarLabel}}</mat-label>
+                <input matInput placeholder="{{searchBarLabel}}" autofocus>
+                <mat-icon matSuffix style="position:relative !important;top: -.2em !important;">search</mat-icon>
+            </mat-form-field>
+
+
+        </header>
+
+    </ng-template>
+
+
+
+
+
 </div>

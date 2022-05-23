@@ -2,12 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { SidenavService } from 'src/app/shared/services/home/sidenav.service';
 import { Router } from '@angular/router';
+import { settingsAnimations } from 'src/app/animations/auth-animations';
 
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss']
+  styleUrls: ['./top-bar.component.scss'],
+  animations:[settingsAnimations]
 })
 export class TopBarComponent implements OnInit {
   searchBarLabel = 'Buscar...';

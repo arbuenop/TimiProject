@@ -54,7 +54,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HomeComponent,
     TopBarComponent,
     SideNavComponent,
-    SettingsComponent
+    SettingsComponent,
     FilterPageComponent
   ],
   imports: [

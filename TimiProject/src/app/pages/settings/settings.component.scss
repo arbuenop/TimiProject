@@ -20,17 +20,17 @@ h3 {
 }
 
 .show-up {
-    transform: translateY(-192%);
+    transform: translateY(-192%) scale(1);
     opacity: 1;
 }
 
 .hide-left {
-    transform: translateX(-100%);
+    transform: translateX(-100%) scale(0);
     opacity: 0;
 }
 
 .show-right {
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
     opacity: 1;
 }
 
