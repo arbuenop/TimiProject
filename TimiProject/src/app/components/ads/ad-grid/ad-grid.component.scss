@@ -1,5 +1,5 @@
-
-
+*{//outline:1px solid red;
+}
 
 main{
   width: 100%;
@@ -7,64 +7,73 @@ main{
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-top: .5em;
 }
 .ad-grid-body {
   // background: #111111;
   color: whitesmoke;
   width: 90vw;
   max-width: 40em;
+}
 
 
-
+.no-ads{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  width: 100%;
+  padding-top: 30px;
 
 }
 
-.timi-users,
-.timi-pro{
 
-  display: flex;
+.timi-ads{
+
+  display: grid;
+
+
+
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: .5vw;
+
+  grid-auto-rows: minmax(80px, auto);
+
+
+
 
   /* Put a card in the next row when previous cards take all width */
-  flex-wrap: wrap;
+//   flex-wrap: wrap;
 
-  margin-left: -8px;
-  margin-right: -8px;
-  justify-content: center;
-  align-items: center;
+//   margin-left: -8px;
+//   margin-right: -8px;
+//   justify-content: flex-start;
+//   align-items: flex-start;
+//   height: calc(7vw - 50%);
   app-ad-card {
+    margin-top:3px;
+    margin-bottom:3px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-basis: 33%;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    padding-bottom: 1vw;
-    padding-top: 1vw;
-    width: 7vw;
-    height: calc(7vw - 50%);
-    min-height: 9em;
-    min-width: 6em;
-}
+    overflow: hidden;
+    height: 45vw;
+    max-height: 250px;
+    margin-right: 0;
+    margin-left: 0;
+    // padding-left: 1vw;
+    // padding-right: 1vw;
+    // padding-bottom: 1vw;
+    // padding-top: 1vw;
+    // width: 7vw;
+  }
 
 }
-.timi-pro{
-  width: 100vw;
-  height: calc(7vw - 50%);
-  min-height: 9em;
-  app-ad-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 33%;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    padding-bottom: 1vw;
-    padding-top: 1vw;
-    width: 7vw;
-    height: calc(7vw - 50%);
-    min-height: 9em;
-    min-width: 6em;
-}
+
+@media screen and (max-width:500px) {
+  app-ad-card{
+    height: 45vw;
+  }
 }
 
 ::ng-deep .carousel .carousel-control-next-icon{
@@ -90,6 +99,7 @@ main{
 ::ng-deep .carousel-indicators{
   display: none !important;
 }
+
 
 @media screen and (max-width:410px) {
   ::ng-deep .carousel .carousel-control-prev-icon{

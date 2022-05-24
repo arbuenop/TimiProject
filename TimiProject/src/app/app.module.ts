@@ -38,8 +38,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdGridComponent } from './components/ads/ad-grid/ad-grid.component';
 import { AdCardComponent } from './components/ads/ad-card/ad-card.component';
 import { SwiperModule } from 'swiper/angular';
-import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+import {  WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CarouselModule } from 'ng-carousel-cdk';
 
 @NgModule({
   declarations: [

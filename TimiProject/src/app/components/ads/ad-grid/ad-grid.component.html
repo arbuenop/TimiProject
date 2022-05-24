@@ -2,17 +2,21 @@
 <main>
   <section class="ad-grid-body">
 
+    <h3  style="font-weight: bold;">
+      <img style="width:1.5em; height:1.5em; margin-right: 1em; margin-bottom: .5em;" src="../../../../assets/icons/crown-icon.png">
+      TIMI PRO
+    </h3>
 
     <mdb-carousel class="carousel " [animation]="'slide'" [interval]="'0'" (activeSlideChange)="onActiveSlideChange($event)">
 
       <mdb-carousel-item *ngFor="let threeTimiAds of timiProAdsSliced">
-        <div class="timi-users" *ngIf="threeTimiAds">
+        <div class="timi-ads" *ngIf="threeTimiAds">
           <div *ngFor="let timiAd of threeTimiAds">
             <app-ad-card *ngIf="timiAd" [timiAd]="timiAd"></app-ad-card>
           </div>
         </div>
-        <div class="timi-users" *ngIf="!threeTimiAds">
-          <h3>{{noMoreAdsLab}}</h3>
+        <div class="no-ads" *ngIf="!threeTimiAds">
+          <h3 style="font-style: italic;">{{noMoreAdsLab}}</h3>
         </div>
       </mdb-carousel-item>
 
@@ -20,30 +24,23 @@
 
     </mdb-carousel>
 
-    <div class="timi-users">
-      <app-ad-card *ngFor="let timiAd of timiUserAds" [timiAd]="timiAd"></app-ad-card>
-    </div>
 
-        <!-- <div class="" mdbCollapse #test="bs-collapse">
 
-      <div class="timi-users">
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-          <app-ad-card></app-ad-card>
-        </div>
-    </div><button mdbBtn color="primary" class="waves-light" type="button" (click)="test.toggle()" mdbWavesEffect>
-      Ver todo
-    </button> -->
+    <h3 style="margin-top: 2vh; font-weight: bold; display: flex;flex-direction: row;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="group" style="width:1.5em; height:1.5em; margin-right: 1em; margin-bottom: .5em;" fill="yellow" class="bi bi-people-fill" viewBox="0 0 16 16">
+        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+      </svg>
+      TIMI USERS
+    </h3>
+
+<div class="timi-ads" >
+
+  <app-ad-card *ngFor="let timiAd of timiUserAds" [timiAd]="timiAd"></app-ad-card>
+
+</div>
+
 
 
 

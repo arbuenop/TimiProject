@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdCard } from 'src/app/models/ads/ad-card';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { AdsService } from 'src/app/shared/services/database/ads.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AdGridComponent implements OnInit {
   timiUserAds:AdCard[];
   noMoreAdsLab = 'No hay anuncios disponibles...';
   constructor(
-    private _addb: AdsService
+    private _addb: AdsService,
+    private _auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class AdGridComponent implements OnInit {
       console.log(this.timiProAdsSliced)
 
     }))
+
 
   }
 
