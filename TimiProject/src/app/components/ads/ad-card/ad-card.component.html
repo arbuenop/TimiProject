@@ -1,0 +1,17 @@
+<mat-card class="ad-card-style mat-h4 noselect" [ngClass]="timiAd.pro? 'timiProAd' : 'timiUserAd'">
+  <div class="online-status" [ngStyle]="{'background-color': timiAd.status? 'lime' : 'red'}">
+  </div>
+  <div class="img-container">
+      <img mat-card-sm-image class="{{imageClass}}" src="{{ timiAd.image }} ">
+  </div>
+  <div class="timi-ad-content-wrapper ">
+      <mat-card-title-group class="ad-card-content">
+          <mat-card-title style="font-size: large;">{{ timiAd.userName }}</mat-card-title>
+          <mat-card-subtitle style="font-size: small;">Level: {{ timiAd.level }}</mat-card-subtitle>
+      </mat-card-title-group>
+      <div class="rating-wrapper ">
+          <div *ngFor="let in of ratingCounter(timiAd.rating)" class="rating-enabled-bar"></div>
+          <div *ngFor="let in of ratingCounter(10-timiAd.rating)" class="rating-disabled-bar"></div>
+      </div>
+  </div>
+</mat-card>

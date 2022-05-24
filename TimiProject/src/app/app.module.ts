@@ -35,6 +35,11 @@ import { SideNavComponent } from './components/shared/side-nav/side-nav.componen
 import { SettingsComponent } from './pages/settings/settings.component';
 import { FilterPageComponent } from './pages/filter-page/filter-page.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AdGridComponent } from './components/ads/ad-grid/ad-grid.component';
+import { AdCardComponent } from './components/ads/ad-card/ad-card.component';
+import { SwiperModule } from 'swiper/angular';
+import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TopBarComponent,
     SideNavComponent,
     SettingsComponent,
-    FilterPageComponent
+    FilterPageComponent,
+    AdGridComponent,
+    AdCardComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +80,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     ReactiveFormsModule,
     NgxMatIntlTelInputModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SwiperModule,CarouselModule, WavesModule, ButtonsModule,
+
+    MDBBootstrapModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
