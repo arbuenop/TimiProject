@@ -93,11 +93,12 @@ main{
 
 @media screen and (max-width:410px) {
   ::ng-deep .carousel .carousel-control-prev-icon{
-    margin-left: 1em !important;
+    margin-right: 1em !important;
   }
 
   ::ng-deep .carousel .carousel-control-next-icon{
-    margin-right: 1em !important;
+
+    margin-left: 1em !important;
   }
 
 }

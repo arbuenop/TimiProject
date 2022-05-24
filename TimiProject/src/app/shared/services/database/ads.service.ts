@@ -28,7 +28,7 @@ export class AdsService {
   }
 
   async getTimiProAds() {
-    const collection = this.afs.collection<AdCard>('ads', ref => ref.where('pro', '==', false))
+    const collection = this.afs.collection<AdCard>('ads', ref => ref.where('pro', '==', true))
     const user$ = collection
       .valueChanges()
       .pipe(
