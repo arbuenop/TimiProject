@@ -1,0 +1,104 @@
+
+
+
+main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ad-grid-body {
+  // background: #111111;
+  color: whitesmoke;
+  width: 90vw;
+  max-width: 40em;
+
+
+
+
+}
+
+.timi-users,
+.timi-pro{
+
+  display: flex;
+
+  /* Put a card in the next row when previous cards take all width */
+  flex-wrap: wrap;
+
+  margin-left: -8px;
+  margin-right: -8px;
+  justify-content: center;
+  align-items: center;
+  app-ad-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 33%;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-bottom: 1vw;
+    padding-top: 1vw;
+    width: 7vw;
+    height: calc(7vw - 50%);
+    min-height: 9em;
+    min-width: 6em;
+}
+
+}
+.timi-pro{
+  width: 100vw;
+  height: calc(7vw - 50%);
+  min-height: 9em;
+  app-ad-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 33%;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-bottom: 1vw;
+    padding-top: 1vw;
+    width: 7vw;
+    height: calc(7vw - 50%);
+    min-height: 9em;
+    min-width: 6em;
+}
+}
+
+::ng-deep .carousel .carousel-control-next-icon{
+  background-image: url('../../../../assets/icons/arrow-right.svg') !important;
+  width: 2.5em !important;
+  height: 2.5em !important;
+  margin-left: 3em;
+  position: absolute;
+  filter: invert(12%) sepia(63%) saturate(6234%) hue-rotate(246deg) brightness(1070%) contrast(156%);
+
+}
+
+::ng-deep .carousel .carousel-control-prev-icon{
+  background-image: url('../../../../assets/icons/arrow-left.svg') !important;
+  width: 2.5em !important;
+  height: 2.5em !important;
+  margin-right: 3em;
+  position: absolute;
+  filter: invert(12%) sepia(63%) saturate(6234%) hue-rotate(246deg) brightness(1070%) contrast(156%);
+
+}
+
+::ng-deep .carousel-indicators{
+  display: none !important;
+}
+
+@media screen and (max-width:410px) {
+  ::ng-deep .carousel .carousel-control-prev-icon{
+    margin-right: 1em !important;
+  }
+
+  ::ng-deep .carousel .carousel-control-next-icon{
+
+    margin-left: 1em !important;
+  }
+
+}

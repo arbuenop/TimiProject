@@ -1,0 +1,52 @@
+
+<main>
+  <section class="ad-grid-body">
+
+
+    <mdb-carousel class="carousel " [animation]="'slide'" [interval]="'0'" (activeSlideChange)="onActiveSlideChange($event)">
+
+      <mdb-carousel-item *ngFor="let threeTimiAds of timiProAdsSliced">
+        <div class="timi-users" *ngIf="threeTimiAds">
+          <div *ngFor="let timiAd of threeTimiAds">
+            <app-ad-card *ngIf="timiAd" [timiAd]="timiAd"></app-ad-card>
+          </div>
+        </div>
+        <div class="timi-users" *ngIf="!threeTimiAds">
+          <h3>{{noMoreAdsLab}}</h3>
+        </div>
+      </mdb-carousel-item>
+
+
+
+    </mdb-carousel>
+
+    <div class="timi-users">
+      <app-ad-card *ngFor="let timiAd of timiUserAds" [timiAd]="timiAd"></app-ad-card>
+    </div>
+
+        <!-- <div class="" mdbCollapse #test="bs-collapse">
+
+      <div class="timi-users">
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+          <app-ad-card></app-ad-card>
+        </div>
+    </div><button mdbBtn color="primary" class="waves-light" type="button" (click)="test.toggle()" mdbWavesEffect>
+      Ver todo
+    </button> -->
+
+
+
+
+  </section>
+</main>
