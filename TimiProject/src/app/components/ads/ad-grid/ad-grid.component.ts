@@ -12,7 +12,7 @@ import { AdsService } from 'src/app/shared/services/database/ads.service';
 })
 export class AdGridComponent implements OnInit {
 
-  detailsToogled = false;
+  detailsToogled = true;
   usersLoaded:boolean;
   proLoaded:boolean;
   skeletonUserCount = new Array(6).fill(0);

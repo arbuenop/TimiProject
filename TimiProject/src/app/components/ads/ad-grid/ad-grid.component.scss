@@ -264,3 +264,19 @@ padding: 10px;
   justify-content: flex-start;
   flex-direction: column;
 }
+
+
+
+
+.accessibility-shadow{
+  content: '';
+  position:absolute;
+  top: -1em;
+  left: -1em;
+  width: 1em;
+  height: 1em;
+  z-index: 4;
+  -webkit-box-shadow: 30px 30px 50px 28px rgba(0,0,0,0.61);
+  box-shadow: 30px 30px 50px 28px rgba(0,0,0,0.61);
+
+}

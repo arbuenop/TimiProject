@@ -6,7 +6,7 @@
     <div class="platform-choser">
       <span class="icon-box">
         {{levelLab}}
-        <div *ngIf="contentLoaded" class="age-option" style="color: yellow;">3</div>
+        <div *ngIf="contentLoaded" class="age-option" style="color: yellow;">{{selected.level}}</div>
 
       <ngx-skeleton-loader *ngIf="!contentLoaded"
       count="1"
@@ -27,16 +27,16 @@
         {{ratingLab}}
 
         <div *ngIf="contentLoaded" class="rating-input">
-          <div class="point selected" id="rating-point-0"></div>
-          <div class="point selected" id="rating-point-1"></div>
-          <div class="point selected" id="rating-point-2"></div>
-          <div class="point selected" id="rating-point-3"></div>
-          <div class="point selected" id="rating-point-4"></div>
-          <div class="point" id="rating-point-5"></div>
-          <div class="point" id="rating-point-6"></div>
-          <div class="point" id="rating-point-7"></div>
-          <div class="point" id="rating-point-8"></div>
-          <div class="point" id="rating-point-9"></div>
+          <div class="point {{point[0]}}"></div>
+          <div class="point {{point[1]}}"></div>
+          <div class="point {{point[2]}}"></div>
+          <div class="point {{point[3]}}"></div>
+          <div class="point {{point[4]}}"></div>
+          <div class="point {{point[5]}}"></div>
+          <div class="point {{point[6]}}"></div>
+          <div class="point {{point[7]}}"></div>
+          <div class="point {{point[8]}}"></div>
+          <div class="point {{point[9]}}"></div>
         </div>
 
 

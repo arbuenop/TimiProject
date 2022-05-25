@@ -174,17 +174,20 @@
 </main>
 <div *ngIf="this.detailsToogled" class="ad-detail-container"[ngClass]="detailsToogled ? 'show-wrapper' : ''" [@fade]>
   <section class="img-wrapper" (click)="this.detailsToogled=false">
-
+    <span class="accessibility-shadow"></span>
+    <mat-icon style="position:absolute;top:.7em;left:.7em; z-index: 5;color: white;">
+      arrow_back_ios</mat-icon>
     <img src="{{detail.image}}" alt=""  [ngClass]="detailsToogled ? 'show-image' : ''" >
   </section>
 </div>
 <div style="width: 100%; display:flex; justify-content:center">
 <section *ngIf="this.detailsToogled"  class="main-content" [@flyInOut]>
   <section class="title-wrapper">
+
     <img src="{{detail.image}}" class="mini-img" alt="">
     <h1 style="font-weight: bold;margin-bottom:0;margin-right: .5em; margin-top: .15em;">{{detail.userName}}</h1>
     <img *ngIf="this.detail.pro" src="../../../../assets/icons/crown-icon.png" style="width: 2em;height: 2em;margin-top: .15em;" alt="">
   </section>
-  <app-ad-detail></app-ad-detail>
+  <app-ad-detail [selected]="this.detail"></app-ad-detail>
 </section>
 </div>
