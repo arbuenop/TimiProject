@@ -1,6 +1,7 @@
 
 
 <main >
+  <div class="hideScroll">
   <section class="option-section" style="margin-top:1.5em;">
 
     <div class="platform-choser">
@@ -155,16 +156,51 @@
   }"
 ></ngx-skeleton-loader>
 
+    </span>
+    </div>
+  </section>
+
+  <section *ngIf="this.hasDescription">
+  <div class="description-head waves-light" style="padding-left:1em;padding-right:1em;font-weight: bold;" (click)="test.toggle();toogleArrow(test.isCollapsed)" mdbWavesEffect>
+    {{descriptionLab}}
+    <mat-icon >{{arrow}}</mat-icon>
+  </div>
+  <div class="description-style" >
+    <div mdbCollapse #test="bs-collapse">
+      {{description}}
+      </div>
+  </div>
+</section>
+
+<div class="section-divider"><br></div>
 
 
+  <!-- GAMES SECTION -->
+
+  <span class="icon-box" style="margin:1em;align-items:flex-start; width: 100%;">
+      {{mostPlayedLab}}
     </span>
 
 
 
-    </div>
+  <section class="games-section">
+
+    <div class="example-game-box one" style="background-image: url( {{ gameImg1 }} );"><br></div>
+    <div class="example-game-box two" style="background-image: url( {{ gameImg2 }} );"><br></div>
+    <div class="example-game-box three" style="background-image: url( {{ gameImg3 }} );"><br></div>
+
   </section>
+
+
+
+<!-- END GAMES SECTION -->
+
+
+
+</div>
   <div class="btn-section">
 
   <button mat-stroked-button class="chat-btn">Chat</button>
   </div>
+
 </main>

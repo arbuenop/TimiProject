@@ -18,6 +18,7 @@ export class AdGridComponent implements OnInit {
   skeletonUserCount = new Array(6).fill(0);
   skeletonProCount= new Array(3).fill(0);
 
+
   detail:AdCard = {
     uid: '0',
     userName: 'ExampleUser',

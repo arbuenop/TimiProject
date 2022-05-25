@@ -15,6 +15,7 @@ export class AdDetailComponent implements OnInit {
 
   @Input() selected:AdCard;
 
+  description='';
 
   // ICON LISTS
   iconList = {"pc":"../../../../assets/icons/mouse-icon.svg",
@@ -40,11 +41,20 @@ export class AdDetailComponent implements OnInit {
     age: Timestamp.now()
   };
 
+  descriptionCollapsed = false;
+
   point = new Array(10).fill('')
 
   contentLoaded=false;
 
   userAge = '??'
+  hasDescription = false;
+
+
+
+  gameImg1 = 'https://i.blogs.es/5f2c41/1/840_560.jpg'
+  gameImg2 = 'https://cdn2.unrealengine.com/14br-consoles-1920x1080-wlogo-1920x1080-432974386.jpg'
+  gameImg3 = 'https://media.vandal.net/i/1080x1080/10-2020/202010416234149_1.jpg'
 
   // LABELS
   levelLab='Nivel';
@@ -53,8 +63,13 @@ export class AdDetailComponent implements OnInit {
   platformLab = 'Plataforma';
   ageLab = 'Edad';
   targetLab = 'Objetivo';
-
+  descriptionLab = 'Descripción...';
+  mostPlayedLab = 'Títulos más jugados'
   // END LABELS
+
+  arrow = 'expand_more';
+  arrowD = 'expand_less';
+  arrowC = 'expand_more'
 
   constructor(
     private _db: AdsService,
@@ -72,11 +87,21 @@ export class AdDetailComponent implements OnInit {
           this.icon=this.getPlatformSrc(data.platform)
           if(data.competitive) this.target='../../../../assets/icons/competitive-icon.svg'
           else this.target='../../../../assets/icons/friendly-icon.svg'
+          if(data.description){
+            this.hasDescription=true;
+            this.description = data.description
+          }
         }
         this.contentLoaded=true;
       })
     );
+    this.arrow=this.arrowC
 
+  }
+
+  toogleArrow(collapsed:boolean){
+    if(!collapsed) this.arrow=this.arrowC;
+    else this.arrow = this.arrowD;
   }
 
   getPlatformSrc(p:string){
