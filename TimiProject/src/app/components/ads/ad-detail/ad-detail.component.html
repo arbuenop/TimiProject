@@ -1,0 +1,176 @@
+
+
+<main >
+  <section class="option-section" style="margin-top:1.5em;">
+
+    <div class="platform-choser">
+      <span class="icon-box">
+        {{levelLab}}
+        <div *ngIf="contentLoaded" class="age-option" style="color: yellow;">3</div>
+
+      <ngx-skeleton-loader *ngIf="!contentLoaded"
+      count="1"
+  appearance="line"
+  animation="progress"
+  [theme]="{
+    'background-color': '#FFBF00',
+    height: '30px',
+    width: '30px',
+    'margin-left': '0',
+    'margin-top': '1em'
+  }"
+></ngx-skeleton-loader>
+</span>
+
+    <div class="divider"></div>
+      <span class="icon-box">
+        {{ratingLab}}
+
+        <div *ngIf="contentLoaded" class="rating-input">
+          <div class="point selected" id="rating-point-0"></div>
+          <div class="point selected" id="rating-point-1"></div>
+          <div class="point selected" id="rating-point-2"></div>
+          <div class="point selected" id="rating-point-3"></div>
+          <div class="point selected" id="rating-point-4"></div>
+          <div class="point" id="rating-point-5"></div>
+          <div class="point" id="rating-point-6"></div>
+          <div class="point" id="rating-point-7"></div>
+          <div class="point" id="rating-point-8"></div>
+          <div class="point" id="rating-point-9"></div>
+        </div>
+
+
+        <ngx-skeleton-loader *ngIf="!contentLoaded"
+        count="1"
+    appearance="line"
+    animation="progress"
+    [theme]="{
+      'background-color': '#FFBF00',
+      height: '30px',
+      width: '30vw',
+      'margin-top': '1em',
+      'margin-left': '0',
+      'max-width': '10em'
+    }"
+  ></ngx-skeleton-loader>
+
+
+
+    </span>
+      <div class="divider"></div>
+
+    <span class="icon-box">
+      {{locartionLab}}
+
+      <h3 *ngIf="contentLoaded" style="color:yellow;margin-bottom: -13px;font-size: .9em; font-style: italic;">Barcelona </h3>
+      <h3 *ngIf="contentLoaded" style="color:yellow;margin-bottom: 0px;font-size: .9em; font-style: italic;">España</h3>
+      <ngx-skeleton-loader *ngIf="!contentLoaded"
+      count="1"
+  appearance="line"
+  animation="progress"
+  [theme]="{
+    'background-color': '#FFBF00',
+    height: '30px',
+    width: '10vw',
+    'margin-top': '1em',
+    'margin-left': '0'
+  }"
+></ngx-skeleton-loader>
+
+    </span>
+
+
+
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+  <section class="option-section">
+
+    <div class="platform-choser">
+      <span class="icon-box">
+        {{platformLab}}
+
+
+      <img *ngIf="contentLoaded" style="margin-top: .8em !important;" src="../../../../assets/icons/playstation-icon.svg" class="icon" alt="">
+
+      <ngx-skeleton-loader *ngIf="!contentLoaded"
+      count="1"
+  appearance="circle"
+  animation="progress"
+  [theme]="{
+    'background-color': '#FFBF00',
+    height: '40px',
+    width: '40px',
+    'margin-top': '.5em',
+    'margin-left': '0'
+  }"
+></ngx-skeleton-loader>
+
+
+    </span>
+
+
+    <div class="divider"></div>
+      <span class="icon-box">
+        {{ageLab}}
+
+
+        <ngx-skeleton-loader *ngIf="!contentLoaded"
+        count="1"
+    appearance="line"
+    animation="progress"
+    [theme]="{
+      'background-color': '#FFBF00',
+      height: '30px',
+      width: '45px',
+      'margin-top': '1em',
+      'margin-left': '0'
+    }"
+  ></ngx-skeleton-loader>
+
+        <div *ngIf="contentLoaded" class="age-option" style="color: yellow;">20</div>
+
+    </span>
+      <div class="divider"></div>
+
+    <span class="icon-box ">
+      {{targetLab}}
+      <div class="clicked" style="margin-top: .5em;">
+        <img *ngIf="contentLoaded" src="../../../../assets/icons/friendly-icon.svg" class="icon" alt="">
+      </div>
+
+      <ngx-skeleton-loader *ngIf="!contentLoaded"
+      count="1"
+  appearance="circle"
+  animation="progress"
+  [theme]="{
+    'background-color': '#FFBF00',
+    height: '40px',
+    width: '40px',
+    'margin-top': '0',
+    'margin-left': '0'
+  }"
+></ngx-skeleton-loader>
+
+
+
+    </span>
+
+
+
+    </div>
+  </section>
+  <div class="btn-section">
+
+  <button mat-stroked-button class="chat-btn">Chat</button>
+  </div>
+</main>

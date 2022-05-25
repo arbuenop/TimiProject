@@ -9,7 +9,7 @@ import { AdCard } from 'src/app/models/ads/ad-card';
 export class AdCardComponent implements OnInit {
 
   @Input() timiAd:AdCard = {
-    uid: -1,
+    uid: '-1',
     userName: 'ExampleUser',
     level: 0,
     rating: 0,

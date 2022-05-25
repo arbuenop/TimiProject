@@ -1,6 +1,6 @@
 export interface AdCard {
 
-  uid: number;
+  uid: string;
   userName: string;
   level: number;
   rating: number;

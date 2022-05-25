@@ -271,7 +271,6 @@ export class AuthService implements OnInit{
       } else {
         this.swal.messageErr('Something went wrong. Please try again')
       }
-      this.setStateLoading(false);
     }, 0);
   }
   quitLoaderAndSetError() {

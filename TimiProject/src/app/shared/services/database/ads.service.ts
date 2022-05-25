@@ -40,6 +40,27 @@ export class AdsService {
   }
 
 
+  setTestCollection() {
+
+    this.afs
+      .collection("auth-data")
+      .doc('user-auth-data').set({
+        name: "Los Angeles",
+        state: "CA",
+        country: "USA"
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
+
+  createAd(adData:AdCard){
+    this.afs
+    .collection("ads")
+    .doc().set(adData)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+  }
+
 }
 
 

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { faCoffee, faCrown, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { fade } from 'src/app/animations/auth-animations';
 
 @Component({
   selector: 'app-filter-page',
   templateUrl: './filter-page.component.html',
-  styleUrls: ['./filter-page.component.scss']
+  styleUrls: ['./filter-page.component.scss'],
+  animations: [fade]
 })
 export class FilterPageComponent implements OnInit {
 

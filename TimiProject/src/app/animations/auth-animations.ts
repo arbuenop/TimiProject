@@ -49,4 +49,47 @@ export const authAnimations =
   ],
   );
 
+  export const showDetailsAnimation =
+
+
+  trigger('flyInOut', [
+    transition('void => *', [
+      style({
+        // position:'absolute',
+        opacity: 0,
+        transform: 'translateY(100%)'
+      }),
+      animate('300ms ease-out',style({ opacity: 1, transform: 'translateY(0%)'}))
+    ]),
+    transition('* => void', [
+      style({
+      // position:'absolute',
+      opacity: 1,
+    }),
+      animate('300ms ease-in', style({  opacity: 0,  transform: 'translateY(100%)' }))
+    ])
+  ])
+
+
+  ;
+  export const fade =
+
+  trigger('fade', [
+    transition('void => *', [
+      style({
+        // position:'absolute',
+        opacity: 0,
+      }),
+      animate('300ms ease-out',style({ opacity: 1}))
+    ]),
+    transition('* => void', [
+      style({
+      opacity: 1,
+    }),
+      animate('300ms ease-in', style({  opacity: 0}))
+    ])
+  ])
+
+
+  ;
 

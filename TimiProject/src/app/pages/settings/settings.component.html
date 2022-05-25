@@ -5,7 +5,7 @@
     </button>
     <button mat-flat-button class="white-header-button"> <mat-icon>settings</mat-icon> {{settingsLab}}</button>
 </header>
-<main class="{{ mainClass }} settings-main-wrapper">
+<main class="{{ mainClass }} settings-main-wrapper"[@fade]>
     <section class="settings-list-item hover-action pointer" (click)="select(1)">
         <h3><strong>{{ notificationsLab }}</strong></h3>
         <mat-slide-toggle style=" margin-right:.8em;" [color]="color" [checked]="checked" [disabled]="disabled">

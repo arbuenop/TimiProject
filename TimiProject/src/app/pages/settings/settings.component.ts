@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { moveSectionLeftAnimation, settingsAnimations } from 'src/app/animations/auth-animations';
+import { fade, moveSectionLeftAnimation, settingsAnimations } from 'src/app/animations/auth-animations';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Location } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  animations: [settingsAnimations, moveSectionLeftAnimation]
+  animations: [settingsAnimations, moveSectionLeftAnimation, fade]
 })
 export class SettingsComponent implements OnInit {
 mainClass =''

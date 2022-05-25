@@ -1,5 +1,5 @@
 
-<main>
+<main [@fade]>
   <section class="ad-grid-body">
 
     <h3  style="font-weight: bold;">
@@ -7,22 +7,88 @@
       TIMI PRO
     </h3>
 
-    <mdb-carousel class="carousel " [animation]="'slide'" [interval]="'0'" (activeSlideChange)="onActiveSlideChange($event)">
+    <mdb-carousel class="carousel " [animation]="'slide'" [interval]="'0'" *ngIf="proLoaded" (activeSlideChange)="onActiveSlideChange($event)">
 
       <mdb-carousel-item *ngFor="let threeTimiAds of timiProAdsSliced">
         <div class="timi-ads" *ngIf="threeTimiAds">
           <div *ngFor="let timiAd of threeTimiAds">
-            <app-ad-card *ngIf="timiAd" [timiAd]="timiAd"></app-ad-card>
+            <app-ad-card *ngIf="timiAd" [timiAd]="timiAd" (click)="onClickAd(timiAd)"[@fade]></app-ad-card>
           </div>
         </div>
         <div class="no-ads" *ngIf="!threeTimiAds">
           <h3 style="font-style: italic;">{{noMoreAdsLab}}</h3>
         </div>
+
+
+
+
       </mdb-carousel-item>
 
 
 
     </mdb-carousel>
+
+        <div class="timi-ads " *ngIf="!proLoaded" style="margin-top:10px; margin-bottom:2.2em">
+          <div class="fake-skeleton-timiPro" *ngFor="let i of skeletonProCount">
+
+            <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            animation="progress"
+            [theme]="{
+              'background-color': 'yellow',
+              height: '15vw',
+              width: '20vw',
+              'margin-bottom': '1vw',
+
+              'max-height': '140px',
+              'max-width': '160px'
+            }"
+          ></ngx-skeleton-loader>
+            <div class="info-wrapper-skeleton">
+            <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            animation="progress"
+            [theme]="{
+              'background-color': 'yellow',
+              height: '15px',
+              width: '20vw',
+              'margin-bottom': '3px',
+              'max-width': '100px'
+            }"
+          ></ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            animation="progress"
+            [theme]="{
+              'background-color': 'yellow',
+              height: '10px',
+              width: '15vw',
+              'margin-bottom': '3px',
+              'max-width': '60px'
+            }"
+          ></ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            animation="progress"
+            [theme]="{
+              'background-color': 'yellow',
+              height: '20px',
+              width: '23vw',
+              'margin-bottom': 0,
+              'max-width':'130px'
+            }"
+          ></ngx-skeleton-loader>
+
+        </div>
+
+          </div>
+        </div>
+
+
 
 
 
@@ -35,15 +101,90 @@
       TIMI USERS
     </h3>
 
-<div class="timi-ads" >
+<div class="timi-ads" *ngIf="usersLoaded">
 
-  <app-ad-card *ngFor="let timiAd of timiUserAds" [timiAd]="timiAd"></app-ad-card>
+  <app-ad-card *ngFor="let timiAd of timiUserAds" [timiAd]="timiAd" (click)="onClickAd(timiAd)"[@fade]></app-ad-card>
 
 </div>
 
+<div class="timi-ads" *ngIf="!usersLoaded">
+  <div class="fake-skeleton-timiUser" *ngFor="let i of skeletonUserCount">
+
+    <ngx-skeleton-loader
+    count="1"
+    appearance="line"
+    animation="progress"
+    [theme]="{
+      'background-color': 'yellow',
+      height: '15vw',
+      width: '20vw',
+      'margin-bottom': '1vw',
+
+      'max-height': '140px',
+      'max-width': '160px'
+    }"
+  ></ngx-skeleton-loader>
+    <div class="info-wrapper-skeleton">
+    <ngx-skeleton-loader
+    count="1"
+    appearance="line"
+    animation="progress"
+    [theme]="{
+      'background-color': 'yellow',
+      height: '15px',
+      width: '20vw',
+      'margin-bottom': '3px',
+      'max-width': '100px'
+    }"
+  ></ngx-skeleton-loader>
+  <ngx-skeleton-loader
+    count="1"
+    appearance="line"
+    animation="progress"
+    [theme]="{
+      'background-color': 'yellow',
+      height: '10px',
+      width: '15vw',
+      'margin-bottom': '3px',
+      'max-width': '60px'
+    }"
+  ></ngx-skeleton-loader>
+  <ngx-skeleton-loader
+    count="1"
+    appearance="line"
+    animation="progress"
+    [theme]="{
+      'background-color': 'yellow',
+      height: '20px',
+      width: '23vw',
+      'margin-bottom': 0,
+      'max-width':'130px'
+    }"
+  ></ngx-skeleton-loader>
+
+</div>
+
+  </div>
+</div>
 
 
 
 
   </section>
 </main>
+<div *ngIf="this.detailsToogled" class="ad-detail-container"[ngClass]="detailsToogled ? 'show-wrapper' : ''" [@fade]>
+  <section class="img-wrapper" (click)="this.detailsToogled=false">
+
+    <img src="{{detail.image}}" alt=""  [ngClass]="detailsToogled ? 'show-image' : ''" >
+  </section>
+</div>
+<div style="width: 100%; display:flex; justify-content:center">
+<section *ngIf="this.detailsToogled"  class="main-content" [@flyInOut]>
+  <section class="title-wrapper">
+    <img src="{{detail.image}}" class="mini-img" alt="">
+    <h1 style="font-weight: bold;margin-bottom:0;margin-right: .5em; margin-top: .15em;">{{detail.userName}}</h1>
+    <img *ngIf="this.detail.pro" src="../../../../assets/icons/crown-icon.png" style="width: 2em;height: 2em;margin-top: .15em;" alt="">
+  </section>
+  <app-ad-detail></app-ad-detail>
+</section>
+</div>

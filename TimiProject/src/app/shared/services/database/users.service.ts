@@ -27,45 +27,6 @@ export class UsersService {
     return this.userData;
   }
 
-  // SetUserData(user: any) {
-  //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-  //     `users/${user.uid}`
-  //   );
-  //   console.log()
-  //   const userData: UserAuthModel = {
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: user.displayName,
-  //     passwd: user.passwd,
-  //     photoURL: user.photoURL,
-  //     emailVerified: user.emailVerified,
-  //     userName: user.userName
-  //   };
-
-  //   console.log(userData)
-  //   this.userData = userData;
-  //   console.log(this.userData)
-  //   return userRef.set(userData, {
-  //     merge: true,
-  //   });
-  // }
-
-
-
-  setTestCollection() {
-
-    this.afs
-      .collection("auth-data")
-      .doc('user-auth-data').set({
-        name: "Los Angeles",
-        state: "CA",
-        country: "USA"
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }
-
-
   async getTestCollection() {
     var data:test;
     this.afs.collection('tests').doc("hello").ref.get()

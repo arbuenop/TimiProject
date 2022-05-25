@@ -41,6 +41,8 @@ import { SwiperModule } from 'swiper/angular';
 import {  WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CarouselModule } from 'ng-carousel-cdk';
+import { AdDetailComponent } from './components/ads/ad-detail/ad-detail.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { CarouselModule } from 'ng-carousel-cdk';
     SettingsComponent,
     FilterPageComponent,
     AdGridComponent,
-    AdCardComponent
+    AdCardComponent,
+    AdDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import { CarouselModule } from 'ng-carousel-cdk';
     ReactiveFormsModule,
     NgxMatIntlTelInputModule,
     FontAwesomeModule,
+    NgxSkeletonLoaderModule,
     SwiperModule,CarouselModule, WavesModule, ButtonsModule,
 
     MDBBootstrapModule.forRoot()
