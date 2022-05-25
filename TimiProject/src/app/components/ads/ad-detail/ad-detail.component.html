@@ -62,8 +62,8 @@
     <span class="icon-box">
       {{locartionLab}}
 
-      <h3 *ngIf="contentLoaded" style="color:yellow;margin-bottom: -13px;font-size: .9em; font-style: italic;">Barcelona </h3>
-      <h3 *ngIf="contentLoaded" style="color:yellow;margin-bottom: 0px;font-size: .9em; font-style: italic;">España</h3>
+      <h3 *ngIf="contentLoaded" style="color:yellow;margin-bottom: -13px;font-size: .9em; font-style: italic;">{{details.city}} </h3>
+      <h3 *ngIf="contentLoaded" style="color:yellow;margin-bottom: 0px;font-size: .9em; font-style: italic;">{{details.country}}</h3>
       <ngx-skeleton-loader *ngIf="!contentLoaded"
       count="1"
   appearance="line"
@@ -87,12 +87,6 @@
 
 
 
-
-
-
-
-
-
   <section class="option-section">
 
     <div class="platform-choser">
@@ -100,7 +94,7 @@
         {{platformLab}}
 
 
-      <img *ngIf="contentLoaded" style="margin-top: .8em !important;" src="../../../../assets/icons/playstation-icon.svg" class="icon" alt="">
+      <img *ngIf="contentLoaded" style="margin-top: .8em !important;" src="{{icon}}" class="icon" alt="">
 
       <ngx-skeleton-loader *ngIf="!contentLoaded"
       count="1"
@@ -137,7 +131,7 @@
     }"
   ></ngx-skeleton-loader>
 
-        <div *ngIf="contentLoaded" class="age-option" style="color: yellow;">20</div>
+        <div *ngIf="contentLoaded" class="age-option" style="color: yellow;">{{ userAge }}</div>
 
     </span>
       <div class="divider"></div>
@@ -145,7 +139,7 @@
     <span class="icon-box ">
       {{targetLab}}
       <div class="clicked" style="margin-top: .5em;">
-        <img *ngIf="contentLoaded" src="../../../../assets/icons/friendly-icon.svg" class="icon" alt="">
+        <img *ngIf="contentLoaded" src="{{target}}" class="icon" alt="">
       </div>
 
       <ngx-skeleton-loader *ngIf="!contentLoaded"

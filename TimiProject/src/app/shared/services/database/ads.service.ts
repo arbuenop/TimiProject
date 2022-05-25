@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, Observable } from 'rxjs';
 import { AdCard } from 'src/app/models/ads/ad-card';
+import { AdDetails } from 'src/app/models/ads/ad-details';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,22 @@ export class AdsService {
     .catch((err) => console.log(err));
   }
 
+
+
+  async getDetails(uid:string){
+
+
+    const collection = this.afs.collection('ads', ref => ref.where('uid', '==', uid))
+    const ad = this.afs.collection('ads').doc(uid).collection<AdDetails>('ad-details')
+    const ad$ = ad
+      .valueChanges()
+      .pipe(
+        map(details => {
+          return details[0];
+        })
+      );
+    return ad$;
+  }
 }
 
 

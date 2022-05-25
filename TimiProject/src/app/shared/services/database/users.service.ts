@@ -44,6 +44,7 @@ export class UsersService {
       console.log("There was an error getting your document:", error);
     });
 
+
   }
 //SEARCH USERS BY MAIL
 // --------------------------------------
