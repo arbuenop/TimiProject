@@ -6,6 +6,7 @@ main{
   justify-content: flex-start;
   align-items: center;
   margin-top: .5em;
+  overflow-x: hidden;
 }
 .ad-grid-body {
   // background: #111111;
@@ -185,7 +186,7 @@ main{
   height:80%;
   z-index: 10;
   background: #101010;
-  max-width: 80em;
+  max-width: 65em;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   -webkit-border-top-left-radius: 34px;
@@ -199,7 +200,12 @@ main{
 
 
 }
-
+@media screen and (min-width:60em){
+  .title-wrapper{
+    padding-left: 3vw;
+    padding-right: calc(3vw + 1.5em);
+  }
+}
 
 .title-wrapper{
   width: 100%;
@@ -207,8 +213,7 @@ main{
   align-content: center;
   justify-content: flex-start;
   align-items: stretch;
-
-
+  padding-bottom:1em;
 }
 .mini-img{
   width: 2.5em;
