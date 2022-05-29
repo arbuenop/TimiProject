@@ -14,6 +14,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { FilterPageComponent } from './pages/filter-page/filter-page.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo:'home'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./pages/auth/auth-routing.module').then(m=>m.AuthRoutingModule)},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
   { path: 'search-users', component: FilterPageComponent, canActivate: [AuthGuard]},
   { path: '404-not-found', component: NotFoundComponent },
   { path: '**', redirectTo:'404-not-found', pathMatch: 'full' },

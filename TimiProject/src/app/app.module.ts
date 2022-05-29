@@ -40,6 +40,7 @@ import { AdCardComponent } from './components/ads/ad-card/ad-card.component';
 import { SwiperModule } from 'swiper/angular';
 import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     SettingsComponent,
     FilterPageComponent,
     AdGridComponent,
-    AdCardComponent
+    AdCardComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

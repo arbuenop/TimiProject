@@ -1,3 +1,4 @@
+import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -93,7 +94,72 @@ export class SwalService {
       width: 390,
       background: `rgb(41, 41, 41)`,
     })
-}
+  }
+
+
+  //Profile Swals
+  /*--------------------------------------*/
+  ageProfile():any{
+      var atributos = {
+        min: '8',
+        max: '120',
+        step: '1'
+      }
+    return Swal.fire({
+      title: 'Quantos años tienes?',
+      icon: 'question',
+      input: 'range',
+      inputLabel: 'tu edad',
+      inputAttributes : atributos,
+      inputValue: 25,
+      confirmButtonColor: "yellow",
+      padding: '3em',
+      color: 'yellow',
+      background: `rgb(41, 41, 41)`,
+
+    })
+  }
+
+  locationProfile():any{
+    return Swal.fire({
+      title: 'Select field validation',
+      input: 'select',
+      inputOptions: {
+        'Fruits': {
+          apples: 'Apples',
+          bananas: 'Bananas',
+          grapes: 'Grapes',
+          oranges: 'Oranges'
+        },
+        'Vegetables': {
+          potato: 'Potato',
+          broccoli: 'Broccoli',
+          carrot: 'Carrot'
+        },
+        'icecream': 'Ice cream'
+      },
+      inputPlaceholder: 'Select a fruit',
+      showCancelButton: true,
+    })
+  }
+
+  warningProfile():any{
+    return Swal.fire({
+      title: 'Alerta!',
+      text: 'Si vuelves hacia atrás la información introducida se borrara y tendrás que volver a poner tu edad y tu ubicación',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Cancelar',
+      confirmButtonColor: "yellow",
+      confirmButtonText: 'Volver atrás!',
+      cancelButtonColor: '#d33',
+      width: 600,
+      padding: '3em',
+      color: 'yellow',
+      background: `rgb(41, 41, 41)`
+    })
+  }
+  /*--------------------------------------*/
 
   /*Error Metod*/
   getErrorMsg(err:any):string {
