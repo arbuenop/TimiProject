@@ -20,20 +20,21 @@ $cardHeight: 100%;
     border-color: rgba(109, 109, 109, 0.63);
 }
 
-.ad-image{
-  align-self: center;
-  border-radius: 8px;
-  height: 100%;
-  width: 100%;
-  margin-bottom: 5px;
+.ad-image {
+    align-self: center;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 5px;
 }
+
 .image-error {
-  align-self: center;
-  border-radius: 8px;
-  height: $cardHeight;
-  width: $cardWidth;
-  padding: 1em;
-  background-color: yellow;
+    align-self: center;
+    border-radius: 8px;
+    height: $cardHeight;
+    width: $cardWidth;
+    padding: 1em;
+    background-color: yellow;
 }
 
 .timiProAd {
@@ -44,6 +45,11 @@ $cardHeight: 100%;
 }
 
 .img-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: yellow;
+    border-radius: 8px;
     width: $cardWidth;
     height: $cardHeight;
     overflow: hidden;
@@ -55,6 +61,7 @@ $cardHeight: 100%;
     width: $cardWidth;
     height: $cardHeight;
 }
+
 // trbl
 .ad-card-content {
     margin-top: 10px;
@@ -73,11 +80,10 @@ mat-card-subtitle {
     color: white;
 }
 
-
-@media  screen and (max-width: 360px) {
-  .mat-card-title{
-    width:27vw;
-  }
+@media screen and (max-width: 360px) {
+    .mat-card-title {
+        width: 27vw;
+    }
 }
 
 .ad-card-style:hover {
@@ -86,7 +92,7 @@ mat-card-subtitle {
 
 .rating-wrapper {
     height: 1em;
-    width:$cardWidth;
+    width: $cardWidth;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -104,18 +110,16 @@ mat-card-subtitle {
     height: $cardHeight;
     width: 3px;
     display: block;
-
     margin-right: 0.4em;
     margin-right: .9vw;
     border-radius: 5px;
 }
 
-
-@media screen and (min-width:580px){
-  .rating-enabled-bar,
-  .rating-disabled-bar {
-    margin-right: 0.4em;
-  }
+@media screen and (min-width:580px) {
+    .rating-enabled-bar,
+    .rating-disabled-bar {
+        margin-right: 0.4em;
+    }
 }
 
 .rating-disabled-bar {

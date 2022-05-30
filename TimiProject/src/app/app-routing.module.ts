@@ -20,10 +20,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo:'home'},
   { path: 'not-found', component: NotFoundComponent },
   { path: 'auth', loadChildren: () => import('./pages/auth/auth-routing.module').then(m=>m.AuthRoutingModule)},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
-  { path: 'search-users', component: FilterPageComponent, canActivate: [AuthGuard]},
+  { path: 'home', loadChildren: () => import('./pages/home/home-routing.module').then(m=>m.HomeRoutingModule), canActivate: [AuthGuard] },
   { path: '404-not-found', component: NotFoundComponent },
   { path: '**', redirectTo:'404-not-found', pathMatch: 'full' },
 ];

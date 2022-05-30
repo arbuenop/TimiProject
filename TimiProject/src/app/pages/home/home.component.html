@@ -1,3 +1,6 @@
+<div class="router-wrapper" *ngIf="hasRoute('/home/')">
+    <router-outlet></router-outlet>
+</div>
 <mat-drawer-container>
 
     <mat-drawer mode="over" [(opened)]="opened" style="background:none">
@@ -6,7 +9,7 @@
     <mat-drawer-content>
         <app-top-bar></app-top-bar>
         <div>
-          <app-ad-grid></app-ad-grid>
+            <app-ad-grid></app-ad-grid>
         </div>
     </mat-drawer-content>
 </mat-drawer-container>

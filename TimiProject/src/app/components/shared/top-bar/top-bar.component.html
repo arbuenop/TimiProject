@@ -1,5 +1,5 @@
 <div id="bg-motion" class="{{timiTitleClass}}">
-    <button mat-button (click)='back()' routerLinkActive="router-link-active " class="back-btn " *ngIf="!hasRoute('/home')">
+    <button mat-button (click)='back()' routerLinkActive="router-link-active " class="back-btn " *ngIf="hasRoute('/home')">
     <mat-icon>arrow_back_ios</mat-icon>Atrás
     </button>
     <img src="../../../../assets/images/auth-images/TimiTitle.svg " [hidden]="search " class="timiTitle " id="timiTitle " alt=" ">
@@ -15,7 +15,7 @@
             </div>
 
 
-            <mat-form-field appearance="outline" class="searchBar" [routerLink]="['/search-users']" routerLinkActive="router-link-active">
+            <mat-form-field appearance="outline" class="searchBar" [routerLink]="['./search-users']" routerLinkActive="router-link-active">
                 <mat-label>{{searchBarLabel}}</mat-label>
                 <input matInput placeholder="{{searchBarLabel}}">
                 <mat-icon matSuffix style="position:relative !important;top: -.2em !important;">search</mat-icon>

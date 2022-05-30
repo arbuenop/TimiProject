@@ -43,6 +43,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CarouselModule } from 'ng-carousel-cdk';
 import { AdDetailComponent } from './components/ads/ad-detail/ad-detail.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     FilterPageComponent,
     AdGridComponent,
     AdCardComponent,
-    AdDetailComponent
+    AdDetailComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +88,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     NgxMatIntlTelInputModule,
     FontAwesomeModule,
     NgxSkeletonLoaderModule,
-    SwiperModule,CarouselModule, WavesModule, ButtonsModule,
+    SwiperModule, CarouselModule, WavesModule, ButtonsModule,
+
 
     MDBBootstrapModule.forRoot()
   ],

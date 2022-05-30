@@ -18,11 +18,11 @@ export const authAnimations =
 
   trigger('settingsAnimations', [
 
-    transition('* => *', [
+    transition('* <=> *', [
       style({
         // position:'absolute',
         opacity: 0,
-        transform: 'translateY(-50px)'
+        transform: 'translateY(50px)'
       }),
       animate('300ms', style({ opacity: 1, transform: 'translateY(0)' })),
     ]),
