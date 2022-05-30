@@ -80,7 +80,6 @@ export class CreateUserComponent implements OnInit {
         if (data[0]) {
           if (data[0].userName === name) {
 
-            console.log('Error con la contraseña...')
             // this.swal.messageErr("Este nombre de usuario ya está en uso")
           }
         }

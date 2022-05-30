@@ -66,7 +66,6 @@ searchUserByPhone(phone:any):Observable<any>{
 
 searchUserByName(name:any):Observable<any>{
   return  this.afs.collection('auth-data', ref => ref.where('userName', '==' , name)).valueChanges()
-
 }
 
 

@@ -1,0 +1,64 @@
+
+<header>
+  <button mat-button class="back-button" (click)="this.location.back()">
+    <mat-icon>arrow_back_ios</mat-icon>
+    {{backBtnLabel}}
+  </button>
+</header>
+
+<section class="profile-container">
+  <section class="profile-wrapper">
+    <div class="top">
+      <div>
+        <div class="online-status"></div>
+        <h1>{{userNameLabel}}</h1>
+      </div>
+
+      <button class="edit-btn" (click)="this.changeBio()" >
+        <i class="fa-solid fa-wand-magic-sparkles fa-2x"></i>
+      </button>
+    </div>
+
+    <div class="top-info">
+
+      <div class="cont-info">
+        <p class="title">Edad</p>
+        <p #age class="info">{{ageLabel}}</p>
+      </div>
+
+      <span class="separator"></span>
+
+      <div>
+        <p class="title">Valoración</p>
+        <div class="rating-wrapper ">
+          <div *ngFor="let in of ratingCounter(rating)" class="rating-enabled-bar"></div>
+          <div *ngFor="let in of ratingCounter(10-rating)" class="rating-disabled-bar"></div>
+        </div>
+      </div>
+
+      <span class="separator"></span>
+
+      <div  class="cont-info">
+        <p class="title"> Ubicación</p>
+        <p class="info">{{locationLabel}}</p>
+      </div>
+
+    </div>
+
+    <div class="desc-wrapper">
+      <label class="title-desc">Descripción</label>
+      <input #bio class="desc" type="text" [defaultValue]="bioLabel">
+
+      <div class="line"></div>
+    </div>
+
+    <div class="bottom-info">
+      <mat-button-toggle-group class="btns" aria-label="Method" class="method-chooser">
+        <mat-button-toggle class="toogle" autofocus value="ratings">Valoraciones</mat-button-toggle>
+        <mat-button-toggle class="toogle"  value="ads">Anuncios</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+
+  </section>
+</section>
