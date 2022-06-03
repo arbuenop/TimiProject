@@ -46,8 +46,13 @@ body {
     position: fixed;
     z-index: 200;
 }
-
 .white-header>.white-header-button {
+  width: 85%;
+  border-radius: 4px;
+  margin-top: 2.5em;
+  max-width: 40em;
+}
+.white-header>.white-header-button-checked {
     background-color: #CDCDCD;
     width: 85%;
     border: 0.5px solid rgba(255, 255, 255, 0.7);

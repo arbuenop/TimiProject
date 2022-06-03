@@ -7,14 +7,13 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { WindowServiceService } from './window-service.service';
 import { RecaptchaVerifier } from "firebase/auth";
 import { UsersService } from './database/users.service';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
 import { SwalService } from './swal.service';
 import { UserSessionService } from './session/user-session.service';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +40,7 @@ export class AuthService implements OnInit{
     public ngZone: NgZone, // NgZone service to remove outside scope warning,
     private _userService: UsersService,
     private _userSessionService: UserSessionService,
-    public swal: SwalService
+    public swal: SwalService,
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -251,6 +250,7 @@ export class AuthService implements OnInit{
       localStorage.removeItem('user');
       this.router.navigate(['/auth/init']);
     });
+
   }
 
   isLoading(): Observable<boolean>  {
@@ -349,4 +349,13 @@ export class AuthService implements OnInit{
     if(sessionStorage.getItem('userNumber'))
     return sessionStorage.getItem('userNumber')? sessionStorage.getItem('userNumber'): '';
   }
+
+
+
+
+
+
+
+
+
 }

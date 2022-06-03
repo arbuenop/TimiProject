@@ -1,0 +1,28 @@
+<header class="white-header">
+  <button mat-button style="position: absolute; top:0; left:0;" routerLink="/home">
+    <mat-icon>arrow_back_ios</mat-icon>
+</button>
+<button mat-flat-button class="{{chatsChecked}}" style="margin-left:1em; margin-right:.2em" (click)="toogleBtnClass(false)"> <mat-icon>person_ad</mat-icon> {{chatsLab}}</button>
+<button mat-flat-button class="{{groupsChecked}}" style="margin-right:1em; margin-left:.2em"  (click)="toogleBtnClass(true)"> <mat-icon>group</mat-icon> {{groupsLab}}</button>
+
+</header>
+
+
+<main>
+
+  <div>
+    <section>
+        <div class="img-info-wrap">
+          <div class="chatImg">
+            <div class="status"></div>
+          </div>
+          <div class="infoWrap">
+            <h2>Feeeeer20</h2>
+            <p>¿Juegaaaaaaaaaaaaaaaaaaaaaaaaas?</p>
+          </div>
+        </div>
+        <div class="unReaded">9+</div>
+    </section>
+    <div class="divider"></div>
+  </div>
+</main>

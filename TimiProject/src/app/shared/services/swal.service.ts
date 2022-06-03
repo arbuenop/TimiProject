@@ -18,8 +18,24 @@ export class SwalService {
 
   constructor(
     private _router: Router,
-    private db: UsersService
+    private db: UsersService,
+
+
   ) { }
+
+  messageInf(title: string, msg:string){
+
+    Swal.fire({
+      icon: 'info',
+      title: title,
+      text: msg,
+      width: 600,
+      padding: '3em',
+      color: 'yellow',
+      background: `rgb(41, 41, 41)`,
+      confirmButtonColor: "yellow"
+    })
+  }
 
   messageErr(error: string) {
       Swal.fire({

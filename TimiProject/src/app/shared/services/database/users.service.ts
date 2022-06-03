@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection ,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { doc, getDoc } from "firebase/firestore";
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
 import { FormGroup } from '@angular/forms';
 
@@ -143,7 +143,18 @@ deleteUserById(id:string){
 
   }
 
-
+  updateDoc(_id: string, _value: string) {
+    let doc = this.afs.collection('users', ref => ref.where('id', '==', _id));
+    doc.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, data };
+      }))).subscribe((_doc: any) => {
+       let id = _doc[0].payload.doc.id; //first result of query [0]
+       this.afs.doc(`users/${id}`).update({rating: _value});
+      })
+  }
 
 
 

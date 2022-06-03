@@ -44,6 +44,10 @@ import { CarouselModule } from 'ng-carousel-cdk';
 import { AdDetailComponent } from './components/ads/ad-detail/ad-detail.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { ChatsComponent } from './pages/chat/chats/chats.component';
+import { ConversComponent } from './pages/chat/convers/convers.component';
+
+
 
 @NgModule({
   declarations: [
@@ -68,7 +72,9 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
     AdGridComponent,
     AdCardComponent,
     AdDetailComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ChatsComponent,
+    ConversComponent
   ],
   imports: [
     BrowserModule,

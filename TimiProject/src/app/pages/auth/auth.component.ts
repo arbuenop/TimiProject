@@ -4,6 +4,7 @@ import { authAnimations } from 'src/app/animations/auth-animations';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Location } from '@angular/common';
 import { SwalService } from 'src/app/shared/services/swal.service';
+import { HomeComponent } from '../home/home.component';
 
 
 @Component({
@@ -46,14 +47,15 @@ export class AuthComponent implements OnInit {
     private router: Router,
     private contexts: ChildrenOutletContexts,
     private location: Location,
-    private _swal: SwalService
+    private _swal: SwalService,
+    private _home:HomeComponent
   ) { }
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
   ngOnInit(): void {
-
+    this._home.pause();
     this.authService.checkReCaptcha();
     this.authService.isLoading().subscribe((value) => {
       this.showSpinner = value;

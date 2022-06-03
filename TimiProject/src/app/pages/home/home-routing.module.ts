@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChatsComponent } from '../chat/chats/chats.component';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 import { FilterPageComponent } from '../filter-page/filter-page.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       { path: 'edit-profile', component: EditProfileComponent },
       { path: 'search-users', component: FilterPageComponent },
+      { path: 'chats/:uid', component: ChatsComponent },
 
     ],
   },
