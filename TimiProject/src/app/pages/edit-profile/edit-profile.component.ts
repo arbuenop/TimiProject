@@ -85,7 +85,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   changeBio(){
-    console.log(this.bio.nativeElement.value)
     this.dbService.updateBioUserProfile(this.bio.nativeElement.value,JSON.parse(localStorage.getItem("user")).uid)
   }
 

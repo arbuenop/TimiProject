@@ -1,63 +1,93 @@
-<header class="white-header" [@settingsAnimations]>
-    <button mat-button style="position: absolute; top:0; left:0;" (click)="back()">
-        <mat-icon>arrow_back_ios</mat-icon>
-        {{backBtnLabel}}
-    </button>
-    <button mat-flat-button class="white-header-button"> <mat-icon>settings</mat-icon> {{settingsLab}}</button>
-</header>
-<main class="{{ mainClass }} settings-main-wrapper "[@fade]>
-    <section class="settings-list-item hover-action pointer" (click)="select(1)">
-        <h3><strong>{{ notificationsLab }}</strong></h3>
-        <mat-slide-toggle style=" margin-right:.8em;" [color]="color" [checked]="checked" [disabled]="disabled">
-        </mat-slide-toggle>
-    </section>
-
-    <div class="list-divider"></div>
-
-    <section class="settings-list-item hover-action pointer" (click)="toogleLanguage()">
-        <h3><strong>{{ languageLab }}</strong></h3>
-        <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
-    </section>
-
-    <div class="list-divider"></div>
-
-    <section class="settings-list-item hover-action pointer">
-        <h3><strong>{{ privacyPolicyLab }}</strong></h3>
-    </section>
-
-    <div class="list-divider"></div>
-
-    <section class="settings-list-item hover-action pointer" (click)="logout()">
-        <h3><strong>{{ closeSessionLab }}</strong></h3>
-    </section>
-
-    <div class="list-divider"></div>
-
-    <section class="settings-list-item hover-action pointer">
-        <h3 class="h3"><strong>{{ removeAccountLab }}</strong></h3>
-    </section>
-
-    <div class="list-divider"></div>
-</main>
+  <header class="white-header" [@settingsAnimations]>
+      <button mat-button style="position: absolute; top:0; left:0;" (click)="back()">
+          <mat-icon>arrow_back_ios</mat-icon>
+          {{backBtnLabel}}
+      </button>
+      <button mat-flat-button class="white-header-button"> <mat-icon>settings</mat-icon> {{settingsLab}}</button>
+  </header>
+  <main class="{{ mainClass }} settings-main-wrapper">
+      <section class="settings-list-item hover-action pointer">
+          <h3><strong>{{ notificationsLab }}</strong></h3>
+          <mat-slide-toggle style=" margin-right:.8em;" [color]="color" [checked]="config.notifications" (click)="select()"></mat-slide-toggle>
+      </section>
 
 
+      <div class="list-divider"></div>
 
+      <section class="settings-list-item hover-action pointer" (click)="toogleLanguage()">
+          <h3><strong>{{ languageLab }}</strong></h3>
+          <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
+      </section>
 
+      <div class="list-divider"></div>
 
+      <section class="settings-list-item hover-action pointer">
+          <h3><strong>{{ privacyPolicyLab }}</strong></h3>
+      </section>
 
-<main class="settings-main-wrapper {{ languageClass }}">
+      <div class="list-divider"></div>
 
-    <section class="settings-list-item hover-action pointer">
-        <h3><strong>{{ accountLangLab }}</strong></h3>
-        <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
-    </section>
+      <section class="settings-list-item hover-action pointer" (click)="logout()">
+          <h3><strong>{{ closeSessionLab }}</strong></h3>
+      </section>
 
-    <div class="list-divider"></div>
+      <div class="list-divider"></div>
 
-    <section class="settings-list-item hover-action pointer">
-        <h3><strong>{{ playerLangLab }}</strong></h3>
-        <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
-    </section>
+      <section class="settings-list-item hover-action pointer" (click)="deleteaAccount()">
+          <h3 class="h3"><strong>{{ removeAccountLab }}</strong></h3>
+      </section>
 
-    <div class="list-divider"></div>
-</main>
+      <div class="list-divider"></div>
+  </main>
+
+  <div id="save" class="save-hidded" (click)="save()">
+    <mat-icon class="save-icon">save</mat-icon>
+  </div>
+
+  <main id="config-langs" class="settings-main-wrapper {{ languageClass }}">
+
+      <section class="settings-list-item hover-action pointer" (click)="toogleLangs(1)" style="margin-bottom: 0px;">
+          <h3><strong>{{ accountLangLab }}</strong></h3>
+          <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
+      </section>
+
+      <section class="{{ languageDespClass }}">
+        <div id="esp" class="pais" (click)="languageSelected('esp')">
+          <p class="name-pais">Español</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/esp.png">
+        </div>
+        <div id="en" class="pais" (click)="languageSelected('en')">
+          <p class="name-pais">Ingles</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/en.png">
+        </div>
+        <div id="fr" class="pais" (click)="languageSelected('fr')">
+          <p class="name-pais">Frances</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/fr.png">
+        </div>
+        <div id="de" class="pais" (click)="languageSelected('de')">
+          <p class="name-pais">Aleman</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/de.png">
+        </div>
+      </section>
+
+      <div class="list-divider"></div>
+
+      <section class="settings-list-item hover-action pointer" (click)="toogleLangs(2)">
+          <h3><strong>{{ playerLangLab }}</strong></h3>
+          <mat-icon style="transform:rotate(180deg); margin-right:.8em; cursor:pointer;">arrow_back_ios</mat-icon>
+      </section>
+
+      <div class="list-divider"></div>
+
+      <section class="{{ languagePlayersDespClass }}">
+        <div id="esp-p" class="pais" (click)="languagePlayersSelected('esp-p')">
+          <p class="name-pais">Español</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/esp.png">
+        </div>
+        <div id="en-p" class="pais" (click)="languagePlayersSelected('en-p')">
+          <p class="name-pais">Ingles</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/en.png">
+        </div>
+        <div id="fr-p" class="pais" (click)="languagePlayersSelected('fr-p')">
+          <p class="name-pais">Frances</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/fr.png">
+        </div>
+        <div id="de-p" class="pais" (click)="languagePlayersSelected('de-p')">
+          <p class="name-pais">Aleman</p><img class="bandera" src="../../../assets/icons/TimiProject_files/paises/de.png">
+        </div>
+      </section>
+
+  </main>

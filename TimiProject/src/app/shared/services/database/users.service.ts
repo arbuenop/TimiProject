@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection ,AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { doc, getDoc } from "firebase/firestore";
 import { Observable } from 'rxjs';
-import { UserAuthModel } from 'src/app/models/user-models/user-auth-model';
 import { FormGroup } from '@angular/forms';
-
+import { UserSessionService } from '../session/user-session.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { deleteUser } from 'firebase/auth';
 
 export interface test{
   country: string;
@@ -18,6 +18,8 @@ export interface test{
 export class UsersService {
   constructor(
     public afs: AngularFirestore,
+    public auth: AngularFireAuth,
+    public sessionUser: UserSessionService
   ) { }
 
   userData: any; // Save logged in user data
@@ -115,9 +117,28 @@ searchUserByName(name:any):Observable<any>{
 // DELETE USER
 // --------------------------------------
 
-deleteUserById(id:string){
-  this.afs.collection('users').doc(id).delete()
-  if (sessionStorage.getItem('userNumber'))sessionStorage.removeItem('userNumber');
+async deleteUserById(id:string){
+
+
+
+    if (sessionStorage.getItem('userNumber'))sessionStorage.removeItem('userNumber');
+    if (sessionStorage.getItem('user-profile'))sessionStorage.removeItem('user-profile');
+    if (sessionStorage.getItem('user-config'))sessionStorage.removeItem('user-config');
+    if (sessionStorage.getItem('user-key'))sessionStorage.removeItem('user-key');
+    if (sessionStorage.getItem('userEmail'))sessionStorage.removeItem('userEmail');
+    if (localStorage.getItem('user'))localStorage.removeItem('user');
+    this.afs.collection('user-profile').doc(id).delete().then( res => {
+      this.afs.collection('user-config').doc(id).delete().then( res => {
+        this.afs.collection('auth-data').doc(id).delete().then(async res => {
+          (await this.auth.currentUser).delete()
+
+        })
+      })
+
+    })
+
+
+
 
 }
 

@@ -15,7 +15,6 @@ export class UserSessionService {
   }
 
   clearUserData() {
-
     this.userData = {
       uid: '',
       email: '',
